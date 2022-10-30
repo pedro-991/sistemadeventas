@@ -50,6 +50,7 @@
                     </form>
                 </div>
                 <div class="col-12 col-md-6">
+                <button class="btn btn-primary" onclick="openmodal()" >retirar otro</button>
                     <form action="{{route("agregarProductoVenta")}}" method="post">
                         @csrf
                         <div class="form-group">

@@ -113,7 +113,8 @@ class VenderController extends Controller
 
     public function agregarProductoVenta(Request $request)
     {
-        $codigo = $request->post("codigo");
+        //este es el coigo recibido del input codigo_barras
+        /* $codigo = $request->post("codigo");
         $producto = Producto::where("codigo_barras", "=", $codigo)->first();
         if (!$producto) {
             return redirect()
@@ -122,7 +123,27 @@ class VenderController extends Controller
         }
         $this->agregarProductoACarrito($producto);
         return redirect()
-            ->route("vender.index");
+            ->route("vender.index"); */
+
+            $codigo = $request->post("codigo") . "%";
+            //buscar todas las coincidencias
+            //SELECT * FROM `productos` WHERE `descripcion` LIKE 'ja%';
+            $producto = Producto::where("descripcion", "LIKE", $codigo)->get();
+            if ($producto) {
+                foreach($producto as $pro) {
+
+                    return redirect()
+                    ->route("vender.index")
+                    ->with("mensaje", $pro->descripcion);
+               
+                 }
+            }
+
+            return redirect()
+            ->route("vender.index")
+            ->with("mensaje", "Producto no encontrado");
+
+
     }
 
     private function agregarProductoACarrito($producto)

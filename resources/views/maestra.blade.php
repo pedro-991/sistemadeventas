@@ -56,6 +56,15 @@
             padding-bottom: 70px;
         }
     </style>
+     <!-- Scripts -->
+     <script src="{{ asset('js/app.js') }}" defer></script>
+     <script language="Javascript">
+
+            function openmodal() {
+                $('#project1').modal('show');
+            }
+
+        </script>
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
@@ -143,4 +152,21 @@
     </span>
 </footer>
 </body>
+<!-- Modal -->
+<div class="modal fade" id="project1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Pagina web</h4>
+                </div>
+                <div class="modal-body">
+                    <img class="img-responsive" src="./img/IMG_small.jpg">
+                    Crea tu propia pagina web. En esta pagina encontraras los primeros pasos.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </html>
