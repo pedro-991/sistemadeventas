@@ -46,9 +46,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="{{env("APP_NAME")}}">
     <meta name="author" content="Parzibyte">
+    <!-- CSRF Token -->
+<meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield("titulo") - {{env("APP_NAME")}}</title>
-    <link href="{{url("/css/bootstrap.min.css")}}" rel="stylesheet">
     <link href="{{url("/css/all.min.css")}}" rel="stylesheet">
+     <!-- Styles -->
+     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
         body {
             padding-top: 70px;
@@ -58,13 +61,34 @@
     </style>
      <!-- Scripts -->
      <script src="{{ asset('js/app.js') }}" defer></script>
-     <script language="Javascript">
+     <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script> 
+      <script src="{{ asset('js/myscript.js') }}" defer></script> 
+     <!--<script src="{{ asset('js/jquery-3.3.1.min.js') }}" defer></script> -->
+       <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+     
 
-            function openmodal() {
-                $('#project1').modal('show');
-            }
 
-        </script>
+<script>
+  
+  $(document).ready(function(){
+                var myModalEl = document.getElementById('exampleModal');
+               
+            myModalEl.addEventListener('hidden.bs.modal', function (event) {
+                //aqui podria obtener el codigo
+                //del producto seleccionado y enviarlo al input codigo_barras
+               /*  var myModalselect = document.getElementById('selectPro');
+                var myInputCod = document.getElementById('codigo');
+                myInputCod.value = myModalselect.value; */
+              console.log('modal cerrado');
+             
+
+            })
+            
+            
+            });
+
+</script>
+    
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
@@ -153,20 +177,21 @@
 </footer>
 </body>
 <!-- Modal -->
-<div class="modal fade" id="project1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Pagina web</h4>
-                </div>
-                <div class="modal-body">
-                    <img class="img-responsive" src="./img/IMG_small.jpg">
-                    Crea tu propia pagina web. En esta pagina encontraras los primeros pasos.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
+<div class="modal fade modal-fullscreen" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <input type="text" name="txtBusqueda" id="txtBusqueda" class="form-control" onkeyup="Buscar()" placeholder="Busqueda"autofocus>
+        <div id="contentTable"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
     </div>
+  </div>
+</div>
 </html>

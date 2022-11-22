@@ -13,3 +13,14 @@ require('./bootstrap');
  */
 
 require('./components/Example');
+
+
+/***
+ * 
+
+my scripts
+
+
+ */
+
+

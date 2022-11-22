@@ -50,14 +50,22 @@
                     </form>
                 </div>
                 <div class="col-12 col-md-6">
-                <button class="btn btn-primary" onclick="openmodal()" >retirar otro</button>
-                    <form action="{{route("agregarProductoVenta")}}" method="post">
+                <input type="hidden" id="btnModal" class="" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <div ></div>
+
+                <label for="codigotest">Buscar</label>
+                            <input id="codigotest" autocomplete="off" name="codigotest" type="text"
+                                   class="form-control"
+                                   placeholder="Jabon">
+ 
+                    <form action="{{route('agregarProductoVenta')}}" method="post">
                         @csrf
                         <div class="form-group">
-                            <label for="codigo">Código de barras</label>
+                           
+                                   <label for="codigo">Código de barras</label>
                             <input id="codigo" autocomplete="off" required autofocus name="codigo" type="text"
                                    class="form-control"
-                                   placeholder="Código de barras">
+                                   placeholder="0001">
                         </div>
                     </form>
                 </div>

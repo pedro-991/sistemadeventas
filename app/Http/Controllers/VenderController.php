@@ -114,7 +114,7 @@ class VenderController extends Controller
     public function agregarProductoVenta(Request $request)
     {
         //este es el coigo recibido del input codigo_barras
-        /* $codigo = $request->post("codigo");
+         $codigo = $request->post("codigo");
         $producto = Producto::where("codigo_barras", "=", $codigo)->first();
         if (!$producto) {
             return redirect()
@@ -123,27 +123,85 @@ class VenderController extends Controller
         }
         $this->agregarProductoACarrito($producto);
         return redirect()
-            ->route("vender.index"); */
+            ->route("vender.index"); 
 
-            $codigo = $request->post("codigo") . "%";
-            //buscar todas las coincidencias
-            //SELECT * FROM `productos` WHERE `descripcion` LIKE 'ja%';
-            $producto = Producto::where("descripcion", "LIKE", $codigo)->get();
+           
+
+
+    }
+
+    public function productoFiltro(Request $request)
+    {
+        $codigo = $request->post("txtcodigo") . "%";
+        //$respuesta = $codigo . " desde laravel";
+        //$codigo = "<h1>Hola desde laravel</h1>";
+        //return $respuesta;
+        $producto = Producto::where("descripcion", "LIKE", $codigo)->get();
+        $htmlproducto = "";
             if ($producto) {
+
+                $htmlproducto = "<table class='table table-bordered' id='tblProducto'>";
+
+                $htmlproducto = $htmlproducto . "<tr><th>Descripcion</th><th>Precio</th><th>Existencia</th><th>Seleccionar</th></tr>";
+
                 foreach($producto as $pro) {
 
-                    return redirect()
-                    ->route("vender.index")
-                    ->with("mensaje", $pro->descripcion);
-               
+                    //$htmlproducto = $htmlproducto . "<p>" . $pro->descripcion . "</p>";
+                    /****
+                     * inicion html
+                     */
+
+                    $htmlproducto = $htmlproducto . "
+                    
+                    <tr align='center'>
+
+                    <td>
+                    
+                    " . $pro->descripcion . "
+                      
+                    </td>
+
+                    
+<td>
+" . $pro->precio_venta . "
+</td>
+
+
+<td>
+" . $pro->existencia . "
+</td>
+                    
+                
+                    <td>
+
+<input type='radio' name='selectPro' id='selectPro' onclick='selectCode(this)' value=". $pro->codigo_barras .">
+  
+ 
+</td>
+
+                    
+                    </tr>
+                    
+                    
+                    ";
+
+                    
+               /******
+                * fin html
+                */
                  }
+                 //return $htmlproducto;
+
+                 $htmlproducto = $htmlproducto . "</table>";
+                 
+            };
+
+            if ($htmlproducto != "") {
+                return $htmlproducto;
+            } else {
+
+            return "Producto no encontrado";
             }
-
-            return redirect()
-            ->route("vender.index")
-            ->with("mensaje", "Producto no encontrado");
-
-
     }
 
     private function agregarProductoACarrito($producto)
