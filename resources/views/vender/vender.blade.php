@@ -39,9 +39,7 @@
                         </div>
                         @if(session("productos") !== null)
                             <div class="form-group">
-                                <button name="accion" value="terminar" type="submit" class="btn btn-success">Terminar
-                                    venta
-                                </button>
+                                <input name="accion" id="btnTerminarVenta" value="Terminar Venta" type="button" class="btn btn-success"/>
                                 <button name="accion" value="cancelar" type="submit" class="btn btn-danger">Cancelar
                                     venta
                                 </button>
@@ -51,7 +49,13 @@
                 </div>
                 <div class="col-12 col-md-6">
                 <input type="hidden" id="btnModal" class="" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <div ></div>
+                <div id="contentDiv"></div>
+                <form action="{{route('mostrarSesion')}}" method="post">
+                        @csrf
+                        <button name="accion" value="cancelar" type="submit" class="btn btn-danger">Mostrar
+                                    Sesion
+                                </button>
+                </form>
                 <label for="codigotest">Buscar</label>
                             <input id="codigotest" autocomplete="off" name="codigotest" type="text"
                                    class="form-control"
@@ -69,48 +73,52 @@
                     </form>
                 </div>
             </div>
-            @if(session("productos") !== null)
-                <h2>Total: ${{number_format($total, 2)}}</h2>
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th>Código de barras</th>
-                            <th>Descripción</th>
-                            <th>Precio</th>
-                            <th>Cantidad</th>
-                            <th>I.V.A.</th>
-                            <th>Quitar</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach(session("productos") as $producto)
+            <div id="tablaVenta">
+                @if(session("productos") !== null)
+                    <h2>Total: ${{number_format($total, 2)}}</h2>
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="tableVenta">
+                            <thead>
                             <tr>
-                                <td>{{$producto->codigo_barras}}</td>
-                                <td>{{$producto->descripcion}}</td>
-                                <td>${{number_format($producto->precio_venta, 2)}}</td>
-                                <td>{{$producto->cantidad}}</td>
-                                <td>{{$producto->iva}}</td>
-                                <td>
-                                    <form action="{{route('quitarProductoDeVenta')}}" method="post">
-                                        @method("delete")
-                                        @csrf
-                                        <input type="hidden" name="indice" value="{{$loop->index}}">
-                                        <button type="submit" class="btn btn-danger">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </form>
-                                </td>
+                            <th>Id</th>    
+                            <th>Código de barras</th>
+                                <th>Descripción</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
+                                <th>I.V.A.</th>
+                                <th>Quitar</th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            @else
-                <h2>Aquí aparecerán los productos de la venta
-                    <br>
-                    Escanea el código de barras o escribe y presiona Enter</h2>
-            @endif
+                            </thead>
+                            <tbody>
+                            @foreach(session("productos") as $producto)
+                                <tr>
+                                <td>{{$producto->id}}</td>
+                                    <td>{{$producto->codigo_barras}}</td>
+                                    <td>{{$producto->descripcion}}</td>
+                                    <td>{{number_format($producto->precio_venta, 2)}}</td>
+                                    <td>{{$producto->cantidad}}</td>
+                                    <td>{{$producto->iva}}</td>
+                                    <th>
+                                        <form action="{{route('quitarProductoDeVenta')}}" method="post">
+                                            @method("delete")
+                                            @csrf
+                                            <input type="hidden" name="indice" value="{{$loop->index}}">
+                                            <button type="submit" class="btn btn-danger">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </th>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @else
+                    <h2>Aquí aparecerán los productos de la venta
+                        <br>
+                        Escanea el código de barras o escribe y presiona Enter</h2>
+                @endif
+            </div>
         </div>
     </div>
 @endsection

@@ -34,6 +34,7 @@ class VenderController extends Controller
 
     public function terminarOCancelarVenta(Request $request)
     {
+        
         if ($request->input("accion") == "terminar") {
             return $this->terminarVenta($request);
         } else {
@@ -45,39 +46,36 @@ class VenderController extends Controller
     {
         // Crear una venta
         $venta = new Venta();
-        //24-11-2022
-        //aqui abajo podria ir
-        //$venta->id_cliente = $request->post("id_cliente");
-        $venta->id_cliente = $request->input("id_cliente");
+        
+        $venta->id_cliente = $request->post("id_cliente");
         $venta->saveOrFail();
         $idVenta = $venta->id;
-        //24-11-2022
-        //aqui abajo podria ir
-        //$productos = $request->post("productos");
-        $productos = $this->obtenerProductos();
+        
+        $productos = $request->post("productos");
         // Recorrer carrito de compras
         foreach ($productos as $producto) {
             // El producto que se vende...
             $productoVendido = new ProductoVendido();
+           
             $productoVendido->fill([
                 "id_venta" => $idVenta,
-                "descripcion" => $producto->descripcion,
-                "codigo_barras" => $producto->codigo_barras,
-                "precio" => $producto->precio_venta,
-                "cantidad" => $producto->cantidad,
-                "iva" => $producto->iva,
+                "descripcion" => $producto[2],
+                "codigo_barras" => $producto[1],
+                "precio" => $producto[3],
+                "cantidad" => $producto[4],
+                "iva" => $producto[5],
             ]);
             // Lo guardamos
             $productoVendido->saveOrFail();
             // Y restamos la existencia del original
-            $productoActualizado = Producto::find($producto->id);
+            $productoActualizado = Producto::find($producto[0]);
             $productoActualizado->existencia -= $productoVendido->cantidad;
             $productoActualizado->saveOrFail();
         }
         $this->vaciarProductos();
-        return redirect()
-            ->route("vender.index")
-            ->with("mensaje", "Venta terminada");
+      
+            $htmlTabla = "";
+            return $htmlTabla;
     }
 
     private function obtenerProductos()
@@ -266,4 +264,30 @@ class VenderController extends Controller
                 "clientes" => Cliente::all(),
             ]);
     }
+
+    public function mostrarSesion(Request $request)
+    {
+       //echo $request->session()->get;
+       //return $request->session()->all();
+       //return session("productos");
+       $productos = $request->post("productos");
+      /*  foreach ($productos as $producto) {
+        echo " - ";
+        echo $producto[0];
+        echo " ";
+        echo $producto[1];
+        echo " ";
+        echo $producto[2];
+        echo " ";
+        echo $producto[3];
+        echo " ";
+        echo $producto[4]; 
+      
+       
+    } */
+    //return $request->post("productos");
+    //return redirect()->view('test', compact('productos'));
+    return $productos[0];
+    }
+
 }

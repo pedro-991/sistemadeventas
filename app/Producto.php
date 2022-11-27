@@ -27,6 +27,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Producto extends Model
 {
-    protected $fillable = ["codigo_barras", "descripcion", "precio_compra", "precio_venta", "iva", "existencia",
+    protected $fillable = ["id", "codigo_barras", "descripcion", "precio_compra", "precio_venta", "iva", "existencia",
     ];
 }

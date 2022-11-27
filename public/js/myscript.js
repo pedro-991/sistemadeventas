@@ -8,15 +8,7 @@ function openmodal() {
     
             };
 
- /* **********************  enviar al modal  */
-
-          /*   function enviarAlModal(content) {
-                var input = document.getElementById('btnModal');
-                $("#contentTable").html(content);
-                input.click();
-                        }; */
-
-  /*  **************************   enviar al modal fin */
+ 
 
 
   $(function ()
@@ -98,5 +90,48 @@ function selectCode(content) {
                 ventimp.close();
                 
                         };
+
+                        
+  $(function ()
+  {
+      $("#btnTerminarVenta").on('click', function () {
+
+        var myTableArray = [];
+        let inputIdCliente = document.getElementById('id_cliente').value;
+
+$("table#tableVenta tr").each(function() {
+    var arrayOfThisRow = [];
+    var tableData = $(this).find('td');
+    if (tableData.length > 0) {
+        tableData.each(function() { arrayOfThisRow.push($(this).text()); });
+        myTableArray.push(arrayOfThisRow);
+    }
+});
+
+//console.log(myTableArray);
+  
+              $.ajaxSetup({
+                  headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+  
+          $.ajax({
+              url: 'terminarVenta',
+              type: 'POST',
+              data:  {
+                id_cliente : inputIdCliente,
+                productos : myTableArray
+            },
+              success: function (datos) {
+                $("#tablaVenta").html(datos);
+              }
+          });
+          return false;
+       
+  
+      });
+  
+  });
 
       
