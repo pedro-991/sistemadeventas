@@ -27,7 +27,7 @@
             @include("notificacion")
             <div class="row">
                 <div class="col-12 col-md-6">
-                    <form action="{{route("terminarOCancelarVenta")}}" method="post">
+                    <form action="{{route('terminarOCancelarVenta')}}" method="post">
                         @csrf
                         <div class="form-group">
                             <label for="id_cliente">Cliente</label>
@@ -52,7 +52,6 @@
                 <div class="col-12 col-md-6">
                 <input type="hidden" id="btnModal" class="" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <div ></div>
-
                 <label for="codigotest">Buscar</label>
                             <input id="codigotest" autocomplete="off" name="codigotest" type="text"
                                    class="form-control"
@@ -80,6 +79,7 @@
                             <th>Descripción</th>
                             <th>Precio</th>
                             <th>Cantidad</th>
+                            <th>I.V.A.</th>
                             <th>Quitar</th>
                         </tr>
                         </thead>
@@ -90,8 +90,9 @@
                                 <td>{{$producto->descripcion}}</td>
                                 <td>${{number_format($producto->precio_venta, 2)}}</td>
                                 <td>{{$producto->cantidad}}</td>
+                                <td>{{$producto->iva}}</td>
                                 <td>
-                                    <form action="{{route("quitarProductoDeVenta")}}" method="post">
+                                    <form action="{{route('quitarProductoDeVenta')}}" method="post">
                                         @method("delete")
                                         @csrf
                                         <input type="hidden" name="indice" value="{{$loop->index}}">

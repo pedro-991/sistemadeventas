@@ -45,9 +45,15 @@ class VenderController extends Controller
     {
         // Crear una venta
         $venta = new Venta();
+        //24-11-2022
+        //aqui abajo podria ir
+        //$venta->id_cliente = $request->post("id_cliente");
         $venta->id_cliente = $request->input("id_cliente");
         $venta->saveOrFail();
         $idVenta = $venta->id;
+        //24-11-2022
+        //aqui abajo podria ir
+        //$productos = $request->post("productos");
         $productos = $this->obtenerProductos();
         // Recorrer carrito de compras
         foreach ($productos as $producto) {
@@ -59,6 +65,7 @@ class VenderController extends Controller
                 "codigo_barras" => $producto->codigo_barras,
                 "precio" => $producto->precio_venta,
                 "cantidad" => $producto->cantidad,
+                "iva" => $producto->iva,
             ]);
             // Lo guardamos
             $productoVendido->saveOrFail();

@@ -24,7 +24,7 @@
     <div class="row">
         <div class="col-12">
             <h1>Editar producto</h1>
-            <form method="POST" action="{{route("productos.update", [$producto])}}">
+            <form method="POST" action="{{route('productos.update', [$producto])}}">
                 @method("PUT")
                 @csrf
                 <div class="form-group">
@@ -52,6 +52,12 @@
                            type="decimal(9,2)" placeholder="Precio de venta">
                 </div>
                 <div class="form-group">
+                    <label class="label">I.V.A.</label>
+                    <input required value="{{$producto->iva}}" autocomplete="off" name="iva"
+                           class="form-control"
+                           type="integer" placeholder="16">
+                </div>
+                <div class="form-group">
                     <label class="label">Existencia</label>
                     <input required value="{{$producto->existencia}}" autocomplete="off" name="existencia"
                            class="form-control"
@@ -60,7 +66,7 @@
 
                 @include("notificacion")
                 <button class="btn btn-success">Guardar</button>
-                <a class="btn btn-primary" href="{{route("productos.index")}}">Volver</a>
+                <a class="btn btn-primary" href="{{route('productos.index')}}">Volver</a>
             </form>
         </div>
     </div>

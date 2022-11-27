@@ -24,7 +24,7 @@
     <div class="row">
         <div class="col-12">
             <h1>Agregar producto</h1>
-            <form method="POST" action="{{route("productos.store")}}">
+            <form method="POST" action="{{route('productos.store')}}">
                 @csrf
                 <div class="form-group">
                     <label class="label">Código de barras</label>
@@ -45,6 +45,11 @@
                     <label class="label">Precio de venta</label>
                     <input required autocomplete="off" name="precio_venta" class="form-control"
                            type="decimal(9,2)" placeholder="Precio de venta">
+                </div>
+                <div class="form-group">
+                    <label class="label">I.V.A.</label>
+                    <input required autocomplete="off" name="iva" class="form-control"
+                           type="integer" placeholder="16">
                 </div>
                 <div class="form-group">
                     <label class="label">Existencia</label>
