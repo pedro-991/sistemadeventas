@@ -265,29 +265,6 @@ class VenderController extends Controller
             ]);
     }
 
-    public function mostrarSesion(Request $request)
-    {
-       //echo $request->session()->get;
-       //return $request->session()->all();
-       //return session("productos");
-       $productos = $request->post("productos");
-      /*  foreach ($productos as $producto) {
-        echo " - ";
-        echo $producto[0];
-        echo " ";
-        echo $producto[1];
-        echo " ";
-        echo $producto[2];
-        echo " ";
-        echo $producto[3];
-        echo " ";
-        echo $producto[4]; 
-      
-       
-    } */
-    //return $request->post("productos");
-    //return redirect()->view('test', compact('productos'));
-    return $productos[0];
-    }
+   
 
 }

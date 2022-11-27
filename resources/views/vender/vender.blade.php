@@ -50,12 +50,7 @@
                 <div class="col-12 col-md-6">
                 <input type="hidden" id="btnModal" class="" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <div id="contentDiv"></div>
-                <form action="{{route('mostrarSesion')}}" method="post">
-                        @csrf
-                        <button name="accion" value="cancelar" type="submit" class="btn btn-danger">Mostrar
-                                    Sesion
-                                </button>
-                </form>
+            
                 <label for="codigotest">Buscar</label>
                             <input id="codigotest" autocomplete="off" name="codigotest" type="text"
                                    class="form-control"
