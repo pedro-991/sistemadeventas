@@ -156,6 +156,8 @@ class VenderController extends Controller
                      * inicion html
                      */
 
+                     //$proJson = $pro->json();
+
                     $htmlproducto = $htmlproducto . "
                     
                     <tr align='center'>
@@ -179,7 +181,7 @@ class VenderController extends Controller
                 
                     <td>
 
-<input type='radio' name='selectPro' id='selectPro' onclick='selectCode(this)' value=". $pro->codigo_barras .">
+<input type='radio' name='selectPro' id='selectPro' onclick='selectCode(this)' value='" . $pro . "'>
   
  
 </td>

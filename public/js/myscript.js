@@ -8,6 +8,15 @@ function openmodal() {
     
             };
 
+          /*   $("#btnCancelarVenta").on('click', function () {
+
+                var body = document.getElementById('tablaVenta');
+                html = "";
+                //console.log('soy btn venta');
+                body.innerHTML = html;
+
+            }); */
+
  
 
 
@@ -50,9 +59,27 @@ function openmodal() {
 
 function selectCode(content) {
     
+               /*  var myJson = JSON.parse (content.value);
                 var myInputCod = document.getElementById('codigo');
-                myInputCod.value = content.value;
-                console.log(content.value);
+                //myInputCod.value = content.value;
+                console.log(myJson.codigo_barras); */
+
+                var myJson = JSON.parse (content.value);
+                var myInputTitle = document.getElementById('title');
+                var myInputCod = document.getElementById('codigoTdl');
+                var myInputDescrip = document.getElementById('description');
+                var myInputPrec = document.getElementById('precioTdl');
+                var myInputCant = document.getElementById('cantidadTdl');
+                var myInputIva = document.getElementById('ivaTdl');
+
+                myInputTitle.value = myJson.id;
+                myInputCod.value = myJson.codigo_barras;
+                myInputDescrip.value = myJson.descripcion;
+                myInputPrec.value = myJson.precio_venta;
+                myInputCant.value = "1";
+                myInputIva.value = myJson.iva;
+
+                //console.log(myJson);
     
             };
 
@@ -99,7 +126,7 @@ function selectCode(content) {
         var myTableArray = [];
         let inputIdCliente = document.getElementById('id_cliente').value;
 
-$("table#tableVenta tr").each(function() {
+$("table#table tr").each(function() {
     var arrayOfThisRow = [];
     var tableData = $(this).find('td');
     if (tableData.length > 0) {

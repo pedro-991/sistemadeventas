@@ -46,6 +46,11 @@
                             </div>
                         @endif
                     </form>
+                    <div class="form-group">
+                                <input name="accion" id="btnTerminarVenta" value="Terminar Venta" type="button" class="btn btn-success"/>
+                                <input name="accion2" id="btnCancelarVenta" value="Cancelar Venta" type="button" class="btn btn-danger">
+                            </div>
+                            
                 </div>
                 <div class="col-12 col-md-6">
                 <input type="hidden" id="btnModal" class="" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -56,7 +61,7 @@
                                    class="form-control"
                                    placeholder="Jabon">
  
-                    <form action="{{route('agregarProductoVenta')}}" method="post">
+                  <!--  <form action="{{route('agregarProductoVenta')}}" method="post">
                         @csrf
                         <div class="form-group">
                            
@@ -64,11 +69,12 @@
                             <input id="codigo" autocomplete="off" required autofocus name="codigo" type="text"
                                    class="form-control"
                                    placeholder="0001">
-                        </div>
-                    </form>
+                        </div> 
+                    </form> -->
+                   
                 </div>
             </div>
-            <div id="tablaVenta">
+            
                 @if(session("productos") !== null)
                     <h2>Total: ${{number_format($total, 2)}}</h2>
                     <div class="table-responsive">
@@ -109,11 +115,124 @@
                         </table>
                     </div>
                 @else
-                    <h2>Aquí aparecerán los productos de la venta
-                        <br>
-                        Escanea el código de barras o escribe y presiona Enter</h2>
+                    
                 @endif
-            </div>
+            
         </div>
+    </div>
+    <div class="row">
+    
+            
+    <main>
+    <div class="container pt-3">
+      <div class="alert alert-danger d-none" role="alert" id="alert">
+        A simple danger alert—check it out!
+      </div>
+
+      <div>
+        <form> 
+          <div class="row">
+          
+           
+                
+                <input
+                  type="hidden"
+                  id="title"
+                  class="form-control ml-sm-2 col-md-6"
+                  placeholder="Learn JS"
+                  readonly
+                >
+             
+            
+                
+                  <input
+                    type="hidden"
+                    id="codigoTdl"
+                    class="form-control ml-sm-2 col-md-6"
+                    placeholder="Learn JS"
+                    readonly
+                  >
+             
+            <div class="col-sm-3 d-sm-flex align-items-center">
+              <div class="row"> 
+                <label class="col-md-6 m-sm-0">Description</label>
+                <input
+                  type="text"
+                  id="description"
+                  class="form-control ml-sm-2 col-md-6"
+                  placeholder=""
+                  readonly
+                >
+              </div>
+            </div>
+            <div class="col-sm-3 d-sm-flex align-items-center">
+              <div class="row"> 
+                <label class="col-md-6 m-sm-0">Precio</label>
+                <input
+                  type="text"
+                  id="precioTdl"
+                  class="form-control ml-sm-2 col-md-6"
+                  placeholder=""
+                >
+              </div>
+            </div>
+            <div class="col-sm-3 d-sm-flex align-items-center">
+              <div class="row"> 
+                <label class="col-md-6 m-sm-0">Cantidad</label>
+                <input
+                  type="text"
+                  id="cantidadTdl"
+                  class="form-control ml-sm-2 col-md-6"
+                  placeholder=""
+                >
+              </div>
+            </div>
+            
+                
+                <input
+                  type="hidden"
+                  id="ivaTdl"
+                  class="form-control ml-sm-2"
+                  placeholder="Learn JS"
+                  readonly
+                >
+             
+            <div class="col-sm-2 d-sm-flex justify-content-end mt-4 mt-sm-0">
+              <button type="button" class="btn btn-info btn-block" id="add">
+                Add
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="mt-5">
+        <table class="table table-striped" id="table">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Código</th>
+              <th scope="col">Description</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">I.V.A.</th>
+             
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <div id="tablaVenta">
+            <!-- Content generated with JS -->
+            </div>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+
+    </div>
+    <div class="row">
+        
     </div>
 @endsection

@@ -63,6 +63,7 @@
      <!-- Scripts -->
      <script src="{{ asset('js/app.js') }}" defer></script>
      <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script> 
+     <script src="{{ asset('js/index.js') }}" type="module"></script>
       <script src="{{ asset('js/myscript.js') }}" defer></script> 
      <!--<script src="{{ asset('js/jquery-3.3.1.min.js') }}" defer></script> -->
        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
@@ -195,4 +196,103 @@
     </div>
   </div>
 </div>
+  <!-- Modal 2 edit -->
+  <div
+    class="modal fade"
+    id="modal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            Edit Todo
+          </h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-danger d-none" role="alert" id="modal-alert">
+            A simple danger alert—check it out!
+          </div>
+          <form>
+            <div class="form-group">
+              <label>Title</label>
+              <input
+                id="modal-title"
+                type="text"
+                class="form-control"
+                placeholder="Do Something"
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Codigo</label>
+              <input
+                id="modal-codigo_barras"
+                type="text"
+                class="form-control"
+                placeholder="Do Something"
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Description</label>
+              <textarea class="form-control" id="modal-description" rows="3">
+
+              </textarea>
+            </div>
+
+            <div class="form-group">
+              <label>Precio</label>
+              <input
+                id="modal-precio_venta"
+                type="text"
+                class="form-control"
+                placeholder="Do Something"
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Cantidad</label>
+              <input
+                id="modal-cantidad"
+                type="text"
+                class="form-control"
+                placeholder="Do Something"
+              />
+            </div>
+
+            <div class="form-group">
+              <label>I.V.A</label>
+              <input
+                id="modal-iva"
+                type="text"
+                class="form-control"
+                placeholder="Do Something"
+              />
+            </div>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+          <button type="button" class="btn btn-info" id="modal-btn">
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </html>
