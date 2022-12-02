@@ -52,6 +52,12 @@
                            type="integer" placeholder="16">
                 </div>
                 <div class="form-group">
+                    <label class="label">UND</label>
+                    <input required autocomplete="off" name="und"
+                           class="form-control"
+                           type="text" placeholder="UND">
+                </div>
+                <div class="form-group">
                     <label class="label">Existencia</label>
                     <input required autocomplete="off" name="existencia" class="form-control"
                            type="decimal(9,2)" placeholder="Existencia">
@@ -59,7 +65,7 @@
 
                 @include("notificacion")
                 <button class="btn btn-success">Guardar</button>
-                <a class="btn btn-primary" href="{{route("productos.index")}}">Volver al listado</a>
+                <a class="btn btn-primary" href="{{route('productos.index')}}">Volver al listado</a>
             </form>
         </div>
     </div>

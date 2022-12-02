@@ -13,7 +13,7 @@ export default class View {
     //this.filters = new Filters();
     
 
-    this.addTodoForm.onClick((title, codigo_barras, description, precio_venta, cantidad, iva) => this.addTodo(title, codigo_barras, description, precio_venta, cantidad, iva));
+    this.addTodoForm.onClick((title, codigo_barras, description, precio_venta, cantidad, iva, und) => this.addTodo(title, codigo_barras, description, precio_venta, cantidad, iva, und));
     this.modal.onClick((id, values) => this.editTodo(id, values));
     //this.filters.onClick((filters) => this.filter(filters));
   }
@@ -54,10 +54,10 @@ export default class View {
     }
   } */
 
-  addTodo(title, codigo_barras, description, precio_venta, cantidad, iva) {
+  addTodo(title, codigo_barras, description, precio_venta, cantidad, iva, und) {
     //console.log(title);
     //console.log(description);
-    const todo = this.model.addTodo(title, codigo_barras, description, precio_venta, cantidad, iva);
+    const todo = this.model.addTodo(title, codigo_barras, description, precio_venta, cantidad, iva, und);
     this.createRow(todo);
   }
 
@@ -85,8 +85,9 @@ export default class View {
   removeTodoCancelar() {
     //console.log('soy remove todo');
     const todos = this.model.getTodos();
-    this.model.removeTodoTable();
-    todos.forEach((todo, i) => document.getElementById(i+1).remove());
+    const arrayId = this.model.removeTodoTable();
+    //console.log(arrayId);
+    arrayId.forEach((id) => document.getElementById(id).remove());
     //todos.forEach((todo, i) => console.log(i));
   }
 
@@ -100,6 +101,7 @@ export default class View {
       <td>${todo.precio_venta}</td>
       <td>${todo.cantidad}</td>
       <td>${todo.iva}</td>
+      <td>${todo.und}</td>
 
       
       <th class="text-right">
@@ -116,7 +118,7 @@ export default class View {
     const editBtn = document.createElement('button');
     editBtn.classList.add('btn', 'btn-primary', 'mb-1');
     //editBtn.innerHTML = '<i class="fa fa-pencil"></i>';
-    editBtn.innerHTML = '<i class="fa fa-check" aria-hidden="true"></i>';
+    editBtn.innerHTML = '<i class="fa fa-edit" aria-hidden="true"></i>';
     editBtn.setAttribute('data-bs-toggle', 'modal');
     editBtn.setAttribute('data-bs-target', '#modal');
     editBtn.onclick = () => this.modal.setValues({

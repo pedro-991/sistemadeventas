@@ -1,5 +1,6 @@
 export default class Model {
   constructor() {
+    this.arrayId = [];
     this.view = null;
     this.todos = JSON.parse(localStorage.getItem('todos'));
     if (!this.todos || this.todos.length < 1) {
@@ -16,6 +17,9 @@ export default class Model {
           
         }
       ] */
+
+      //aqui agregar vector en blanco
+      this.todos = [];
       this.currentId = 0;
     } else {
       this.currentId = this.todos[this.todos.length - 1].id + 1;
@@ -52,7 +56,7 @@ export default class Model {
     this.save();
   }
 
-  addTodo(title, codigo_barras, description, precio_venta, cantidad, iva) {
+  addTodo(title, codigo_barras, description, precio_venta, cantidad, iva, und) {
 
     //console.log(title);
     //console.log(description);
@@ -64,7 +68,8 @@ export default class Model {
       description, 
       precio_venta, 
       cantidad, 
-      iva
+      iva,
+      und
     }
 
     this.todos.push(todo);
@@ -82,9 +87,15 @@ export default class Model {
 
   removeTodoTable() {
     //console.log('soy remove todo table');
+    this.arrayId = [];
+    this.todos.forEach((todo) => {
+      this.arrayId.push(todo.id);
+    });
     this.todos.splice(0, this.todos.length);
-    //this.todos.splice(0, 3);  
+      
     this.save();
+    
+    return this.arrayId;
   }
 
 }

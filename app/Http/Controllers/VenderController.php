@@ -64,6 +64,7 @@ class VenderController extends Controller
                 "precio" => $producto[3],
                 "cantidad" => $producto[4],
                 "iva" => $producto[5],
+                "und" => $producto[6],
             ]);
             // Lo guardamos
             $productoVendido->saveOrFail();

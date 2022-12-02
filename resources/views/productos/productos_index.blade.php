@@ -35,6 +35,7 @@
                         <th>Precio de compra</th>
                         <th>Precio de venta</th>
                         <th>I.V.A.</th>
+                        <th>UND</th>
                         <th>Utilidad</th>
                         <th>Existencia</th>
 
@@ -50,6 +51,7 @@
                             <td>{{$producto->precio_compra}}</td>
                             <td>{{$producto->precio_venta}}</td>
                             <td>{{$producto->iva}}</td>
+                            <td>{{$producto->und}}</td>
                             <td>{{$producto->precio_venta - $producto->precio_compra}}</td>
                             <td>{{$producto->existencia}}</td>
                             <td>

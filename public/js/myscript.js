@@ -71,6 +71,7 @@ function selectCode(content) {
                 var myInputPrec = document.getElementById('precioTdl');
                 var myInputCant = document.getElementById('cantidadTdl');
                 var myInputIva = document.getElementById('ivaTdl');
+                var myInputUnd = document.getElementById('typeUnd');
 
                 myInputTitle.value = myJson.id;
                 myInputCod.value = myJson.codigo_barras;
@@ -78,6 +79,7 @@ function selectCode(content) {
                 myInputPrec.value = myJson.precio_venta;
                 myInputCant.value = "1";
                 myInputIva.value = myJson.iva;
+                myInputUnd.value = myJson.und;
 
                 //console.log(myJson);
     
@@ -125,6 +127,8 @@ function selectCode(content) {
 
         var myTableArray = [];
         let inputIdCliente = document.getElementById('id_cliente').value;
+        let inputTypeUnd = document.getElementById('typeUnd').value;
+        let botonCancelarVenta = document.getElementById('btnCancelarVenta');
 
 $("table#table tr").each(function() {
     var arrayOfThisRow = [];
@@ -151,7 +155,8 @@ $("table#table tr").each(function() {
                 productos : myTableArray
             },
               success: function (datos) {
-                $("#tablaVenta").html(datos);
+                //$("#tablaVenta").html(datos);
+                botonCancelarVenta.click();
               }
           });
           return false;

@@ -58,6 +58,12 @@
                            type="integer" placeholder="16">
                 </div>
                 <div class="form-group">
+                    <label class="label">UND</label>
+                    <input required value="{{$producto->und}}" autocomplete="off" name="und"
+                           class="form-control"
+                           type="text" placeholder="">
+                </div>
+                <div class="form-group">
                     <label class="label">Existencia</label>
                     <input required value="{{$producto->existencia}}" autocomplete="off" name="existencia"
                            class="form-control"

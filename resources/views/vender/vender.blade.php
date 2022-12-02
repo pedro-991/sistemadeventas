@@ -60,6 +60,9 @@
                             <input id="codigotest" autocomplete="off" name="codigotest" type="text"
                                    class="form-control"
                                    placeholder="Jabon">
+
+                                   <input id="typeUnd" autocomplete="off" name="typeUnd" type="text"
+                                   class="form-control">
  
                   <!--  <form action="{{route('agregarProductoVenta')}}" method="post">
                         @csrf
@@ -216,6 +219,7 @@
               <th scope="col">Precio</th>
               <th scope="col">Cantidad</th>
               <th scope="col">I.V.A.</th>
+              <th scope="col">UND</th>
              
               <th scope="col"></th>
             </tr>

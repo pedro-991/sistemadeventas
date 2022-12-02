@@ -62,9 +62,14 @@
                     <tr style="height: 30px;">
                         <td>{{$producto->codigo_barras}}</td>
                         <td>{{$producto->descripcion}}</td>
-                        <td>{{$producto->cantidad}} UND</td>
+                        <td>{{$producto->cantidad}} {{$producto->und}}</td>
                         <td>{{number_format($producto->precio, 2)}}</td>
+                        @if($producto->iva == 0)
+                        
+                        <td>XENTO</td>
+                        @else
                         <td>{{$producto->iva}}%</td>
+                        @endif
                         <td>{{number_format($producto->cantidad * $producto->precio, 2)}}</td>
                     </tr>
                   
