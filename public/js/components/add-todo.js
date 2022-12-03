@@ -10,6 +10,8 @@ export default class AddTodo {
     this.cantidad = document.getElementById('cantidadTdl');
     this.iva = document.getElementById('ivaTdl');
     this.und = document.getElementById('typeUnd');
+    this.total = this.precio_venta.value * this.cantidad.value;
+    //console.log(this.total);
 
     this.alert = new Alert('alert');
   }
@@ -20,7 +22,7 @@ export default class AddTodo {
         this.alert.show('Title and description are required');
       } else {
         this.alert.hide();
-        callback(this.title.value, this.codigo_barras.value, this.description.value, this.precio_venta.value, this.cantidad.value, this.iva.value, this.und.value);
+        callback(this.title.value, this.codigo_barras.value, this.description.value, this.precio_venta.value, this.cantidad.value, this.iva.value, this.und.value, this.total);
       }
     }
   }

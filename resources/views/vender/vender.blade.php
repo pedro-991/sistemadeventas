@@ -61,7 +61,7 @@
                                    class="form-control"
                                    placeholder="Jabon">
 
-                                   <input id="typeUnd" autocomplete="off" name="typeUnd" type="text"
+                                   <input id="typeUnd" autocomplete="off" name="typeUnd" type="hidden"
                                    class="form-control">
  
                   <!--  <form action="{{route('agregarProductoVenta')}}" method="post">
@@ -77,7 +77,8 @@
                    
                 </div>
             </div>
-            
+            <h5 id="ivaTotal">I.V.A.: Bs 0</h5>
+            <h2 id="h2Total">Total: Bs 0</h2>
                 @if(session("productos") !== null)
                     <h2>Total: ${{number_format($total, 2)}}</h2>
                     <div class="table-responsive">
@@ -220,6 +221,7 @@
               <th scope="col">Cantidad</th>
               <th scope="col">I.V.A.</th>
               <th scope="col">UND</th>
+              <th scope="col">TOTAL</th>
              
               <th scope="col"></th>
             </tr>

@@ -10,6 +10,8 @@ export default class Modal {
     this.iva = document.getElementById('modal-iva');
     this.btn = document.getElementById('modal-btn');
     this.alert = new Alert('modal-alert');
+    this.und = "";
+    this.total = "";
 
     this.todo = null;
   }
@@ -22,6 +24,8 @@ export default class Modal {
     this.precio_venta.value = todo.precio_venta;
     this.cantidad.value = todo.cantidad;
     this.iva.value = todo.iva;
+    this.und = todo.und;
+    this.total = todo.total;
   }
 
   onClick(callback) {
@@ -40,6 +44,8 @@ export default class Modal {
         precio_venta: this.precio_venta.value,
         cantidad: this.cantidad.value,
         iva: this.iva.value,
+        und: this.und,
+        total: this.total,
       });
     }
   }

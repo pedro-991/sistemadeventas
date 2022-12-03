@@ -1,6 +1,7 @@
 export default class Model {
   constructor() {
     this.arrayId = [];
+    this.totalesTable = [];
     this.view = null;
     this.todos = JSON.parse(localStorage.getItem('todos'));
     if (!this.todos || this.todos.length < 1) {
@@ -53,13 +54,18 @@ export default class Model {
   editTodo(id, values) {
     const index = this.findTodo(id);
     Object.assign(this.todos[index], values);
-    this.save();
+    //console.log(values);
+    
+    //this.save();
+    //this.view.showTotal();
   }
 
-  addTodo(title, codigo_barras, description, precio_venta, cantidad, iva, und) {
+  addTodo(title, codigo_barras, description, precio_venta, cantidad, iva, und, total) {
 
     //console.log(title);
     //console.log(description);
+
+    total = precio_venta * cantidad;
 
     const todo = {
       id: this.currentId++,
@@ -69,12 +75,13 @@ export default class Model {
       precio_venta, 
       cantidad, 
       iva,
-      und
+      und,
+      total
     }
 
     this.todos.push(todo);
-    console.log(this.todos);
-    this.save();
+    //console.log(todo);
+    //this.save();
 
     return {...todo};
   }
@@ -96,6 +103,19 @@ export default class Model {
     this.save();
     
     return this.arrayId;
+  }
+
+  totalizarTable() {
+    //console.log('soy remove todo table');
+    this.totalesTable = [];
+    this.todos.forEach((todo) => {
+      this.totalesTable.push([todo.total, todo.iva]);
+    });
+    //this.todos.splice(0, this.todos.length);
+      
+    //this.save();
+    //console.log(this.totalesTable)
+    return this.totalesTable;
   }
 
 }

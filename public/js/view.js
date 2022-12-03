@@ -1,6 +1,6 @@
 import AddTodo from './components/add-todo.js';
 import Modal from './components/modal.js';
-//import Filters from './components/filters.js';
+
 
 export default class View {
   constructor() {
@@ -10,12 +10,18 @@ export default class View {
     this.modal = new Modal();
     this.btnCancelar = document.getElementById('btnCancelarVenta');
     this.btnCancelar.onclick = () => this.removeTodoCancelar();
-    //this.filters = new Filters();
+    this.h2Total = document.getElementById('h2Total');
+    this.ivaTotal = document.getElementById('ivaTotal');
+   
     
 
-    this.addTodoForm.onClick((title, codigo_barras, description, precio_venta, cantidad, iva, und) => this.addTodo(title, codigo_barras, description, precio_venta, cantidad, iva, und));
-    this.modal.onClick((id, values) => this.editTodo(id, values));
-    //this.filters.onClick((filters) => this.filter(filters));
+    this.addTodoForm.onClick((title, codigo_barras, description, precio_venta, cantidad, iva, und, total) => this.addTodo(title, codigo_barras, description, precio_venta, cantidad, iva, und, total));
+    this.modal.onClick((id, values) => 
+    {
+      //this.showTotal();
+      this.editTodo(id, values);
+    });
+    
   }
 
   setModel(model) {
@@ -28,36 +34,11 @@ export default class View {
     todos.forEach((todo) => this.createRow(todo));
   }
 
- /*  filter(filters) {
-    const { type, words } = filters;
-    const [, ...rows] = this.table.getElementsByTagName('tr');
-    for (const row of rows) {
-      const [title, description, completed] = row.children;
-      let shouldHide = false;
-
-      if (words) {
-        shouldHide = !title.innerText.includes(words) && !description.innerText.includes(words);
-      }
-
-      const shouldBeCompleted = type === 'completed';
-      const isCompleted = completed.children[0].checked;
-
-      if (type !== 'all' && shouldBeCompleted !== isCompleted) {
-        shouldHide = true;
-      }
-
-      if (shouldHide) {
-        row.classList.add('d-none');
-      } else {
-        row.classList.remove('d-none');
-      }
-    }
-  } */
-
-  addTodo(title, codigo_barras, description, precio_venta, cantidad, iva, und) {
+  addTodo(title, codigo_barras, description, precio_venta, cantidad, iva, und, total) {
     //console.log(title);
     //console.log(description);
-    const todo = this.model.addTodo(title, codigo_barras, description, precio_venta, cantidad, iva, und);
+    const todo = this.model.addTodo(title, codigo_barras, description, precio_venta, cantidad, iva, und, total);
+    this.showTotal();
     this.createRow(todo);
   }
 
@@ -66,7 +47,10 @@ export default class View {
   }
 
   editTodo(id, values) {
+    values.total = values.precio_venta * values.cantidad;
+    //console.log(values);
     this.model.editTodo(id, values);
+    this.showTotal();
     const row = document.getElementById(id);
     row.children[0].innerText = values.title;
     row.children[1].innerText = values.codigo_barras;
@@ -74,6 +58,7 @@ export default class View {
     row.children[3].innerText = values.precio_venta;
     row.children[4].innerText = values.cantidad;
     row.children[5].innerText = values.iva;
+    row.children[7].innerText = values.precio_venta * values.cantidad;
     
   }
 
@@ -88,7 +73,33 @@ export default class View {
     const arrayId = this.model.removeTodoTable();
     //console.log(arrayId);
     arrayId.forEach((id) => document.getElementById(id).remove());
-    //todos.forEach((todo, i) => console.log(i));
+  }
+
+  showTotal() {
+    //console.log("showTotal ha sido corrido");
+    const totalesTable = this.model.totalizarTable();
+    //console.log(totalesTable);
+    let ivaTotal = totalesTable.map((totales) => {
+      return totales[0] * (totales[1]/100);
+    });
+    ivaTotal = ivaTotal.reduce((acc, num) => {
+      return acc + num;
+    });
+    //console.log(ivaTotal);
+    this.ivaTotal.innerHTML = "I.V.A.: Bs " + ivaTotal.toFixed(2);
+
+    let sumaTotal = totalesTable.map((totales) => {
+      return totales[0];
+    });
+
+     sumaTotal = sumaTotal.reduce((acc, num) => {
+      return acc + num;
+    });
+
+    let totalWithIva = sumaTotal + ivaTotal;
+    //console.log(sumaTotal);
+    this.h2Total.innerHTML = "Total: Bs " + totalWithIva.toFixed(2);
+   
   }
 
   createRow(todo) {
@@ -102,6 +113,7 @@ export default class View {
       <td>${todo.cantidad}</td>
       <td>${todo.iva}</td>
       <td>${todo.und}</td>
+      <td>${todo.precio_venta * todo.cantidad}</td>
 
       
       <th class="text-right">
@@ -109,15 +121,8 @@ export default class View {
       </th>
     `;
 
-   /*  const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.checked = todo.completed;
-    checkbox.onclick = () => this.toggleCompleted(todo.id);
-    row.children[2].appendChild(checkbox); */
-
     const editBtn = document.createElement('button');
     editBtn.classList.add('btn', 'btn-primary', 'mb-1');
-    //editBtn.innerHTML = '<i class="fa fa-pencil"></i>';
     editBtn.innerHTML = '<i class="fa fa-edit" aria-hidden="true"></i>';
     editBtn.setAttribute('data-bs-toggle', 'modal');
     editBtn.setAttribute('data-bs-target', '#modal');
@@ -129,13 +134,15 @@ export default class View {
       precio_venta: row.children[3].innerText,
       cantidad: row.children[4].innerText,
       iva: row.children[5].innerText,
+      und: row.children[6].innerText,
+      total: row.children[7].innerText,
     });
-    row.children[6].appendChild(editBtn);
+    row.children[8].appendChild(editBtn);
 
     const removeBtn = document.createElement('button');
     removeBtn.classList.add('btn', 'btn-danger', 'mb-1', 'ml-1');
     removeBtn.innerHTML = '<i class="fa fa-trash"></i>';
     removeBtn.onclick = () => this.removeTodo(todo.id);
-    row.children[6].appendChild(removeBtn);
+    row.children[8].appendChild(removeBtn);
   }
 }
