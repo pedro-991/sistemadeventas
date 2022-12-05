@@ -25,6 +25,7 @@ namespace App\Http\Controllers;
 
 use App\Producto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductosController extends Controller
 {
@@ -59,6 +60,8 @@ class ProductosController extends Controller
         $producto = new Producto($request->input());
         $producto->saveOrFail();
         return redirect()->route("productos.index")->with("mensaje", "Producto guardado");
+    
+        //return var_dump($request->input());
     }
 
     /**
@@ -108,5 +111,12 @@ class ProductosController extends Controller
     {
         $producto->delete();
         return redirect()->route("productos.index")->with("mensaje", "Producto eliminado");
+    }
+
+    public function actualizarDollar(Request $request)
+    {
+        //Producto::where('existencia', '>', 0)->update(['precio_venta'=>'precio_compra' . '*' . '2.00']);
+        $updated = DB::update('update productos set precio_venta = preciodollar * ?', [$request->dollar]);
+        return "hola";
     }
 }

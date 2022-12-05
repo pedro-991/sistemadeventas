@@ -21,6 +21,7 @@ Auth::routes([
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post("/productocodigo", "VenderController@productoFiltro")->name("buscarProducto");
 Route::post("/terminarVenta", "VenderController@terminarVenta")->name("terminarVenta");
+Route::post("/dollar", "ProductosController@actualizarDollar")->name("dollar");
 //Route::post("/mostrarSesion", "VenderController@mostrarSesion")->name("mostrarSesion");
 // Permitir logout con petición get
 Route::get("/logout", function () {

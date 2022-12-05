@@ -25,6 +25,10 @@
         <div class="col-12">
             <h1>Productos <i class="fa fa-box"></i></h1>
             <a href="{{route('productos.create')}}" class="btn btn-success mb-2">Agregar</a>
+            <a href="" id="btnActualizar" class="btn btn-success mb-2">Actualizar</a>
+            <input style="width: 30%" id="inputActualizar" autocomplete="off" name="" type="text"
+                                   class="form-control"
+                                   placeholder="10.69">
             @include("notificacion")
             <div class="table-responsive">
                 <table class="table table-bordered">
@@ -34,6 +38,7 @@
                         <th>Descripción</th>
                         <th>Precio de compra</th>
                         <th>Precio de venta</th>
+                        <th>Precio de venta $</th>
                         <th>I.V.A.</th>
                         <th>UND</th>
                         <th>Utilidad</th>
@@ -50,6 +55,7 @@
                             <td>{{$producto->descripcion}}</td>
                             <td>{{$producto->precio_compra}}</td>
                             <td>{{$producto->precio_venta}}</td>
+                            <td>{{$producto->preciodollar}}</td>
                             <td>{{$producto->iva}}</td>
                             <td>{{$producto->und}}</td>
                             <td>{{$producto->precio_venta - $producto->precio_compra}}</td>

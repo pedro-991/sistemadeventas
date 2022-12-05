@@ -47,6 +47,11 @@
                            type="decimal(9,2)" placeholder="Precio de venta">
                 </div>
                 <div class="form-group">
+                    <label class="label">Precio de venta $</label>
+                    <input required autocomplete="off" name="preciodollar" class="form-control"
+                           type="decimal(9,2)" placeholder="">
+                </div>
+                <div class="form-group">
                     <label class="label">I.V.A.</label>
                     <input required autocomplete="off" name="iva" class="form-control"
                            type="integer" placeholder="16">

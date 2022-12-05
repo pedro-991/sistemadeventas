@@ -166,4 +166,39 @@ $("table#table tr").each(function() {
   
   });
 
+  $(function ()
+  {
+      $("#btnActualizar").on('click', function () {
+
+        
+        let inputActualizar = document.getElementById('inputActualizar').value;
+        
+
+
+  
+              $.ajaxSetup({
+                  headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+  
+          $.ajax({
+              url: 'dollar',
+              type: 'POST',
+              data:  {
+                dollar : inputActualizar
+            },
+              success: function (datos) {
+                //$("#tablaVenta").html(datos);
+                //botonCancelarVenta.click();
+                location.href='productos';
+              }
+          });
+          return false;
+       
+  
+      });
+  
+  });
+
       
