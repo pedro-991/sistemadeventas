@@ -114,6 +114,7 @@ export default class View {
       <td>${todo.iva}</td>
       <td>${todo.und}</td>
       <td>${todo.precio_venta * todo.cantidad}</td>
+      <th>${((todo.iva/100+1) * todo.precio_venta).toFixed(2)}</th>
 
       
       <th class="text-right">
@@ -137,12 +138,12 @@ export default class View {
       und: row.children[6].innerText,
       total: row.children[7].innerText,
     });
-    row.children[8].appendChild(editBtn);
+    row.children[9].appendChild(editBtn);
 
     const removeBtn = document.createElement('button');
     removeBtn.classList.add('btn', 'btn-danger', 'mb-1', 'ml-1');
     removeBtn.innerHTML = '<i class="fa fa-trash"></i>';
     removeBtn.onclick = () => this.removeTodo(todo.id);
-    row.children[8].appendChild(removeBtn);
+    row.children[9].appendChild(removeBtn);
   }
 }

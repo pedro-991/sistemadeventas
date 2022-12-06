@@ -36,7 +36,7 @@ class ProductosController extends Controller
      */
     public function index()
     {
-        return view("productos.productos_index", ["productos" => Producto::all()]);
+        return view("productos.productos_index", ["productos" => Producto::all()->sortBy('descripcion')]);
     }
 
     /**
@@ -117,6 +117,6 @@ class ProductosController extends Controller
     {
         //Producto::where('existencia', '>', 0)->update(['precio_venta'=>'precio_compra' . '*' . '2.00']);
         $updated = DB::update('update productos set precio_venta = preciodollar * ?', [$request->dollar]);
-        return "hola";
+        //return "hola";
     }
 }

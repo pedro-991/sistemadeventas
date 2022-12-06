@@ -26,12 +26,16 @@
             <h1>Productos <i class="fa fa-box"></i></h1>
             <a href="{{route('productos.create')}}" class="btn btn-success mb-2">Agregar</a>
             <a href="" id="btnActualizar" class="btn btn-success mb-2">Actualizar</a>
-            <input style="width: 30%" id="inputActualizar" autocomplete="off" name="" type="text"
-                                   class="form-control"
-                                   placeholder="10.69">
+            <div class="row">
+                <input style="width: 30%" id="inputActualizar" autocomplete="off" name="" type="text"
+                                    class="col-md-3 form-control"
+                                    placeholder="10.69">
+                <input style="width: 30%" type="text" name="txtBusqueda" id="txtBusqueda" class="col-md-3 form-control" onkeyup="Buscar()" placeholder="Busqueda"autofocus>
+
+            </div>
             @include("notificacion")
             <div class="table-responsive">
-                <table class="table table-bordered">
+                <table id="tblProducto" class="table table-bordered">
                     <thead>
                     <tr>
                         <th>Código de barras</th>
