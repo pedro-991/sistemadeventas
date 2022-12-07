@@ -35,15 +35,26 @@
             <a class="btn btn-success" href="javascript:printInvoice()">
                 <i class="fa fa-print"></i>&nbsp;Imprimir
             </a>
-            <div id="divFactura">
+            
             <h2>Productos</h2>
-            <div class="titleHeader">
-            <p style="padding: 0; margin: 0;">CLIENTE: <small>{{$venta->cliente->nombre}}</small></p>
-            <p style="padding: 0; margin: 0;">RIF: <small></small></p>
-            <p style="padding: 0; margin: 0;">DIRECCIÓN: <small></small></p>
-</div>
-            <table width="100%" class="table table-bordered table-hover table-sm">
-                <thead class="thead-light">
+            <div id="divFactura">
+            <div class="" style="width: 100%; display: flex;">
+                <div class="" style="width: 70%;">
+                    <p style="padding: 0; margin: 0;">CLIENTE: <small>{{$venta->cliente->nombre}}</small></p>
+                </div>
+                <div class="" style="width: 30%;">
+                    <p style="padding: 0; margin: 0;">FECHA: <small>{{$venta->created_at}}</small></p>
+                </div>
+
+            </div>
+
+                <p style="padding: 0; margin: 0;">RIF: <small></small></p>
+                <p style="padding: 0; margin: 0;">DIRECCIÓN: <small></small></p>
+                <p style="padding: 0; margin: 0;"></p>
+
+            
+            <table width="100%" border="1">
+            <thead ><!-- style="border-width: 1; border-style: solid; border-color: black;"> --> <!-- class="thead-light" > -->
                 <tr>
                     <th>Código</th>
                     <th>Descripción</th>
@@ -53,7 +64,10 @@
                     <th>Total</th>
                 </tr>
                 </thead>
-                <tbody style="height: 200px;">
+            </table>
+            <table width="100%" border="0"> <!-- class="table table-bordered table-hover table-sm"> -->
+                
+                <tbody style="min-height: 100px"> <!-- height: 200px; -->
                 @php
                     $totalIva = 0;
 
@@ -79,31 +93,25 @@
         @endphp
                 @endforeach
               
-                <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              
-</tr>
+               
                 </tbody>
+                </table>
+                <table width="100%" border="1">
                 <tfoot>
                 <tr>
-                    <td colspan="3"></td>
+                
                     <td><strong>SUB TOTAL</strong></td>
                     <td><strong>{{number_format($total, 2)}}</strong></td>
                 </tr>
                 <tr>
-                    <td colspan="3"></td>
+               
                     <td><strong>I.V.A. 16.00%</strong></td>
-                    <td><strong>{{$totalIva}}</strong></td>
+                    <td><strong>{{number_format($totalIva, 2)}}</strong></td>
                 </tr>
                 <tr>
-                    <td colspan="3"></td>
+                
                     <td><strong>Total</strong></td>
-                    <td>{{number_format($total + $totalIva, 2)}}</td>
+                    <td><strong>{{number_format($total + $totalIva, 2)}}</strong></td>
                 </tr>
                 </tfoot>
             </table>
