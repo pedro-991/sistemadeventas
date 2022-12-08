@@ -15,7 +15,7 @@ export default class View {
    
     
 
-    this.addTodoForm.onClick((title, codigo_barras, description, precio_venta, cantidad, iva, und, total) => this.addTodo(title, codigo_barras, description, precio_venta, cantidad, iva, und, total));
+    this.addTodoForm.onClick((title, codigo_barras, description, precio_venta, cantidad, iva, und, total, referventa, refercompra) => this.addTodo(title, codigo_barras, description, precio_venta, cantidad, iva, und, total, referventa, refercompra));
     this.modal.onClick((id, values) => 
     {
       //this.showTotal();
@@ -34,10 +34,11 @@ export default class View {
     todos.forEach((todo) => this.createRow(todo));
   }
 
-  addTodo(title, codigo_barras, description, precio_venta, cantidad, iva, und, total) {
-    //console.log(title);
+  addTodo(title, codigo_barras, description, precio_venta, cantidad, iva, und, total, referventa, refercompra) {
+    //console.log(refercompra);
     //console.log(description);
-    const todo = this.model.addTodo(title, codigo_barras, description, precio_venta, cantidad, iva, und, total);
+    //console.log(referventa);
+    const todo = this.model.addTodo(title, codigo_barras, description, precio_venta, cantidad, iva, und, total, referventa, refercompra);
     this.showTotal();
     this.createRow(todo);
   }
@@ -59,11 +60,14 @@ export default class View {
     row.children[4].innerText = values.cantidad;
     row.children[5].innerText = values.iva;
     row.children[7].innerText = values.precio_venta * values.cantidad;
+    row.children[9].innerText = values.referventa;
+    row.children[10].innerText = values.refercompra;
     
   }
 
   removeTodo(id) {
     this.model.removeTodo(id);
+    this.showTotal();
     document.getElementById(id).remove();
   }
 
@@ -115,6 +119,9 @@ export default class View {
       <td>${todo.und}</td>
       <td>${todo.precio_venta * todo.cantidad}</td>
       <th>${((todo.iva/100+1) * todo.precio_venta).toFixed(2)}</th>
+      <th>${todo.referventa}</th>
+      <th>${todo.refercompra}</th>
+      
 
       
       <th class="text-right">
@@ -137,13 +144,15 @@ export default class View {
       iva: row.children[5].innerText,
       und: row.children[6].innerText,
       total: row.children[7].innerText,
+      referventa: row.children[9].innerText,
+      refercompra: row.children[10].innerText,
     });
-    row.children[9].appendChild(editBtn);
+    row.children[11].appendChild(editBtn);
 
     const removeBtn = document.createElement('button');
     removeBtn.classList.add('btn', 'btn-danger', 'mb-1', 'ml-1');
     removeBtn.innerHTML = '<i class="fa fa-trash"></i>';
     removeBtn.onclick = () => this.removeTodo(todo.id);
-    row.children[9].appendChild(removeBtn);
+    row.children[11].appendChild(removeBtn);
   }
 }

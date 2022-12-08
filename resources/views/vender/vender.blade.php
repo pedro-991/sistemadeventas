@@ -137,7 +137,21 @@
         <form> 
           <div class="row">
           
-           
+          <input
+                  type="hidden"
+                  id="referVenta"
+                  class="form-control ml-sm-2 col-md-6"
+                  placeholder=""
+                  readonly
+                >
+
+                <input
+                  type="hidden"
+                  id="referCompra"
+                  class="form-control ml-sm-2 col-md-6"
+                  placeholder=""
+                  readonly
+                >
                 
                 <input
                   type="hidden"

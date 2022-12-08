@@ -23,7 +23,10 @@
 @section("contenido")
     <div class="row">
         <div class="col-12">
-            <h1>Productos <i class="fa fa-box"></i></h1>
+            <div class="row">
+                <h1 class="col-md-3">Productos <i class="fa fa-box"></i></h1>
+                <h2 class="col-md-3">{{count($productos)}}</h2>
+            </div>
             <a href="{{route('productos.create')}}" class="btn btn-success mb-2">Agregar</a>
             <a href="" id="btnActualizar" class="btn btn-success mb-2">Actualizar</a>
             <div class="row">

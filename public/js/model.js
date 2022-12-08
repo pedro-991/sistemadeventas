@@ -60,7 +60,7 @@ export default class Model {
     //this.view.showTotal();
   }
 
-  addTodo(title, codigo_barras, description, precio_venta, cantidad, iva, und, total) {
+  addTodo(title, codigo_barras, description, precio_venta, cantidad, iva, und, total, referventa, refercompra) {
 
     //console.log(title);
     //console.log(description);
@@ -76,7 +76,9 @@ export default class Model {
       cantidad, 
       iva,
       und,
-      total
+      total,
+      referventa,
+      refercompra
     }
 
     this.todos.push(todo);

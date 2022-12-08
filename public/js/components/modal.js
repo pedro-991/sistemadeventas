@@ -12,6 +12,8 @@ export default class Modal {
     this.alert = new Alert('modal-alert');
     this.und = "";
     this.total = "";
+    this.referventa = document.getElementById('modal-venta-dollar');
+    this.refercompra = document.getElementById('modal-compra-dollar');
 
     this.todo = null;
   }
@@ -26,6 +28,8 @@ export default class Modal {
     this.iva.value = todo.iva;
     this.und = todo.und;
     this.total = todo.total;
+    this.referventa.value = todo.referventa;
+    this.refercompra.value = todo.refercompra;
   }
 
   onClick(callback) {
@@ -46,6 +50,8 @@ export default class Modal {
         iva: this.iva.value,
         und: this.und,
         total: this.total,
+        referventa: this.referventa.value,
+        refercompra: this.refercompra.value,
       });
     }
   }

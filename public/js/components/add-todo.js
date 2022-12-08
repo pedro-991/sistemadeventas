@@ -11,6 +11,8 @@ export default class AddTodo {
     this.iva = document.getElementById('ivaTdl');
     this.und = document.getElementById('typeUnd');
     this.total = this.precio_venta.value * this.cantidad.value;
+    this.referventa = document.getElementById('referVenta');
+    this.refercompra = document.getElementById('referCompra');
     //console.log(this.total);
 
     this.alert = new Alert('alert');
@@ -22,7 +24,7 @@ export default class AddTodo {
         this.alert.show('Title and description are required');
       } else {
         this.alert.hide();
-        callback(this.title.value, this.codigo_barras.value, this.description.value, this.precio_venta.value, this.cantidad.value, this.iva.value, this.und.value, this.total);
+        callback(this.title.value, this.codigo_barras.value, this.description.value, this.precio_venta.value, this.cantidad.value, this.iva.value, this.und.value, this.total, this.referventa.value, this.refercompra.value);
       }
     }
   }

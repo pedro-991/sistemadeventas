@@ -231,7 +231,7 @@
                 id="modal-title"
                 type="text"
                 class="form-control"
-                placeholder="Do Something"
+                placeholder=""
               />
             </div>
 
@@ -259,6 +259,26 @@
                 type="text"
                 class="form-control"
                 placeholder="Do Something"
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Compra $</label>
+              <input
+                id="modal-compra-dollar"
+                type="text"
+                class="form-control"
+                placeholder=""
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Venta $</label>
+              <input
+                id="modal-venta-dollar"
+                type="text"
+                class="form-control"
+                placeholder=""
               />
             </div>
 

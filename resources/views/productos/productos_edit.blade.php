@@ -58,6 +58,18 @@
                            type="decimal(9,2)" placeholder="">
                 </div>
                 <div class="form-group">
+                    <label class="label">Referencia venta $</label>
+                    <input required value="{{$producto->referventa}}" autocomplete="off" name="referventa"
+                           class="form-control"
+                           type="text" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label class="label">Referencia compra $</label>
+                    <input required value="{{$producto->refercompra}}" autocomplete="off" name="refercompra"
+                           class="form-control"
+                           type="text" placeholder="">
+                </div>
+                <div class="form-group">
                     <label class="label">I.V.A.</label>
                     <input required value="{{$producto->iva}}" autocomplete="off" name="iva"
                            class="form-control"

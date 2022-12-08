@@ -72,6 +72,8 @@ function selectCode(content) {
                 var myInputCant = document.getElementById('cantidadTdl');
                 var myInputIva = document.getElementById('ivaTdl');
                 var myInputUnd = document.getElementById('typeUnd');
+                var myInputReferVenta = document.getElementById('referVenta');
+                var myInputReferCompra = document.getElementById('referCompra');
 
                 myInputTitle.value = myJson.id;
                 myInputCod.value = myJson.codigo_barras;
@@ -80,6 +82,8 @@ function selectCode(content) {
                 myInputCant.value = "1";
                 myInputIva.value = myJson.iva;
                 myInputUnd.value = myJson.und;
+                myInputReferVenta.value = myJson.referventa;
+                myInputReferCompra.value = myJson.refercompra;
 
                 //console.log(myJson);
     
