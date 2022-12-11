@@ -43,7 +43,7 @@
                     <p style="padding: 0; margin: 0;">CLIENTE: <small>{{$venta->cliente->nombre}}</small></p>
                 </div>
                 <div class="" style="width: 30%;">
-                    <p style="padding: 0; margin: 0;">FECHA: <small>{{$venta->created_at}}</small></p>
+                    <p style="padding: 0; margin: 0;">FECHA: <small><strong>{{date_format($venta->created_at, "d/m/Y")}}</strong></small></p>
                 </div>
 
             </div>
@@ -75,7 +75,7 @@
                 @foreach($venta->productos as $producto)
                     <tr style="height: 30px;">
                         <td>{{$producto->codigo_barras}}</td>
-                        <td>{{$producto->descripcion}}</td>
+                        <td><small>{{$producto->descripcion}}</small></td>
                         <td>{{$producto->cantidad}} {{$producto->und}}</td>
                         <td>{{number_format($producto->precio, 2)}}</td>
                         @if($producto->iva == 0)
@@ -96,25 +96,26 @@
                
                 </tbody>
                 </table>
+
                 <table width="100%" border="1">
-                <tfoot>
-                <tr>
-                
-                    <td><strong>SUB TOTAL</strong></td>
-                    <td><strong>{{number_format($total, 2)}}</strong></td>
-                </tr>
-                <tr>
-               
-                    <td><strong>I.V.A. 16.00%</strong></td>
-                    <td><strong>{{number_format($totalIva, 2)}}</strong></td>
-                </tr>
-                <tr>
-                
-                    <td><strong>Total</strong></td>
-                    <td><strong>{{number_format($total + $totalIva, 2)}}</strong></td>
-                </tr>
-                </tfoot>
+                    
+                                <tr>
+                                    
+                                    <td align="right" style="padding-right: 5%;">
+                                
+                                        <strong>Sub Total:...................</strong>
+                                        <strong>{{number_format($total, 2)}}</strong></br>
+                                        <strong>I.V.A. 16.00%:.............</strong>
+                                        <strong>{{number_format($totalIva, 2)}}</strong></br>
+                                        <strong>Total:............................</strong>
+                                        <strong>{{number_format($total + $totalIva, 2)}}</strong></br>
+                                    
+                                    </td>
+                                </tr>
+                               
+                    
             </table>
+                
 </div>
 
         </div>

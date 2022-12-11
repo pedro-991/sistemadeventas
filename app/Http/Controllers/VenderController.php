@@ -148,7 +148,7 @@ class VenderController extends Controller
 
                 $htmlproducto = "<table class='table table-bordered' id='tblProducto'>";
 
-                $htmlproducto = $htmlproducto . "<tr><th>Descripcion</th><th>Precio</th><th>Existencia</th><th>Seleccionar</th></tr>";
+                $htmlproducto = $htmlproducto . "<tr><th>Descripcion</th><th>Precio+IVA</th><th>Refer Venta</th><th>Existencia</th><th>Seleccionar</th></tr>";
 
                 foreach($producto as $pro) {
 
@@ -171,7 +171,11 @@ class VenderController extends Controller
 
                     
 <td>
-" . $pro->precio_venta . "
+" . number_format($pro->precio_venta * ($pro->iva/100+1), 2) . "
+</td>
+
+<td>
+" . $pro->referventa . "
 </td>
 
 
