@@ -27,8 +27,13 @@
                 <h1 class="col-md-3">Productos <i class="fa fa-box"></i></h1>
                 <h2 class="col-md-3">{{count($productos)}}</h2>
             </div>
-            <a href="{{route('productos.create')}}" class="btn btn-success mb-2">Agregar</a>
-            <a href="" id="btnActualizar" class="btn btn-success mb-2">Actualizar</a>
+            <div class="row">
+                <a href="{{route('productos.create')}}" class="btn btn-success mb-2 col-md-2">Agregar</a>
+                <a href="" id="btnActualizar" class="btn btn-success mb-2 col-md-2">Actualizar</a>
+                <input style="width: 20%" id="tazaNow" autocomplete="off" name="" type="text"
+                                        class="col-md-3 form-control"
+                                        placeholder="" readonly>
+            </div>
             <div class="row">
                 <input style="width: 30%" id="inputActualizar" autocomplete="off" name="" type="text"
                                     class="col-md-3 form-control"

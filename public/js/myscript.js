@@ -8,17 +8,6 @@ function openmodal() {
     
             };
 
-          /*   $("#btnCancelarVenta").on('click', function () {
-
-                var body = document.getElementById('tablaVenta');
-                html = "";
-                //console.log('soy btn venta');
-                body.innerHTML = html;
-
-            }); */
-
- 
-
 
   $(function ()
 {
@@ -59,10 +48,6 @@ function openmodal() {
 
 function selectCode(content) {
     
-               /*  var myJson = JSON.parse (content.value);
-                var myInputCod = document.getElementById('codigo');
-                //myInputCod.value = content.value;
-                console.log(myJson.codigo_barras); */
 
                 var myJson = JSON.parse (content.value);
                 var myInputTitle = document.getElementById('title');
@@ -176,6 +161,7 @@ $("table#table tr").each(function() {
 
         
         let inputActualizar = document.getElementById('inputActualizar').value;
+        let inputTaza = document.getElementById('tazaNow').value;
         
 
 
@@ -192,12 +178,24 @@ $("table#table tr").each(function() {
               data:  {
                 dollar : inputActualizar
             },
-              success: function (datos) {
-                //$("#tablaVenta").html(datos);
-                //botonCancelarVenta.click();
-                location.href='productos';
+              success: function () {
+                //location.href='productos';
+                $.ajax({
+                    url: 'update',
+                    type: 'POST',
+                    data:  {
+                      dollar : inputActualizar
+                  },
+                    success: function (datos) {
+                      location.href='productos';
+                      //inputTaza = inputActualizar;
+                    }
+                });
               }
           });
+
+         
+
           return false;
        
   

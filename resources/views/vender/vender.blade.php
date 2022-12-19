@@ -77,8 +77,15 @@
                    
                 </div>
             </div>
-            <h5 id="ivaTotal">I.V.A.: Bs 0</h5>
-            <h2 id="h2Total">Total: Bs 0</h2>
+            <h5>
+                <div class="row">
+                        <div class="col-md-2" id="ivaTotal">I.V.A.: Bs 0</div>
+                        <input style="width: 20%" id="tazaNow" autocomplete="off" name="" type="text"
+                        class="col-md-3 form-control"
+                        placeholder="" readonly>
+                </div>
+            </h5>
+            <h2><div class="row"><div class="col-md-3" id="h2Total">Total: Bs 0</div><div class="col-md-3" id="h2TotalDollar">Total: $ 0</div></div></h2>
                 @if(session("productos") !== null)
                     <h2>Total: ${{number_format($total, 2)}}</h2>
                     <div class="table-responsive">

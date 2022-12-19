@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddPreciodollarColumnToProductosTables extends Migration
+class CreateTazasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class AddPreciodollarColumnToProductosTables extends Migration
      */
     public function up()
     {
-        Schema::table('productos', function (Blueprint $table) {
-            $table->decimal("preciodollar", 9, 2)->default('0.00')->after('precio_venta');
+        Schema::create('tazas', function (Blueprint $table) {
+            $table->id();
+            $table->decimal("taza", 9, 2)->default('0.00');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +27,6 @@ class AddPreciodollarColumnToProductosTables extends Migration
      */
     public function down()
     {
-        Schema::table('productos', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('tazas');
     }
 }

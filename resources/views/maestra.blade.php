@@ -73,6 +73,9 @@
 <script>
   
   $(document).ready(function(){
+
+    
+        var inputTaza = document.getElementById('tazaNow');
                 var myModalEl = document.getElementById('exampleModal');
                
             myModalEl.addEventListener('hidden.bs.modal', function (event) {
@@ -86,7 +89,19 @@
 
             })
             
-            
+            $.ajax({
+                    url: 'showTaza',
+                    type: 'GET',
+                    success: function (datos) {
+                      //location.href='productos';
+                      //inputTaza = inputActualizar;
+                      inputTaza.value = datos;
+                      console.log('test taza ajax');
+                    }
+                });
+            //inputTaza.value = "11.50";
+            //console.log('test taza');
+
             });
 
 </script>
@@ -180,7 +195,7 @@
 </body>
 <!-- Modal -->
 <div class="modal fade modal-fullscreen" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>

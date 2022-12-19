@@ -12,6 +12,8 @@ export default class View {
     this.btnCancelar.onclick = () => this.removeTodoCancelar();
     this.h2Total = document.getElementById('h2Total');
     this.ivaTotal = document.getElementById('ivaTotal');
+    this.tazaNow = document.getElementById('tazaNow');
+    this.h2TotalDollar = document.getElementById('h2TotalDollar');
    
     
 
@@ -59,7 +61,7 @@ export default class View {
     row.children[3].innerText = values.precio_venta;
     row.children[4].innerText = values.cantidad;
     row.children[5].innerText = values.iva;
-    row.children[7].innerText = values.precio_venta * values.cantidad;
+    row.children[7].innerText = (values.precio_venta * values.cantidad).toFixed(2);
     row.children[9].innerText = values.referventa;
     row.children[10].innerText = values.refercompra;
     
@@ -77,6 +79,9 @@ export default class View {
     const arrayId = this.model.removeTodoTable();
     //console.log(arrayId);
     arrayId.forEach((id) => document.getElementById(id).remove());
+    //this.showTotal();
+    this.ivaTotal.innerHTML = "I.V.A.: Bs " + 0;
+    this.h2Total.innerHTML = "Total: Bs " + 0;
   }
 
   showTotal() {
@@ -103,6 +108,11 @@ export default class View {
     let totalWithIva = sumaTotal + ivaTotal;
     //console.log(sumaTotal);
     this.h2Total.innerHTML = "Total: Bs " + totalWithIva.toFixed(2);
+
+    //total en $
+
+    let totalDollar = totalWithIva / this.tazaNow.value;
+    this.h2TotalDollar.innerHTML = "Total: $ " + totalDollar.toFixed(2);
    
   }
 
@@ -117,7 +127,7 @@ export default class View {
       <td>${todo.cantidad}</td>
       <td>${todo.iva}</td>
       <td>${todo.und}</td>
-      <td>${todo.precio_venta * todo.cantidad}</td>
+      <td>${(todo.precio_venta * todo.cantidad).toFixed(2)}</td>
       <th>${((todo.iva/100+1) * todo.precio_venta).toFixed(2)}</th>
       <th>${todo.referventa}</th>
       <th>${todo.refercompra}</th>
