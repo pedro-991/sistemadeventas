@@ -25,16 +25,24 @@
         "sass": "^1.32.11",
         "sass-loader": "^11.0.1"
     },
-
     "babel": {
         "presets": [
-          "@babel/react",
-          "@babel/env"
+            [
+                "@babel/react",
+                {
+                    "runtime": "automatic"
+                }
+            ],
+            "@babel/env"
         ],
         "plugins": [
-          "@babel/proposal-class-properties",
-          "@babel/plugin-transform-runtime"
+            "@babel/proposal-class-properties",
+            "@babel/plugin-transform-runtime"
         ]
-      }
-
+    },
+    "dependencies": {
+        "@inertiajs/inertia": "^0.11.1",
+        "@inertiajs/inertia-react": "^0.8.1",
+        "react-router-dom": "^6.6.1"
+    }
 }

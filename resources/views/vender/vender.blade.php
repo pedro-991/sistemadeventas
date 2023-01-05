@@ -92,13 +92,13 @@
                         <table class="table table-bordered" id="tableVenta">
                             <thead>
                             <tr>
-                            <th>Id</th>    
-                            <th>Código de barras</th>
-                                <th>Descripción</th>
-                                <th>Precio</th>
-                                <th>Cantidad</th>
-                                <th>I.V.A.</th>
-                                <th>Quitar</th>
+                              <th>Id</th>    
+                              <th>Código de barras</th>
+                              <th>Descripción</th>
+                              <th>Precio</th>
+                              <th>Cantidad</th>
+                              <th>I.V.A.</th>
+                              <th>Quitar</th>
                             </tr>
                             </thead>
                             <tbody>

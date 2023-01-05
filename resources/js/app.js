@@ -12,7 +12,9 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-require('./components/Example');
+//require('./components/Example');
+
+//require('./components/index');
 
 
 /***
@@ -22,5 +24,20 @@ my scripts
 
 
  */
+
+import React from 'react'
+import { render } from 'react-dom'
+import { createInertiaApp } from '@inertiajs/inertia-react'
+
+createInertiaApp({
+  resolve: name => require(`./Pages/${name}`),
+  setup({ el, App, props }) {
+    render(
+      <div className="container mt-5">
+    <App {...props} />
+    </div>, 
+    el)
+  },
+})
 
 

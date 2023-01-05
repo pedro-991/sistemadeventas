@@ -82,6 +82,7 @@ export default class View {
     //this.showTotal();
     this.ivaTotal.innerHTML = "I.V.A.: Bs " + 0;
     this.h2Total.innerHTML = "Total: Bs " + 0;
+    this.h2TotalDollar.innerHTML = "Total: $ " + 0;
   }
 
   showTotal() {

@@ -26,6 +26,7 @@ namespace App\Http\Controllers;
 use App\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Inertia\Inertia;
 
 class ProductosController extends Controller
 {
@@ -37,6 +38,14 @@ class ProductosController extends Controller
     public function index()
     {
         return view("productos.productos_index", ["productos" => Producto::all()->sortBy('descripcion')]);
+    }
+
+    public function indexReact()
+    {
+       
+        return Inertia::render('ShowProducts', ["products" => Producto::all()]);
+        
+        
     }
 
     /**
@@ -119,4 +128,34 @@ class ProductosController extends Controller
         $updated = DB::update('update productos set precio_venta = preciodollar * ?', [$request->dollar]);
         //return "hola";
     }
+
+    public function reactTest()
+    {
+        return view("test");
+    }
+
+        //Inertia
+        public function createInertia()
+        {
+            return Inertia::render('Create');
+        }
+
+        public function storeInertia(Request $request)
+        {
+            $producto = new Producto($request->input());
+            $producto->saveOrFail();
+
+            /* 
+
+            Session::flash('success', 'User created successfully'); */
+
+            //Session::flash('success', 'User created successfully');
+
+            //return Redirect::to('/');
+
+            //return Inertia::render('ShowProducts');
+
+            return Inertia::render('ShowProducts', ["products" => Producto::all()]);
+
+        }
 }

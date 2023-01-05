@@ -90,13 +90,12 @@
             })
             
             $.ajax({
-                    url: 'showTaza',
+                    url: '/MDclonado/sistema_ventas_laravel/public/showTaza',
                     type: 'GET',
                     success: function (datos) {
                       //location.href='productos';
                       //inputTaza = inputActualizar;
                       inputTaza.value = datos;
-                      console.log('test taza ajax');
                     }
                 });
             //inputTaza.value = "11.50";
@@ -105,7 +104,7 @@
             });
 
 </script>
-    
+@yield("headInertia")
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
@@ -146,6 +145,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('clientes.index')}}">Clientes&nbsp;<i class="fa fa-users"></i></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('indexReact')}}">Productos React&nbsp;<i class="fa fa-box"></i></a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="{{route('inertia')}}">Inertia&nbsp;<i class="fa fa-users"></i></a>
+                </li> -->
             @endguest
         </ul>
         <ul class="navbar-nav ml-auto">
@@ -178,6 +183,7 @@
 </script>
 <main class="container-fluid">
     @yield("contenido")
+    
 </main>
 <footer class="px-2 py-2 fixed-bottom bg-dark">
     <span class="text-muted">Punto de venta en Laravel
