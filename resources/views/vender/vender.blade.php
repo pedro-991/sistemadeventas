@@ -54,6 +54,7 @@
                 </div>
                 <div class="col-12 col-md-6">
                 <input type="hidden" id="btnModal" class="" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="hidden" id="btnCloseModal" class="btn-close" data-bs-dismiss="modal" data-bs-target="#exampleModal" aria-label="Close"></button>
                 <div id="contentDiv"></div>
             
                 <label for="codigotest">Buscar</label>
@@ -63,18 +64,6 @@
 
                                    <input id="typeUnd" autocomplete="off" name="typeUnd" type="hidden"
                                    class="form-control">
- 
-                  <!--  <form action="{{route('agregarProductoVenta')}}" method="post">
-                        @csrf
-                        <div class="form-group">
-                           
-                                   <label for="codigo">Código de barras</label>
-                            <input id="codigo" autocomplete="off" required autofocus name="codigo" type="text"
-                                   class="form-control"
-                                   placeholder="0001">
-                        </div> 
-                    </form> -->
-                   
                 </div>
             </div>
             <h5>
@@ -86,48 +75,7 @@
                 </div>
             </h5>
             <h2><div class="row"><div class="col-md-3" id="h2Total">Total: Bs 0</div><div class="col-md-3" id="h2TotalDollar">Total: $ 0</div></div></h2>
-                @if(session("productos") !== null)
-                    <h2>Total: ${{number_format($total, 2)}}</h2>
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="tableVenta">
-                            <thead>
-                            <tr>
-                              <th>Id</th>    
-                              <th>Código de barras</th>
-                              <th>Descripción</th>
-                              <th>Precio</th>
-                              <th>Cantidad</th>
-                              <th>I.V.A.</th>
-                              <th>Quitar</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach(session("productos") as $producto)
-                                <tr>
-                                <td>{{$producto->id}}</td>
-                                    <td>{{$producto->codigo_barras}}</td>
-                                    <td>{{$producto->descripcion}}</td>
-                                    <td>{{number_format($producto->precio_venta, 2)}}</td>
-                                    <td>{{$producto->cantidad}}</td>
-                                    <td>{{$producto->iva}}</td>
-                                    <th>
-                                        <form action="{{route('quitarProductoDeVenta')}}" method="post">
-                                            @method("delete")
-                                            @csrf
-                                            <input type="hidden" name="indice" value="{{$loop->index}}">
-                                            <button type="submit" class="btn btn-danger">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </form>
-                                    </th>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                @else
-                    
-                @endif
+               
             
         </div>
     </div>
@@ -178,7 +126,7 @@
                     readonly
                   >
              
-            <div class="col-sm-3 d-sm-flex align-items-center">
+            <div class="col-md-3 col-sm-3 d-sm-flex align-items-center">
               <div class="row"> 
                 <label class="col-md-6 m-sm-0">Description</label>
                 <input
@@ -190,7 +138,7 @@
                 >
               </div>
             </div>
-            <div class="col-sm-3 d-sm-flex align-items-center">
+            <div class="col-md-3 col-sm-3 d-sm-flex align-items-center">
               <div class="row"> 
                 <label class="col-md-6 m-sm-0">Precio</label>
                 <input
@@ -201,7 +149,7 @@
                 >
               </div>
             </div>
-            <div class="col-sm-3 d-sm-flex align-items-center">
+            <div class="col-md-2 col-sm-2 d-sm-flex align-items-center">
               <div class="row"> 
                 <label class="col-md-6 m-sm-0">Cantidad</label>
                 <input
@@ -212,17 +160,21 @@
                 >
               </div>
             </div>
-            
-                
+
+            <div class="col-md-2 col-sm-2 d-sm-flex align-items-center">
+              <div class="row"> 
+                <label class="col-md-6 m-sm-0">I.V.A.</label>
                 <input
-                  type="hidden"
+                  type="text"
                   id="ivaTdl"
-                  class="form-control ml-sm-2"
-                  placeholder="Learn JS"
-                  readonly
+                  class="form-control ml-sm-2 col-md-6"
+                  placeholder=""
                 >
+              </div>
+            </div>
+            
              
-            <div class="col-sm-2 d-sm-flex justify-content-end mt-4 mt-sm-0">
+            <div class="col-md-2 col-sm-2 d-sm-flex justify-content-end mt-4 mt-sm-0">
               <button type="button" class="btn btn-info btn-block" id="add">
                 Add
               </button>

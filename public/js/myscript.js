@@ -3,7 +3,9 @@
 
 function openmodal() {
     var input = document.getElementById('btnModal');
+    var myInputModal = document.getElementById('txtBusqueda');
                 input.click();
+                myInputModal.focus();
    
     
             };
@@ -47,6 +49,8 @@ function openmodal() {
 //funcion para seleccionar el codigo
 
 function selectCode(content) {
+
+                var btnCloseModal = document.getElementById('btnCloseModal');
     
 
                 var myJson = JSON.parse (content.value);
@@ -71,6 +75,9 @@ function selectCode(content) {
                 myInputReferCompra.value = myJson.refercompra;
 
                 //console.log(myJson);
+
+                
+                btnCloseModal.click();
     
             };
 
