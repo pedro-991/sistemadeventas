@@ -56,12 +56,12 @@
             <table width="100%" border="1">
             <thead ><!-- style="border-width: 1; border-style: solid; border-color: black;"> --> <!-- class="thead-light" > -->
                 <tr>
-                    <th>Código</th>
-                    <th>Descripción</th>
-                    <th>Cantidad</th>
-                    <th>Precio</th>
-                    <th>%I.V.A.</th>
-                    <th>Total</th>
+                    <th style="width: 17%;">Código</th>
+                    <th style="width: 35%;">Descripción</th>
+                    <th style="width: 17%;">Cantidad</th>
+                    <th style="width: 10%;">Precio</th>
+                    <th style="width: 10%;">%I.V.A.</th>
+                    <th style="width: 10%;">Total</th>
                 </tr>
                 </thead>
             </table>
@@ -74,17 +74,17 @@
         @endphp
                 @foreach($venta->productos as $producto)
                     <tr style="height: 30px;">
-                        <td>{{$producto->codigo_barras}}</td>
-                        <td><small>{{$producto->descripcion}}</small></td>
-                        <td>{{$producto->cantidad}} {{$producto->und}}</td>
-                        <td>{{number_format($producto->precio, 2)}}</td>
+                        <td><font face="monospace"><strong>{{$producto->codigo_barras}}</strong></font></td>
+                        <td><font face="monospace"><strong><small>{{$producto->descripcion}}</small></strong></font></td>
+                        <td><font face="monospace"><strong>{{$producto->cantidad}} {{$producto->und}}</strong></font></td>
+                        <td><font face="monospace"><strong>{{number_format($producto->precio, 2)}}</strong></font></td>
                         @if($producto->iva == 0)
                         
-                        <td>XENTO</td>
+                        <td><font face="monospace"><strong>XENTO</strong></font></td>
                         @else
-                        <td>{{$producto->iva}}%</td>
+                        <td><font face="monospace"><strong>{{$producto->iva}}%</strong></font></td>
                         @endif
-                        <td>{{number_format($producto->cantidad * $producto->precio, 2)}}</td>
+                        <td><font face="monospace"><strong>{{number_format($producto->cantidad * $producto->precio, 2)}}</strong></font></td>
                     </tr>
                   
                     @php
@@ -103,12 +103,12 @@
                                     
                                     <td align="right" style="padding-right: 5%;">
                                 
-                                        <strong>Sub Total:...................</strong>
-                                        <strong>{{number_format($total, 2)}}</strong></br>
-                                        <strong>I.V.A. 16.00%:.............</strong>
-                                        <strong>{{number_format($totalIva, 2)}}</strong></br>
-                                        <strong>Total:............................</strong>
-                                        <strong>{{number_format($total + $totalIva, 2)}}</strong></br>
+                                    <font face="monospace"><strong>Sub Total:...................</strong></font>
+                                    <font face="monospace"><strong>{{number_format($total, 2)}}</strong></font></br>
+                                    <font face="monospace"><strong>I.V.A. 16.00%:.............</strong></font>
+                                    <font face="monospace"><strong>{{number_format($totalIva, 2)}}</strong></font></br>
+                                    <font face="monospace"><strong>Total:............................</strong></font>
+                                    <font face="monospace"><strong>{{number_format($total + $totalIva, 2)}}</strong></font></br>
                                     
                                     </td>
                                 </tr>
