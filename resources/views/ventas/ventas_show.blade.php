@@ -74,17 +74,17 @@
         @endphp
                 @foreach($venta->productos as $producto)
                     <tr style="height: 30px;">
-                        <td><font face="monospace"><strong>{{$producto->codigo_barras}}</strong></font></td>
-                        <td><font face="monospace"><strong><small>{{$producto->descripcion}}</small></strong></font></td>
-                        <td><font face="monospace"><strong>{{$producto->cantidad}} {{$producto->und}}</strong></font></td>
-                        <td><font face="monospace"><strong>{{number_format($producto->precio, 2)}}</strong></font></td>
+                        <td><font face="Courier"><strong>{{$producto->codigo_barras}}</strong></font></td>
+                        <td><font face="Courier"><strong><small>{{$producto->descripcion}}</small></strong></font></td>
+                        <td><font face="Courier"><strong>{{$producto->cantidad}} {{$producto->und}}</strong></font></td>
+                        <td><font face="Courier"><strong>{{number_format($producto->precio, 2)}}</strong></font></td>
                         @if($producto->iva == 0)
                         
-                        <td><font face="monospace"><strong>XENTO</strong></font></td>
+                        <td><font face="Courier"><strong>XENTO</strong></font></td>
                         @else
-                        <td><font face="monospace"><strong>{{$producto->iva}}%</strong></font></td>
+                        <td><font face="Courier"><strong>{{$producto->iva}}%</strong></font></td>
                         @endif
-                        <td><font face="monospace"><strong>{{number_format($producto->cantidad * $producto->precio, 2)}}</strong></font></td>
+                        <td><font face="Courier"><strong>{{number_format($producto->cantidad * $producto->precio, 2)}}</strong></font></td>
                     </tr>
                   
                     @php
@@ -103,12 +103,12 @@
                                     
                                     <td align="right" style="padding-right: 5%;">
                                 
-                                    <font face="monospace"><strong>Sub Total:...................</strong></font>
-                                    <font face="monospace"><strong>{{number_format($total, 2)}}</strong></font></br>
-                                    <font face="monospace"><strong>I.V.A. 16.00%:.............</strong></font>
-                                    <font face="monospace"><strong>{{number_format($totalIva, 2)}}</strong></font></br>
-                                    <font face="monospace"><strong>Total:............................</strong></font>
-                                    <font face="monospace"><strong>{{number_format($total + $totalIva, 2)}}</strong></font></br>
+                                    <font face="Courier"><strong>Sub Total:...................</strong></font>
+                                    <font face="Courier"><strong>{{number_format($total, 2)}}</strong></font></br>
+                                    <font face="Courier"><strong>I.V.A. 16.00%:.............</strong></font>
+                                    <font face="Courier"><strong>{{number_format($totalIva, 2)}}</strong></font></br>
+                                    <font face="Courier"><strong>Total:............................</strong></font>
+                                    <font face="Courier"><strong>{{number_format($total + $totalIva, 2)}}</strong></font></br>
                                     
                                     </td>
                                 </tr>

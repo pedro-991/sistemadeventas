@@ -138,7 +138,7 @@
                 >
               </div>
             </div>
-            <div class="col-md-3 col-sm-3 d-sm-flex align-items-center">
+            <div class="col-md-2 col-sm-2 d-sm-flex align-items-center">
               <div class="row"> 
                 <label class="col-md-6 m-sm-0">Precio</label>
                 <input
@@ -150,6 +150,17 @@
               </div>
             </div>
             <div class="col-md-2 col-sm-2 d-sm-flex align-items-center">
+              <div class="row"> 
+                <label class="col-md-6 m-sm-0">Precio+IVA</label>
+                <input
+                  type="text"
+                  id="precioConIva"
+                  class="form-control ml-sm-2 col-md-6"
+                  placeholder=""
+                >
+              </div>
+            </div>
+            <div class="col-md-1 col-sm-1 d-sm-flex align-items-center">
               <div class="row"> 
                 <label class="col-md-6 m-sm-0">Cantidad</label>
                 <input
@@ -169,6 +180,7 @@
                   id="ivaTdl"
                   class="form-control ml-sm-2 col-md-6"
                   placeholder=""
+                  readonly
                 >
               </div>
             </div>
@@ -176,7 +188,7 @@
              
             <div class="col-md-2 col-sm-2 d-sm-flex justify-content-end mt-4 mt-sm-0">
               <button type="button" class="btn btn-info btn-block" id="add">
-                Add
+                Agregar
               </button>
             </div>
           </div>

@@ -69,8 +69,8 @@ export default class View {
 
   removeTodo(id) {
     this.model.removeTodo(id);
-    this.showTotal();
     document.getElementById(id).remove();
+    this.showTotal();
   }
 
   removeTodoCancelar() {

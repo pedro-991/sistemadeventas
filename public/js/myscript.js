@@ -63,6 +63,7 @@ function selectCode(content) {
                 var myInputUnd = document.getElementById('typeUnd');
                 var myInputReferVenta = document.getElementById('referVenta');
                 var myInputReferCompra = document.getElementById('referCompra');
+                var myInputPrecioIva = document.getElementById('precioConIva');
 
                 myInputTitle.value = myJson.id;
                 myInputCod.value = myJson.codigo_barras;
@@ -73,6 +74,7 @@ function selectCode(content) {
                 myInputUnd.value = myJson.und;
                 myInputReferVenta.value = myJson.referventa;
                 myInputReferCompra.value = myJson.refercompra;
+                myInputPrecioIva.value = (myJson.precio_venta * ( 1 + (myJson.iva/100))).toFixed(2);
 
                 //console.log(myJson);
 
