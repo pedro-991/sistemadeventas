@@ -38,7 +38,7 @@ const ShowProducts = ({ products }) => {
                 <h2 className="col-md-3">#Productos</h2>
             </div>
             <div className="row">
-                <Link href="/MDclonado/sistema_ventas_laravel/public/createInertia" className="btn btn-success mb-2 col-md-2">Agregar</Link>
+                <Link href="http://sistemadeventas.com/createInertia" className="btn btn-success mb-2 col-md-2">Agregar</Link>
                 <button id="btnActualizar" className="btn btn-success mb-2 col-md-2" disabled>Actualizar</button>
                 <input style={{ width: "20%" }}  id="tazaNow" autoComplete="off" name="" type="text"
                                         className="col-md-3 form-control"
@@ -68,7 +68,7 @@ const ShowProducts = ({ products }) => {
               <td>{ product.precio_venta }</td>
               <td>
               <Link className="btn btn-primary"
-               href="/">
+               href="http://sistemadeventas.com">
                 Edit
               </Link>
               </td>

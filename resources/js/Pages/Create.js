@@ -18,7 +18,7 @@ const [existencia, setExistencia] = useState('')
 
 const saveData = (e) => {
    e.preventDefault();
-   Inertia.post('/MDclonado/sistema_ventas_laravel/public/saveInertia', { codigo_barras, descripcion, precio_compra, precio_venta, preciodollar, referventa, refercompra, iva, und, existencia });
+   Inertia.post('http://sistemadeventas.com/saveInertia', { codigo_barras, descripcion, precio_compra, precio_venta, preciodollar, referventa, refercompra, iva, und, existencia });
 }
 
     return(
@@ -159,7 +159,7 @@ const saveData = (e) => {
 
 		<div className="form-group mt-3">
 		   <button className="btn btn-success">Guardar</button>
-		   <Link href="/MDclonado/sistema_ventas_laravel/public/indexReact" className="btn btn-primary">Volver al listado</Link>
+		   <Link href="http://sistemadeventas.com/indexReact" className="btn btn-primary">Volver al listado</Link>
 		</div>
 	  </form>
 	</Fragment>

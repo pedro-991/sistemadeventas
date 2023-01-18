@@ -79,27 +79,18 @@
                 var myModalEl = document.getElementById('exampleModal');
                
             myModalEl.addEventListener('hidden.bs.modal', function (event) {
-                //aqui podria obtener el codigo
-                //del producto seleccionado y enviarlo al input codigo_barras
-               /*  var myModalselect = document.getElementById('selectPro');
-                var myInputCod = document.getElementById('codigo');
-                myInputCod.value = myModalselect.value; */
               console.log('modal cerrado');
              
 
             })
             
             $.ajax({
-                    url: '/MDclonado/sistema_ventas_laravel/public/showTaza',
+                    url: 'http://sistemadeventas.com/showTaza',
                     type: 'GET',
                     success: function (datos) {
-                      //location.href='productos';
-                      //inputTaza = inputActualizar;
                       inputTaza.value = datos;
                     }
                 });
-            //inputTaza.value = "11.50";
-            //console.log('test taza');
 
             });
 
