@@ -212,4 +212,55 @@ $("table#table tr").each(function() {
   
   });
 
+  /* aqui abajo para guardar venta */
+
+  $(function ()
+  {
+      $("#btnGuardarVenta").on('click', function () {
+
+        var myTableArray = [];
+        let inputIdCliente = document.getElementById('id_cliente').value;
+        let inputTypeUnd = document.getElementById('typeUnd').value;
+        let botonCancelarVenta = document.getElementById('btnCancelarVenta');
+        let alertVentaGuardada = document.getElementById('alert');
+
+$("table#table tr").each(function() {
+    var arrayOfThisRow = [];
+    var tableData = $(this).find('td');
+    if (tableData.length > 0) {
+        tableData.each(function() { arrayOfThisRow.push($(this).text()); });
+        myTableArray.push(arrayOfThisRow);
+    }
+});
+
+//console.log(myTableArray);
+  
+              $.ajaxSetup({
+                  headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+  
+          $.ajax({
+              url: 'guardarVenta',
+              type: 'POST',
+              data:  {
+                id_cliente : inputIdCliente,
+                productos : myTableArray
+            },
+              success: function (datos) {
+                //botonCancelarVenta.click();
+                //aqui puedo remover la class hide de un alert
+                //para avisar que la venta esta guardada
+                alertVentaGuardada.innerText = "Venta guardada con exito";
+                alertVentaGuardada.classList.remove('d-none');
+              }
+          });
+          return false;
+       
+  
+      });
+  
+  });
+
       

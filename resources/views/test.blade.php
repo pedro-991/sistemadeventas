@@ -5,7 +5,7 @@
 
 <h2>indexReact</h2>
 
-        <div id="showProducts"></div>
+<p>{{$venta}}</p>
 
         
 

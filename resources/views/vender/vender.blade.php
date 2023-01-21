@@ -48,13 +48,15 @@
                     </form>
                     <div class="form-group">
                                 <input name="accion" id="btnTerminarVenta" value="Terminar Venta" type="button" class="btn btn-success"/>
+                                <input name="accion" id="btnGuardarVenta" value="Guardar Venta" type="button" class="btn btn-success"/>
+                                
                                 <input name="accion2" id="btnCancelarVenta" value="Cancelar Venta" type="button" class="btn btn-danger">
                             </div>
                             
                 </div>
                 <div class="col-12 col-md-6">
                 <input type="hidden" id="btnModal" class="" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <button type="hidden" id="btnCloseModal" class="btn-close" data-bs-dismiss="modal" data-bs-target="#exampleModal" aria-label="Close"></button>
+                <input type="hidden" id="btnCloseModal" data-bs-dismiss="modal" data-bs-target="#exampleModal" />
                 <div id="contentDiv"></div>
             
                 <label for="codigotest">Buscar</label>
@@ -85,7 +87,7 @@
     <main>
     <div class="container pt-3">
       <div class="alert alert-danger d-none" role="alert" id="alert">
-        A simple danger alert—check it out!
+      A simple danger alert—check it out!
       </div>
 
       <div>
@@ -157,6 +159,7 @@
                   id="precioConIva"
                   class="form-control ml-sm-2 col-md-6"
                   placeholder=""
+                  readonly
                 >
               </div>
             </div>
@@ -172,7 +175,7 @@
               </div>
             </div>
 
-            <div class="col-md-2 col-sm-2 d-sm-flex align-items-center">
+            <div class="col-md-1 col-sm-1 d-sm-flex align-items-center">
               <div class="row"> 
                 <label class="col-md-6 m-sm-0">I.V.A.</label>
                 <input
@@ -186,10 +189,9 @@
             </div>
             
              
-            <div class="col-md-2 col-sm-2 d-sm-flex justify-content-end mt-4 mt-sm-0">
-              <button type="button" class="btn btn-info btn-block" id="add">
-                Agregar
-              </button>
+            <div class="col-md-2 col-sm-2 mt-4">
+              <input type="button" class="btn btn-success" id="add" value="Agregar"/>
+               
             </div>
           </div>
         </form>

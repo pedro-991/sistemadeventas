@@ -22,6 +22,7 @@ Auth::routes([
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post("/productocodigo", "VenderController@productoFiltro")->name("buscarProducto");
 Route::post("/terminarVenta", "VenderController@terminarVenta")->name("terminarVenta");
+Route::post("/guardarVenta", "VenderController@guardarVenta")->name("guardarVenta");
 Route::post("/dollar", "ProductosController@actualizarDollar")->name("dollar");
 Route::post("/update", "TazaController@updateTaza")->name("update");
 Route::get("/showTaza", "TazaController@showTaza")->name("showTaza");
@@ -29,6 +30,12 @@ Route::get("/reactTest", "ProductosController@reactTest")->name("reactTest");
 Route::get("/indexReact", "ProductosController@indexReact")->name("indexReact");
 Route::get("/createInertia", "ProductosController@createInertia")->name("createInertia");
 Route::post("/saveInertia", "ProductosController@storeInertia")->name("saveInertia");
+//ruta para mostrar documentos en espera
+Route::get("/docEsperaIndex", "DocEsperaController@index")->name("docEspera.index");
+//ruta para mostrar un solo documento en espera
+Route::get("/docEsperaShow/{id}", "DocEsperaController@show")->name("docEspera.show");
+//ruta para eliminar un documento en espera
+Route::delete("/docEsperaDestroy/{id}", "DocEsperaController@destroy")->name("docEspera.destroy");
 //Route::post("/mostrarSesion", "VenderController@mostrarSesion")->name("mostrarSesion");
 Route::get("/inertia", function () {
     return Inertia::render('Home');

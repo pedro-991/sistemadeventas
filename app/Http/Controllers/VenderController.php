@@ -27,6 +27,8 @@ use App\Cliente;
 use App\Producto;
 use App\ProductoVendido;
 use App\Venta;
+use App\Doc_espera;
+use App\Product_espera;
 use Illuminate\Http\Request;
 
 class VenderController extends Controller
@@ -77,6 +79,37 @@ class VenderController extends Controller
       
             $htmlTabla = "";
             return $htmlTabla;
+    }
+
+    public function guardarVenta(Request $request)
+    {
+        // Crear una venta
+        $doc_espera = new Doc_espera();
+        
+        $doc_espera->id_cliente = $request->post("id_cliente");
+        $doc_espera->saveOrFail();
+        $idDoc_espera = $doc_espera->id;
+        
+        $productos = $request->post("productos");
+        // Recorrer carrito de compras
+        foreach ($productos as $producto) {
+            // El producto que se vende...
+            $product_espera = new Product_espera();
+           
+            $product_espera->fill([
+                "id_doc_esperas" => $idDoc_espera,
+                "descripcion" => $producto[2],
+                "codigo_barras" => $producto[1],
+                "precio" => $producto[3],
+                "cantidad" => $producto[4],
+                "iva" => $producto[5],
+                "und" => $producto[6],
+            ]);
+            // Lo guardamos
+            $product_espera->saveOrFail();
+            // Y restamos la existencia del original
+        }
+            return true;
     }
 
     private function obtenerProductos()

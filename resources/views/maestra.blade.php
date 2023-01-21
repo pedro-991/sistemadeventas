@@ -131,6 +131,9 @@
                     <a class="nav-link" href="{{route('ventas.index')}}">Ventas&nbsp;<i class="fa fa-list"></i></a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{route('docEspera.index')}}">Ventas Guardadas&nbsp;<i class="fa fa-list"></i></a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{route('usuarios.index')}}">Usuarios&nbsp;<i class="fa fa-users"></i></a>
                 </li>
                 <li class="nav-item">
@@ -152,12 +155,9 @@
                     </a>
                 </li>
             @endauth
+            
             <li class="nav-item">
-                <a class="nav-link" href="{{route("soporte.index")}}">Soporte&nbsp;<i
-                        class="fa fa-hands-helping"></i></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{route("acerca_de.index")}}">Acerca de&nbsp;<i class="fa fa-info"></i></a>
+                <a class="nav-link" href="{{route('acerca_de.index')}}">Acerca de&nbsp;<i class="fa fa-info"></i></a>
             </li>
         </ul>
     </div>
