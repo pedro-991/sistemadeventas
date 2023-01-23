@@ -249,6 +249,70 @@ class VenderController extends Controller
             }
     }
 
+    public function productoFiltroCarga(Request $request)
+    {
+        $codigo = $request->post("txtcodigo") . "%";
+        //$respuesta = $codigo . " desde laravel";
+        //$codigo = "<h1>Hola desde laravel</h1>";
+        //return $respuesta;
+        $producto = Producto::where("descripcion", "LIKE", $codigo)->get();
+        $htmlproducto = "";
+            if ($producto) {
+
+                $htmlproducto = "<table class='table table-bordered' id='tblProducto'>";
+
+                $htmlproducto = $htmlproducto . "<tr><th>Seleccionar</th></tr>";
+
+                foreach($producto as $pro) {
+
+                    //$htmlproducto = $htmlproducto . "<p>" . $pro->descripcion . "</p>";
+                    /****
+                     * inicion html
+                     */
+
+                     //$proJson = $pro->json();
+
+                    $htmlproducto = $htmlproducto . "
+                    
+                    <tr align='center'>
+
+                  
+
+
+                    
+                
+                    <td>
+
+<input type='radio' name='selectPro' id='selectPro' onclick='selectCode(this)' value='" . $pro . "'>
+  
+ 
+</td>
+
+                    
+                    </tr>
+                    
+                    
+                    ";
+
+                    
+               /******
+                * fin html
+                */
+                 }
+                 //return $htmlproducto;
+
+                 $htmlproducto = $htmlproducto . "</table>";
+                 
+            };
+
+            if ($htmlproducto != "") {
+                return $htmlproducto;
+            } else {
+
+            return "Producto no encontrado";
+            }
+    }
+
     private function agregarProductoACarrito($producto)
     {
         if ($producto->existencia <= 0) {

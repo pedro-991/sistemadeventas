@@ -36,6 +36,10 @@ Route::get("/docEsperaIndex", "DocEsperaController@index")->name("docEspera.inde
 Route::get("/docEsperaShow/{id}", "DocEsperaController@show")->name("docEspera.show");
 //ruta para eliminar un documento en espera
 Route::delete("/docEsperaDestroy/{id}", "DocEsperaController@destroy")->name("docEspera.destroy");
+//ruta para mostrar las ventas en el modal
+Route::get("/indexOnModal", "DocEsperaController@indexOnModal")->name("indexOnModal");
+//
+Route::post("/showCargarVenta", "DocEsperaController@showCargarVenta")->name("showCargarVenta");
 //Route::post("/mostrarSesion", "VenderController@mostrarSesion")->name("mostrarSesion");
 Route::get("/inertia", function () {
     return Inertia::render('Home');

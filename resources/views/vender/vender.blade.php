@@ -37,19 +37,12 @@
                                 @endforeach
                             </select>
                         </div>
-                        @if(session("productos") !== null)
-                            <div class="form-group">
-                                <input name="accion" id="btnTerminarVenta" value="Terminar Venta" type="button" class="btn btn-success"/>
-                                <button name="accion" value="cancelar" type="submit" class="btn btn-danger">Cancelar
-                                    venta
-                                </button>
-                            </div>
-                        @endif
+                        
                     </form>
                     <div class="form-group">
                                 <input name="accion" id="btnTerminarVenta" value="Terminar Venta" type="button" class="btn btn-success"/>
                                 <input name="accion" id="btnGuardarVenta" value="Guardar Venta" type="button" class="btn btn-success"/>
-                                
+                                <input name="accion" id="btnCargarVenta" value="Cargar Venta" type="button" class="btn btn-success"/>
                                 <input name="accion2" id="btnCancelarVenta" value="Cancelar Venta" type="button" class="btn btn-danger">
                             </div>
                             

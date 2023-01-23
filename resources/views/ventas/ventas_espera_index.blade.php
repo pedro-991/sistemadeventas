@@ -41,7 +41,7 @@
                         <tr>
                             <td>{{$venta->created_at}}</td>
                             <td>{{$venta->cliente->nombre}}</td>
-                            <td>${{number_format($venta->total, 2)}}</td>
+                            <td>{{number_format($venta->total, 2)}}</td>
                           
                             <td>
                                 <a class="btn btn-success" href="{{route('docEspera.show', $venta)}}">
