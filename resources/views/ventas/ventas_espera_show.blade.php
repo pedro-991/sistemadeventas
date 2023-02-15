@@ -1,4 +1,4 @@
-{{--
+﻿{{--
 
   ____          _____               _ _           _
  |  _ \        |  __ \             (_) |         | |
@@ -37,7 +37,7 @@
             <div id="divFactura">
             <div class="" style="width: 100%; display: flex;">
                 <div class="" style="width: 70%;">
-                    <p style="padding: 0; margin: 0;">CLIENTE: <small>{{$venta->cliente->nombre}}</small></p>
+                    <p style="padding: 0; margin: 0;">CLIENTE: <small><strong>{{$venta->cliente->nombre}}</strong></small></p>
                 </div>
                 <div class="" style="width: 30%;">
                     <p style="padding: 0; margin: 0;">FECHA: <small><strong>{{date_format($venta->created_at, "d/m/Y")}}</strong></small></p>

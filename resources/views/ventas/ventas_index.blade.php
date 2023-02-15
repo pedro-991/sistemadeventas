@@ -47,6 +47,10 @@
                                 <a class="btn btn-info" href="{{route('ventas.ticket', ['id'=>$venta->id])}}">
                                     <i class="fa fa-print"></i>
                                 </a>
+                                <a class="btn btn-info" href="{{route('ticketTest', ['id'=>$venta->id])}}">
+                                    <!-- <i class="fa fa-print"></i> -->
+                                    Impr.
+                                </a>
                             </td>
                             <td>
                                 <a class="btn btn-success" href="{{route('ventas.show', $venta)}}">

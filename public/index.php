@@ -23,6 +23,16 @@ define('LARAVEL_START', microtime(true));
 
 require __DIR__.'/../vendor/autoload.php';
 
+//include_once ("TfhkaPHP.php");
+
+/* 
+------------------
+libreria hka TfhkaPHP
+------------------
+libreria para imprimir en las impresoras
+termicas
+*/
+
 /*
 |--------------------------------------------------------------------------
 | Turn On The Lights

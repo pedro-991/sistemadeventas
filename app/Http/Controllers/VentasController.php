@@ -23,11 +23,193 @@
 
 namespace App\Http\Controllers;
 
+//require __DIR__ . '/../vendor/autoload.php';
 use App\Venta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Mike42\Escpos\PrintConnectors\FilePrintConnector;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 use Mike42\Escpos\Printer;
+//require 'TfhkaPHP.php';
+//use IntTFHKA;
+//include_once (__DIR__ . '/../../../vendor/IntTFHKA/TfhkaPHP.php');
+
+//use Vendor\IntTFHKA\TfhkaPHP;
+
+class Tfhka
+{
+var  $NamePort = "", $IndPort = false, $StatusError = "";
+
+function Tfhka()
+{
+}
+// Funcion que establece el nombre del puerto a utilizar
+function SetPort($namePort = "")
+{
+$archivo = 'Puerto.dat';
+$fp = fopen($archivo, "w");
+$string = "";
+$write = fputs($fp, $string);
+$string = $namePort;
+$write = fputs($fp, $string);
+fclose($fp); 
+
+$this->NamePort = $namePort;
+
+}
+// Funcion que verifica si el puerto est� abierto y la conexi�n con la impresora
+//Retorno: true si esta presente y false en lo contrario
+function CheckFprinter()
+{
+$sentencia = "IntTFHKA.exe CheckFprinter()";
+
+shell_exec($sentencia);
+
+$rep = ""; 
+$repuesta = file('Retorno.txt');
+$lineas = count($repuesta);
+for($i=0; $i < $lineas; $i++)
+{
+ $rep = $repuesta[$i];
+ } 
+ $this->StatusError = $rep;
+ if (substr($rep,0,1) == "T")
+{
+$this->IndPort = true;
+return $this->IndPort;
+}else
+{
+$this->IndPort = false;
+return $this->IndPort;
+}
+}
+//Funci�n que envia un comando a la impresora
+//Par�metro: Comando en cadena de caracteres ASCII
+//Retorno: true si el comando es valido y false en lo contrario
+function SendCmd($cmd = "")
+{
+
+$sentencia = "IntTFHKA.exe SendCmd(".$cmd;
+
+shell_exec($sentencia);
+
+$rep = ""; 
+$repuesta = file('Retorno.txt');
+$lineas = count($repuesta);
+for($i=0; $i < $lineas; $i++)
+{
+ $rep = $repuesta[$i];
+ } 
+ $this->StatusError = $rep;
+ if (substr($rep,0,1) == "T")
+return true;
+else
+return false;
+
+}
+// Funcion que verifiva el estado y error de la impresora y lo establece en la variable global  $StatusError
+//Retorno: Cadena con la informaci�n del estado y error y validiti bolleana
+function ReadFpStatus()
+{
+
+$sentencia = "IntTFHKA.exe ReadFpStatus()";
+
+
+shell_exec($sentencia);
+
+$rep = ""; 
+$repuesta = file('status_error.txt');
+$lineas = count($repuesta);
+for($i=0; $i < $lineas; $i++)
+{
+ $rep = $repuesta[$i];
+ } 
+ 
+ $this->StatusError = $rep;
+ 
+ return $this->StatusError;
+}
+// Funci�n que ejecuta comandos desde un archivo de texto plano
+//Par�metro: Ruta del archivo con extenci�n .txt � .bat
+//Retorno: Cadena con n�mero de lineas procesadas en el archivo y estado y error
+function SendFileCmd($ruta = "")
+{
+
+$sentencia = "IntTFHKA.exe SendFileCmd(".$ruta;
+
+shell_exec($sentencia);
+
+$rep = ""; 
+$repuesta = file('Retorno.txt');
+$lineas = count($repuesta);
+for($i=0; $i < $lineas; $i++)
+{
+ $rep = $repuesta[$i];
+ } 
+ 
+ 
+ return $rep;
+}
+//Funci�n que sube al PC un tipo de estado de  la impresora
+//Par�metro: Tipo de estado en cadena Ejem: S1
+//Retorno: Cadena de datos del estado respectivo
+function UploadStatusCmd($cmd = "" , $file = "")
+{
+
+$sentencia = "IntTFHKA.exe UploadStatusCmd(".$cmd." ".$file;
+
+shell_exec($sentencia);
+
+$repStErr = ""; 
+$repuesta = file('StatusData.txt');
+$lineas = count($repuesta);
+for($i=0; $i < $lineas; $i++)
+{
+ $repStErr = $repuesta[$i];
+ } 
+$this->StatusError = $repStErr;
+
+$rep = ""; 
+$repuesta = file($file);
+$lineas = count($repuesta);
+for($i=0; $i < $lineas; $i++)
+{
+ $rep = $repuesta[$i];
+ } 
+ 
+return $rep;
+
+}
+//Funci�n que sube al PC reportes X � Z de la impresora 
+//Par�metro: Tipo de reportes en cadena Ejem: U0X. Otro Ejem:   U3A000002000003 
+//Retorno: Cadena de datos del o los reporte(s)
+function UploadReportCmd($cmd = "", $file = "")
+{
+
+$sentencia = "IntTFHKA.exe UploadReportCmd(".$cmd." ".$file;
+
+exec($sentencia);
+
+$repStErr = ""; 
+$repuesta = file('Retorno.txt');
+$lineas = count($repuesta);
+for($i=0; $i < $lineas; $i++)
+{
+ $repStErr = $repuesta[$i];
+ } 
+$this->StatusError = $repStErr;
+
+$rep = ""; 
+$repuesta = file($file);
+$lineas = count($repuesta);
+for($i=0; $i < $lineas; $i++)
+{
+ $rep .= $repuesta[$i];
+ } 
+ 
+ return $rep;
+}
+}
 
 class VentasController extends Controller
 {
@@ -37,7 +219,9 @@ class VentasController extends Controller
         $venta = Venta::findOrFail($request->get("id"));
         $nombreImpresora = env("NOMBRE_IMPRESORA");
         $connector = new WindowsPrintConnector($nombreImpresora);
+//$connector = new FilePrintConnector("php://stdout");
         $impresora = new Printer($connector);
+$impresora -> initialize();
         $impresora->setJustification(Printer::JUSTIFY_CENTER);
         $impresora->setEmphasis(true);
         $impresora->text("Ticket de venta\n");
@@ -68,6 +252,131 @@ class VentasController extends Controller
         $impresora->feed(5);
         $impresora->close();
         return redirect()->back()->with("mensaje", "Ticket impreso");
+    }
+
+    public function ticketTest(Request $request) {
+
+        $venta = Venta::findOrFail($request->get("id"));
+
+        $itObj = new Tfhka();
+
+        $out = "";
+
+        $total = 0;
+
+        $factura = array();
+
+        $conteo = 0;
+
+        foreach ($venta->productos as $producto) {
+            $subtotal = $producto->cantidad * $producto->precio;
+            $total += $subtotal;
+            //como yo se donde esta el valor iva
+            //$producto->iva
+
+            // convertir iva
+
+            if ($producto->iva == 0) {
+                $taza = " ";
+            }
+
+            if ($producto->iva == 16) {
+                $taza = "!";
+            }
+
+            //convertir precio
+            //precio = ?.00 ejemplo: 15.14, 245.45, 1247.44
+
+            $array = str_split($producto->precio);
+	
+            
+            $resta = count($array) - 3;
+            
+            unset($array[$resta]);
+            
+            
+            if (count($array) < 10) {
+                while (count($array) < 10){
+                    array_unshift($array, "0");
+                }
+                
+            }
+            
+            
+            $precioFinal = implode($array);
+
+            /* 
+            ---------------------------
+            */
+            /* aqui abajo
+            convertir cantidad */
+            
+
+            $array = str_split($producto->cantidad);
+	
+            
+            $resta = count($array) - 3;
+            
+            unset($array[$resta]);
+            
+            array_push($array, "0");
+            
+           
+            
+            if (count($array) < 8) {
+                while (count($array) < 8){
+                    array_unshift($array, "0");
+                }
+                
+            }
+            
+            
+            $cantidadFinal = implode($array);
+
+            /* 
+            ############################
+             */
+
+             /* -----------------
+             largo de descripcion
+             limitar el largo de descripcion
+             */
+
+             $descripcionFinal = substr($producto->descripcion, 0, 14);
+            
+                 $factura[$conteo] = $taza . $precioFinal . $cantidadFinal . $descripcionFinal . "\n";
+            
+        
+                 $conteo++;
+                }
+
+                $factura[$conteo] = "101";
+
+       /*  $factura = array(0 => "! 0000001000 00001000 HarinaLaravel\n",
+        1 => " 000000150000001500Jamon\n",
+        2 => "\"000000205000003000Patilla\n",
+        3 => "#000005000000001000Caja de Whisky\n",
+        4 => "101"); */
+        //agregar aqui el comando 199 con pruebas con la impresora 
+        //fisica
+$file = "Factura.txt";	
+$fp = fopen($file, "w+");
+$write = fputs($fp, "");
+    
+foreach($factura as $campo => $cmd)
+{
+$write = fputs($fp, $cmd);
+}
+   
+    fclose($fp); 
+    
+    $out =  $itObj->SendFileCmd($file);
+
+
+    return redirect()->back()->with("mensaje", "Ticket impreso");
+
+
+
     }
 
     /**

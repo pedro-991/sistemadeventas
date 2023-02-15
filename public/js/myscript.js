@@ -178,6 +178,8 @@ function selectCode(content) {
                             success: function (datos) {
                                 $("#contentTable").html(datos);
                                 //openmodal();
+                                const x = () => 1 * 1;
+                                setTimeout(x, 1000);
                                 console.log(producto);
                                 let btnradio = document.getElementById('selectPro');
                                 let btnadd = document.getElementById('add');
@@ -186,7 +188,11 @@ function selectCode(content) {
                                 btnradio.click();
                                 myInputPrec.value = producto.precio;
                                 myInputCant.value = producto.cantidad;
+                                
+                                setTimeout(x, 1000);
+                                //setTimeout(btnadd.click, 1000);
                                 btnadd.click();
+                                //btnadd.click();
                             }
                         });
 

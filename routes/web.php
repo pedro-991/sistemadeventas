@@ -40,6 +40,8 @@ Route::delete("/docEsperaDestroy/{id}", "DocEsperaController@destroy")->name("do
 Route::get("/indexOnModal", "DocEsperaController@indexOnModal")->name("indexOnModal");
 //
 Route::post("/showCargarVenta", "DocEsperaController@showCargarVenta")->name("showCargarVenta");
+//ruta para imprimir en la termica
+Route::get("/ticketTest", "VentasController@ticketTest")->name("ticketTest");
 //Route::post("/mostrarSesion", "VenderController@mostrarSesion")->name("mostrarSesion");
 Route::get("/inertia", function () {
     return Inertia::render('Home');
