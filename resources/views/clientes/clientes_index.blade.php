@@ -24,13 +24,14 @@ ____          _____               _ _           _
     <div class="row">
         <div class="col-12">
             <h1>Clientes <i class="fa fa-users"></i></h1>
-            <a href="{{route("clientes.create")}}" class="btn btn-success mb-2">Agregar</a>
+            <a href="{{route('clientes.create')}}" class="btn btn-success mb-2">Agregar</a>
             @include("notificacion")
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead>
                     <tr>
                         <th>Nombre</th>
+                        <th>RIF/CI</th>
                         <th>Teléfono</th>
 
                         <th>Editar</th>
@@ -41,14 +42,15 @@ ____          _____               _ _           _
                     @foreach($clientes as $cliente)
                         <tr>
                             <td>{{$cliente->nombre}}</td>
+                            <td>{{$cliente->documento}}</td>
                             <td>{{$cliente->telefono}}</td>
                             <td>
-                                <a class="btn btn-warning" href="{{route("clientes.edit",[$cliente])}}">
+                                <a class="btn btn-warning" href="{{route('clientes.edit',[$cliente])}}">
                                     <i class="fa fa-edit"></i>
                                 </a>
                             </td>
                             <td>
-                                <form action="{{route("clientes.destroy", [$cliente])}}" method="post">
+                                <form action="{{route('clientes.destroy', [$cliente])}}" method="post">
                                     @method("delete")
                                     @csrf
                                     <button type="submit" class="btn btn-danger">

@@ -258,6 +258,33 @@ $impresora -> initialize();
 
         $venta = Venta::findOrFail($request->get("id"));
 
+        $idVenta = $request->get("id");
+
+        /* 
+        conseguir el id venta para enviarlo a la factura
+        */
+
+        $array = str_split($idVenta);
+	
+            
+            
+            
+            if (count($array) < 11) {
+                while (count($array) < 11){
+                    array_unshift($array, "0");
+                }
+                
+            }
+            
+            
+            $idVentaFinal = implode($array);
+
+
+
+        /* 
+        arriba conseguir el id venta para enviarlo a la factura
+        */
+
         $itObj = new Tfhka();
 
         $out = "";
@@ -267,6 +294,13 @@ $impresora -> initialize();
         $factura = array();
 
         $conteo = 0;
+
+        $factura[$conteo] = "iR*" . $venta->cliente->documento . "\n";
+        $conteo++;
+        $factura[$conteo] = "iS*" . $venta->cliente->nombre . "\n";
+        $conteo++;
+        $factura[$conteo] = "iF*" . $idVentaFinal . "\n";
+        $conteo++;
 
         foreach ($venta->productos as $producto) {
             $subtotal = $producto->cantidad * $producto->precio;
@@ -342,7 +376,9 @@ $impresora -> initialize();
              limitar el largo de descripcion
              */
 
-             $descripcionFinal = substr($producto->descripcion, 0, 14);
+             $descripcionFinal = substr($producto->descripcion, 0, 50);
+
+
             
                  $factura[$conteo] = $taza . $precioFinal . $cantidadFinal . $descripcionFinal . "\n";
             
@@ -350,7 +386,9 @@ $impresora -> initialize();
                  $conteo++;
                 }
 
-                $factura[$conteo] = "101";
+                $factura[$conteo] = "101\n";
+                $conteo++;
+                $factura[$conteo] = "199";
 
        /*  $factura = array(0 => "! 0000001000 00001000 HarinaLaravel\n",
         1 => " 000000150000001500Jamon\n",
@@ -467,4 +505,41 @@ $write = fputs($fp, $cmd);
         return redirect()->route("ventas.index")
             ->with("mensaje", "Venta eliminada");
     }
+
+    public function reporteX()
+    {
+
+        $itObj = new Tfhka();
+
+        $out = "";
+
+        $out =  $itObj->SendCmd("I0X");
+
+
+    return redirect()->back()->with("mensaje", "Reporte X impreso");
+        
+    }
+
+    public function reporteZ()
+    {
+
+        $itObj = new Tfhka();
+
+        $out = "";
+
+        $out =  $itObj->SendCmd("I0Z");
+
+
+    return redirect()->back()->with("mensaje", "Reporte Z impreso");
+        
+    }
+
+    public function reportes()
+    {
+
+        return view("ventas.ventas_reportes");
+        
+    }
+
+    
 }

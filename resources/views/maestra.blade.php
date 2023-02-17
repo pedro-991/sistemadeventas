@@ -142,9 +142,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('indexReact')}}">Productos React&nbsp;<i class="fa fa-box"></i></a>
                 </li>
-                <!-- <li class="nav-item">
-                    <a class="nav-link" href="{{route('inertia')}}">Inertia&nbsp;<i class="fa fa-users"></i></a>
-                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('reportes')}}">Reportes&nbsp;<i class="fa fa-box"></i></a>
+                </li>
+               
             @endguest
         </ul>
         <ul class="navbar-nav ml-auto">
@@ -156,9 +157,7 @@
                 </li>
             @endauth
             
-            <li class="nav-item">
-                <a class="nav-link" href="{{route('acerca_de.index')}}">Acerca de&nbsp;<i class="fa fa-info"></i></a>
-            </li>
+           
         </ul>
     </div>
 </nav>
@@ -172,7 +171,7 @@
         }
     });
 </script>
-<main class="container-fluid">
+<main class="container-fluid mt-5">
     @yield("contenido")
     
 </main>

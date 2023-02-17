@@ -42,6 +42,12 @@ Route::get("/indexOnModal", "DocEsperaController@indexOnModal")->name("indexOnMo
 Route::post("/showCargarVenta", "DocEsperaController@showCargarVenta")->name("showCargarVenta");
 //ruta para imprimir en la termica
 Route::get("/ticketTest", "VentasController@ticketTest")->name("ticketTest");
+//ruta para imprimir reporte x
+Route::get("/reporteX", "VentasController@reporteX")->name("reporteX");
+//ruta para imprimir reporte z
+Route::get("/reporteZ", "VentasController@reporteZ")->name("reporteZ");
+//ruta para mostrar vista reportes
+Route::get("/reportes", "VentasController@reportes")->name("reportes");
 //Route::post("/mostrarSesion", "VenderController@mostrarSesion")->name("mostrarSesion");
 Route::get("/inertia", function () {
     return Inertia::render('Home');

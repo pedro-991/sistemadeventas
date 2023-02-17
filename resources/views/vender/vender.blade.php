@@ -29,13 +29,20 @@
                 <div class="col-12 col-md-6">
                     <form action="{{route('terminarOCancelarVenta')}}" method="post">
                         @csrf
-                        <div class="form-group">
-                            <label for="id_cliente">Cliente</label>
-                            <select required class="form-control" name="id_cliente" id="id_cliente">
-                                @foreach($clientes as $cliente)
-                                    <option value="{{$cliente->id}}">{{$cliente->nombre}}</option>
-                                @endforeach
-                            </select>
+                        <div class="row">
+                          <div class="form-group col-md-6">
+                              <label for="id_cliente">Cliente</label>
+                              <select required class="form-control" name="id_cliente" id="id_cliente">
+                                  @foreach($clientes as $cliente)
+                                      <option value="{{$cliente->id}}">{{$cliente->nombre}}</option>
+                                  @endforeach
+                              </select>
+                          </div>
+
+                          <div class="form-group col-md-6">
+                              <label for="">Buscar Cliente</label>
+                              <input required class="form-control" name="" id=""/>
+                          </div>
                         </div>
                         
                     </form>

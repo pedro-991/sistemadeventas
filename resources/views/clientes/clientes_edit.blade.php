@@ -24,13 +24,18 @@ ____          _____               _ _           _
     <div class="row">
         <div class="col-12">
             <h1>Editar cliente</h1>
-            <form method="POST" action="{{route("clientes.update", [$cliente])}}">
+            <form method="POST" action="{{route('clientes.update', [$cliente])}}">
                 @method("PUT")
                 @csrf
                 <div class="form-group">
                     <label class="label">Nombre</label>
                     <input required value="{{$cliente->nombre}}" autocomplete="off" name="nombre" class="form-control"
                            type="text" placeholder="Nombre">
+                </div>
+                <div class="form-group">
+                    <label class="label">RIF/CI</label>
+                    <input required value="{{$cliente->documento}}" autocomplete="off" name="documento" class="form-control"
+                           type="text" placeholder="J123456780">
                 </div>
                 <div class="form-group">
                     <label class="label">Teléfono</label>
@@ -41,7 +46,7 @@ ____          _____               _ _           _
 
                 @include("notificacion")
                 <button class="btn btn-success">Guardar</button>
-                <a class="btn btn-primary" href="{{route("clientes.index")}}">Volver</a>
+                <a class="btn btn-primary" href="{{route('clientes.index')}}">Volver</a>
             </form>
         </div>
     </div>

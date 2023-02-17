@@ -24,22 +24,27 @@ ____          _____               _ _           _
     <div class="row">
         <div class="col-12">
             <h1>Agregar cliente</h1>
-            <form method="POST" action="{{route("clientes.store")}}">
+            <form method="POST" action="{{route('clientes.store')}}">
                 @csrf
                 <div class="form-group">
                     <label class="label">Nombre</label>
                     <input required autocomplete="off" name="nombre" class="form-control"
-                           type="text" placeholder="Nombre">
+                           type="text" placeholder="PEDRO PEREZ">
+                </div>
+                <div class="form-group">
+                    <label class="label">RIF/CI</label>
+                    <input required autocomplete="off" name="documento" class="form-control"
+                           type="text" placeholder="J123456780">
                 </div>
                 <div class="form-group">
                     <label class="label">Teléfono</label>
                     <input required autocomplete="off" name="telefono" class="form-control"
-                           type="text" placeholder="Teléfono">
+                           type="text" placeholder="0000-0000000">
                 </div>
 
                 @include("notificacion")
                 <button class="btn btn-success">Guardar</button>
-                <a class="btn btn-primary" href="{{route("clientes.index")}}">Volver al listado</a>
+                <a class="btn btn-primary" href="{{route('clientes.index')}}">Volver al listado</a>
             </form>
         </div>
     </div>
