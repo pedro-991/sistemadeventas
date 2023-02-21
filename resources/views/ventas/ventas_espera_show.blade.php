@@ -35,32 +35,40 @@
             
             <h2>Productos</h2>
             <div id="divFactura">
-            <div class="" style="width: 100%; display: flex;">
-                <div class="" style="width: 70%;">
-                    <p style="padding: 0; margin: 0;">CLIENTE: <small><strong>{{$venta->cliente->nombre}}</strong></small></p>
-                </div>
-                <div class="" style="width: 30%;">
-                    <p style="padding: 0; margin: 0;">FECHA: <small><strong>{{date_format($venta->created_at, "d/m/Y")}}</strong></small></p>
-                </div>
+            
 
-            </div>
 
-                <p style="padding: 0; margin: 0;">RIF: <small></small></p>
-                <p style="padding: 0; margin: 0;">DIRECCIÓN: <small></small></p>
-                <p style="padding: 0; margin: 0;"></p>
+                <table width="100%" border="0">
+                    <tr>
+                    <td><font face="Courier"><strong>CLIENTE: {{$venta->cliente->nombre}}</strong></font></td>
+                    <td><font face="Courier"><strong>FECHA: <small>{{date_format($venta->created_at, "d/m/Y")}}</strong></small></font></td>
+                    </tr>
+
+                    <tr>
+                    <td><font face="Courier"><strong>RIF/CI: {{$venta->cliente->documento}}</strong></font></td>
+                    </tr>
+
+                    <tr>
+                    <td><font face="Courier"><strong>DIRECCIÓN: <small></small></strong></font></td>
+                    </tr>
+                </table>
 
             
             <table width="100%" border="1">
-            <thead ><!-- style="border-width: 1; border-style: solid; border-color: black;"> --> <!-- class="thead-light" > -->
-                <tr>
-                    <th style="width: 17%;">Código</th>
-                    <th style="width: 35%;">Descripción</th>
-                    <th style="width: 17%;">Cantidad</th>
-                    <th style="width: 10%;">Precio</th>
-                    <th style="width: 10%;">%I.V.A.</th>
-                    <th style="width: 10%;">Total</th>
-                </tr>
-                </thead>
+                
+                    <thead ><!-- style="border-width: 1; border-style: solid; border-color: black;"> --> <!-- class="thead-light" > -->
+                    
+                        <tr>
+                            <th style="width: 17%;"><font face="Courier">Código</font></th>
+                            <th style="width: 35%;"><font face="Courier">Descripción</font></th>
+                            <th style="width: 17%;"><font face="Courier">Cantidad</font></th>
+                            <th style="width: 10%;"><font face="Courier">Precio</font></th>
+                            <th style="width: 10%;"><font face="Courier">%I.V.A.</font></th>
+                            <th style="width: 10%;"><font face="Courier">Total</font></th>
+                        </tr>
+                    
+                    </thead>
+                
             </table>
             <table width="100%" border="0"> <!-- class="table table-bordered table-hover table-sm"> -->
                 

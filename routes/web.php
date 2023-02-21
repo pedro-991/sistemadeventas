@@ -21,6 +21,8 @@ Auth::routes([
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post("/productocodigo", "VenderController@productoFiltro")->name("buscarProducto");
+//ruta para buscar cliente rapido
+Route::post("/clienteFiltro", "VenderController@clienteFiltro")->name("clienteFiltro");
 Route::post("/terminarVenta", "VenderController@terminarVenta")->name("terminarVenta");
 Route::post("/guardarVenta", "VenderController@guardarVenta")->name("guardarVenta");
 Route::post("/dollar", "ProductosController@actualizarDollar")->name("dollar");

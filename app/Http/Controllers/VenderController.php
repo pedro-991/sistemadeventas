@@ -369,6 +369,152 @@ class VenderController extends Controller
             ]);
     }
 
-   
+    /* ****************************
+    #buscar cliente
+    #
+    #
+    #
+    *************************/
+
+    public function clienteFiltro(Request $request)
+    {
+        $codigo = $request->post("txtcodigo") . "%";
+        //$respuesta = $codigo . " desde laravel";
+        //$codigo = "<h1>Hola desde laravel</h1>";
+        //return $respuesta;
+        $producto = Cliente::where("nombre", "LIKE", $codigo)->get();
+        $htmlproducto = "";
+            if ($producto) {
+
+                $htmlproducto = "<table class='table table-bordered' id='tblProducto'>";
+
+                $htmlproducto = $htmlproducto . "<tr><th>Razon Social</th><th>RIF/CI</th><th>Telefono</th><th>Seleccionar</th></tr>";
+
+                foreach($producto as $pro) {
+
+                    //$htmlproducto = $htmlproducto . "<p>" . $pro->descripcion . "</p>";
+                    /****
+                     * inicion html
+                     */
+
+                     //$proJson = $pro->json();
+
+                    $htmlproducto = $htmlproducto . "
+                    
+                    <tr align='center'>
+
+                    <td>
+                    
+                    " . $pro->nombre . "
+                      
+                    </td>
+
+                    
+<td>
+" . $pro->documento . "
+</td>
+
+<td>
+" . $pro->telefono . "
+</td>
+
+
+
+                    
+                
+                    <td>
+
+<input type='radio' name='selectPro' id='selectPro' onclick='selectCliente(this)' value='" . $pro . "'>
+  
+ 
+</td>
+
+                    
+                    </tr>
+                    
+                    
+                    ";
+
+                    
+               /******
+                * fin html
+                */
+                 }
+                 //return $htmlproducto;
+
+                 $htmlproducto = $htmlproducto . "</table>";
+                 
+            };
+
+            if ($htmlproducto != "") {
+                return $htmlproducto;
+            } else {
+
+            return "Producto no encontrado";
+            }
+    }
 
 }
+/* 
+
+$codigo = $request->post("txtcodigo") . "%";
+$cliente = Cliente::where("descripcion", "LIKE", $codigo)->get();
+$htmlproducto = "";
+    if ($cliente) {
+
+        $htmlproducto = "<table class='table table-bordered' id='tblProducto'>";
+
+        $htmlproducto = $htmlproducto . "<tr><th>Nombre</th><th>RIF/CI</th><th>Telefono</th></tr>";
+
+        foreach($cliente as $cli) {
+
+          
+
+            $htmlproducto = $htmlproducto . "
+            
+            <tr align='center'>
+
+            <td>
+            
+            " . $cli->nombre . "
+              
+            </td>
+
+            
+            <td>
+            " . $cli->documento . "
+            </td>
+
+            <td>
+            " . $cli->telefono . "
+            </td>
+
+
+
+            
+        
+            <td>
+            <input type='radio' name='selectPro' id='selectPro' onclick='selectCode(this)' value='" . $cli . "'>
+
+
+            </td>
+
+            
+            </tr>
+            
+            
+            ";
+
+            
+       
+
+         $htmlproducto = $htmlproducto . "</table>";
+         
+    };
+
+    if ($htmlproducto != "") {
+        return $htmlproducto;
+    } else {
+
+    return "Producto no encontrado";
+    } */

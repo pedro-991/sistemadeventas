@@ -11,6 +11,40 @@ function openmodal() {
             };
 
 
+/* 
+* funcion para redondear
+* el precio a los productos con iva
+*/
+
+$(function ()
+{
+
+        $("#roundIva").on('click', function (e) {
+
+            
+            var myInputPrec = document.getElementById('precioTdl');
+            var myInputIva = document.getElementById('ivaTdl');
+            var myInputPrecioIva = document.getElementById('precioConIva');
+
+            /* si iva es cero dejo el precio como esta
+            en el input precio
+            si iva es 16 divido el precio que esta en el input entre
+            1.16 y luego coloco este nuevo precio en el input*/
+
+            if (myInputIva.value == "16") {
+                myInputPrec.value = (myInputPrec.value / 1.16).toFixed(3);
+            }
+
+
+        
+        });
+
+});
+
+
+/* ****************************** */
+            
+
   $(function ()
 {
     $("#codigotest").on('keyup', function (e) {
@@ -28,6 +62,42 @@ function openmodal() {
 
         $.ajax({
             url: 'productocodigo',
+            type: 'POST',
+            data:  {txtcodigo : this.value},
+            success: function (datos) {
+                $("#contentTable").html(datos);
+                openmodal();
+            }
+        });
+        return false;
+     
+
+ 
+
+    }
+    });
+
+});
+
+/* funcion para buscar cliente */
+
+$(function ()
+{
+    $("#buscarCliente").on('keyup', function (e) {
+
+        
+        if (e.keyCode == 13) {
+
+           
+
+            $.ajaxSetup({
+                headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+              });
+
+        $.ajax({
+            url: 'clienteFiltro',
             type: 'POST',
             data:  {txtcodigo : this.value},
             success: function (datos) {
@@ -113,6 +183,32 @@ function selectCode(content) {
                 myInputReferCompra.value = myJson.refercompra;
                 myInputPrecioIva.value = (myJson.precio_venta * ( 1 + (myJson.iva/100))).toFixed(2);
 
+                //console.log(myJson);
+
+                
+                btnCloseModal.click();
+    
+            };
+
+            /* 
+            # FUNCION SELECCIONAR EL CLIENTE
+            #
+            #
+            # */
+
+            function selectCliente(content) {
+
+                var btnCloseModal = document.getElementById('btnCloseModal');
+    
+
+                var myJson = JSON.parse (content.value);
+                var myInputCliente = document.getElementById('id_cliente');
+                var myInputClienteNombre = document.getElementById('nombre_cliente');
+                
+
+                myInputCliente.value = myJson.id;
+                myInputClienteNombre.value = myJson.nombre;
+                
                 //console.log(myJson);
 
                 
@@ -244,39 +340,54 @@ function selectCode(content) {
 
         var myTableArray = [];
         let inputIdCliente = document.getElementById('id_cliente').value;
+        let inputNameCliente = document.getElementById('nombre_cliente').value;
         let inputTypeUnd = document.getElementById('typeUnd').value;
         let botonCancelarVenta = document.getElementById('btnCancelarVenta');
+        let alertVentaGuardada = document.getElementById('alert');
 
-$("table#table tr").each(function() {
-    var arrayOfThisRow = [];
-    var tableData = $(this).find('td');
-    if (tableData.length > 0) {
-        tableData.each(function() { arrayOfThisRow.push($(this).text()); });
-        myTableArray.push(arrayOfThisRow);
-    }
-});
 
-//console.log(myTableArray);
-  
-              $.ajaxSetup({
-                  headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+    if (inputNameCliente === "") 
+    {
+        alertVentaGuardada.innerText = "El nombre del cliente es obligatorio";
+        alertVentaGuardada.classList.remove('d-none');
+    } else
+            {
+
+
+                $("table#table tr").each(function() {
+                    var arrayOfThisRow = [];
+                    var tableData = $(this).find('td');
+                    if (tableData.length > 0) {
+                        tableData.each(function() { arrayOfThisRow.push($(this).text()); });
+                        myTableArray.push(arrayOfThisRow);
                     }
                 });
+
+                //console.log(myTableArray);
   
-          $.ajax({
-              url: 'terminarVenta',
-              type: 'POST',
-              data:  {
-                id_cliente : inputIdCliente,
-                productos : myTableArray
-            },
-              success: function (datos) {
-                //$("#tablaVenta").html(datos);
-                botonCancelarVenta.click();
-              }
-          });
-          return false;
+                $.ajaxSetup({
+                    headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+  
+                $.ajax({
+                    url: 'terminarVenta',
+                    type: 'POST',
+                    data:  {
+                        id_cliente : inputIdCliente,
+                        productos : myTableArray
+                    },
+                    success: function (datos) {
+                        //$("#tablaVenta").html(datos);
+                        botonCancelarVenta.click();
+                    }
+                });
+
+                return false;
+
+            }
        
   
       });
@@ -339,43 +450,56 @@ $("table#table tr").each(function() {
 
         var myTableArray = [];
         let inputIdCliente = document.getElementById('id_cliente').value;
+        let inputNameCliente = document.getElementById('nombre_cliente').value;
         let inputTypeUnd = document.getElementById('typeUnd').value;
         let botonCancelarVenta = document.getElementById('btnCancelarVenta');
         let alertVentaGuardada = document.getElementById('alert');
 
-$("table#table tr").each(function() {
-    var arrayOfThisRow = [];
-    var tableData = $(this).find('td');
-    if (tableData.length > 0) {
-        tableData.each(function() { arrayOfThisRow.push($(this).text()); });
-        myTableArray.push(arrayOfThisRow);
-    }
-});
 
-//console.log(myTableArray);
-  
-              $.ajaxSetup({
-                  headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-  
-          $.ajax({
-              url: 'guardarVenta',
-              type: 'POST',
-              data:  {
-                id_cliente : inputIdCliente,
-                productos : myTableArray
-            },
-              success: function (datos) {
-                //botonCancelarVenta.click();
-                //aqui puedo remover la class hide de un alert
-                //para avisar que la venta esta guardada
-                alertVentaGuardada.innerText = "Venta guardada con exito";
-                alertVentaGuardada.classList.remove('d-none');
-              }
-          });
-          return false;
+    if (inputNameCliente === "") 
+    {
+        alertVentaGuardada.innerText = "El nombre del cliente es obligatorio";
+        alertVentaGuardada.classList.remove('d-none');
+    } else
+            {
+
+                        $("table#table tr").each(function() {
+                            var arrayOfThisRow = [];
+                            var tableData = $(this).find('td');
+                            if (tableData.length > 0) {
+                                tableData.each(function() { arrayOfThisRow.push($(this).text()); });
+                                myTableArray.push(arrayOfThisRow);
+                            }
+                        });
+
+                        //console.log(myTableArray);
+        
+                        $.ajaxSetup({
+                            headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                }
+                            });
+        
+                        $.ajax({
+                            url: 'guardarVenta',
+                            type: 'POST',
+                            data:  {
+                                id_cliente : inputIdCliente,
+                                productos : myTableArray
+                            },
+                            success: function (datos) {
+                                //botonCancelarVenta.click();
+                                //aqui puedo remover la class hide de un alert
+                                //para avisar que la venta esta guardada
+                                alertVentaGuardada.innerText = "Venta guardada con exito";
+                                alertVentaGuardada.classList.remove('d-none');
+                            }
+                        });
+
+                        
+                        return false;
+
+            }
        
   
       });

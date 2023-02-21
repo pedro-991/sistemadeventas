@@ -27,27 +27,28 @@
             @include("notificacion")
             <div class="row">
                 <div class="col-12 col-md-6">
-                    <form action="{{route('terminarOCancelarVenta')}}" method="post">
-                        @csrf
+                    
                         <div class="row">
                           <div class="form-group col-md-6">
                               <label for="id_cliente">Cliente</label>
-                              <select required class="form-control" name="id_cliente" id="id_cliente">
+                              <!-- <select required class="form-control" name="id_cliente" id="id_cliente">
                                   @foreach($clientes as $cliente)
                                       <option value="{{$cliente->id}}">{{$cliente->nombre}}</option>
                                   @endforeach
-                              </select>
+                              </select> -->
+                              <input class="form-control" type="hidden" name="id_cliente" id="id_cliente" value=""/>
+                              <input class="form-control" name="nombre_cliente" id="nombre_cliente" value="" readonly/>
                           </div>
 
                           <div class="form-group col-md-6">
-                              <label for="">Buscar Cliente</label>
-                              <input required class="form-control" name="" id=""/>
+                              <label for="buscarCliente">Buscar Cliente</label>
+                              <input class="form-control" name="buscarCliente" id="buscarCliente" autocomplete="off"/>
                           </div>
                         </div>
                         
-                    </form>
+                    
                     <div class="form-group">
-                                <input name="accion" id="btnTerminarVenta" value="Terminar Venta" type="button" class="btn btn-success"/>
+                                <input name="accion" id="btnTerminarVenta" value="Terminar Venta" type="button" class="btn btn-warning"/>
                                 <input name="accion" id="btnGuardarVenta" value="Guardar Venta" type="button" class="btn btn-success"/>
                                 <input name="accion" id="btnCargarVenta" value="Cargar Venta" type="button" class="btn btn-success"/>
                                 <input name="accion2" id="btnCancelarVenta" value="Cancelar Venta" type="button" class="btn btn-danger">
@@ -143,12 +144,19 @@
             <div class="col-md-2 col-sm-2 d-sm-flex align-items-center">
               <div class="row"> 
                 <label class="col-md-6 m-sm-0">Precio</label>
-                <input
-                  type="text"
-                  id="precioTdl"
-                  class="form-control ml-sm-2 col-md-6"
-                  placeholder=""
-                >
+                <div class="form-control ml-sm-2 col-md-6">
+                  <div class="row">
+                    <input
+                      type="text"
+                      id="precioTdl"
+                      class="col-md-9"
+                      placeholder=""
+                      autocomplete="off"
+                    >
+                    <input type="button" id="roundIva" class="btn btn-success col-md-3" value="+" />
+                      <!-- <i class="fa fa-info col-md-1"></i> -->
+                  </div>
+                </div>
               </div>
             </div>
             <div class="col-md-2 col-sm-2 d-sm-flex align-items-center">
