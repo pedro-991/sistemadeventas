@@ -76,7 +76,8 @@
 
     
         var inputTaza = document.getElementById('tazaNow');
-                var myModalEl = document.getElementById('exampleModal');
+        var myModalEl = document.getElementById('exampleModal');
+        var myUrl = '{{env("APP_URL")}}';
                
             myModalEl.addEventListener('hidden.bs.modal', function (event) {
               console.log('modal cerrado');
@@ -85,7 +86,7 @@
             })
             
             $.ajax({
-                    url: 'http://sistemadeventas.com/showTaza',
+                    url: myUrl + '/showTaza',
                     type: 'GET',
                     success: function (datos) {
                       inputTaza.value = datos;

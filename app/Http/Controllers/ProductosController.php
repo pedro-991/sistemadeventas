@@ -27,6 +27,7 @@ use App\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
+use Illuminate\Support\Arr;
 
 class ProductosController extends Controller
 {
@@ -42,8 +43,17 @@ class ProductosController extends Controller
 
     public function indexReact()
     {
+        $url = env("APP_URL");
+
+       /*  $productos = Producto::all();
+
+        $productosOrdenados = Arr::sort($productos); */
+
+        $productos = DB::table('productos')
+                ->orderBy('descripcion', 'asc')
+                ->get();
        
-        return Inertia::render('ShowProducts', ["products" => Producto::all()]);
+        return Inertia::render('ShowProducts', ["products" => $productos, "url" => $url]);
         
         
     }
@@ -137,13 +147,16 @@ class ProductosController extends Controller
         //Inertia
         public function createInertia()
         {
-            return Inertia::render('Create');
+            $url = env("APP_URL");
+            return Inertia::render('Create', ["url" => $url]);
         }
 
         public function storeInertia(Request $request)
         {
             $producto = new Producto($request->input());
             $producto->saveOrFail();
+
+            $url = env("APP_URL");
 
             /* 
 
@@ -155,7 +168,34 @@ class ProductosController extends Controller
 
             //return Inertia::render('ShowProducts');
 
-            return Inertia::render('ShowProducts', ["products" => Producto::all()]);
+            //return Inertia::render('ShowProducts', ["products" => Producto::all(), "url" => $url]);
+
+            return redirect()->route("indexReact");
+
+        }
+
+        //Inertia editar
+        public function editInertia($id)
+        {
+            $producto = Producto::find($id);
+            $url = env("APP_URL");
+            return Inertia::render('Edit', ['producto' => $producto, "url" => $url]);
+        }
+
+        public function updateInertia(Request $request, $id)
+        {
+            $producto = Producto::findOrFail($id);
+            $url = env("APP_URL");
+            /* $producto->name = $request->input('name');
+	        $producto->email = $request->input('email');
+	        $producto->phone = $request->input('phone'); */
+
+            $producto->fill($request->input());
+            $producto->saveOrFail();
+
+            //return Inertia::render('ShowProducts', ["products" => Producto::all(), "url" => $url]);
+
+            return redirect()->route("indexReact");
 
         }
 }

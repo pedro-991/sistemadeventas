@@ -32,6 +32,10 @@ Route::get("/reactTest", "ProductosController@reactTest")->name("reactTest");
 Route::get("/indexReact", "ProductosController@indexReact")->name("indexReact");
 Route::get("/createInertia", "ProductosController@createInertia")->name("createInertia");
 Route::post("/saveInertia", "ProductosController@storeInertia")->name("saveInertia");
+//ruta para mostrar la vista editar con react
+Route::get('/edit/{id}', "ProductosController@editInertia");
+//ruta para editar el producto con react
+Route::post('/update/{id}', "ProductosController@updateInertia");
 //ruta para mostrar documentos en espera
 Route::get("/docEsperaIndex", "DocEsperaController@index")->name("docEspera.index");
 //ruta para mostrar un solo documento en espera
@@ -50,6 +54,7 @@ Route::get("/reporteX", "VentasController@reporteX")->name("reporteX");
 Route::get("/reporteZ", "VentasController@reporteZ")->name("reporteZ");
 //ruta para mostrar vista reportes
 Route::get("/reportes", "VentasController@reportes")->name("reportes");
+
 //Route::post("/mostrarSesion", "VenderController@mostrarSesion")->name("mostrarSesion");
 Route::get("/inertia", function () {
     return Inertia::render('Home');

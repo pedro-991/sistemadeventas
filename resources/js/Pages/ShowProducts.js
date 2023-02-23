@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { Link } from '@inertiajs/inertia-react'
 
 
-const ShowProducts = ({ products }) => {
+const ShowProducts = ({ products, url }) => {
 
   const BuscarReact = () => {
 
@@ -38,7 +38,7 @@ const ShowProducts = ({ products }) => {
                 <h2 className="col-md-3">#Productos</h2>
             </div>
             <div className="row">
-                <Link href="http://sistemadeventas.com/createInertia" className="btn btn-success mb-2 col-md-2">Agregar</Link>
+                <Link href={url + "/createInertia"} className="btn btn-success mb-2 col-md-2">Agregar</Link>
                 <button id="btnActualizar" className="btn btn-success mb-2 col-md-2" disabled>Actualizar</button>
                 <input style={{ width: "20%" }}  id="tazaNow" autoComplete="off" name="" type="text"
                                         className="col-md-3 form-control"
@@ -57,7 +57,8 @@ const ShowProducts = ({ products }) => {
             <th>Codigo</th>
             <th>Description</th>
             <th>Precio</th>
-            <th>Action</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
            </tr>
           </thead>
           <tbody>
@@ -67,9 +68,15 @@ const ShowProducts = ({ products }) => {
               <td>{ product.descripcion }</td>
               <td>{ product.precio_venta }</td>
               <td>
-              <Link className="btn btn-primary"
-               href="http://sistemadeventas.com">
-                Edit
+              <Link className="btn btn-warning"
+               href={url + "/edit/" + product.id}>
+                <i class="fa fa-edit"></i>
+              </Link>
+              </td>
+              <td>
+              <Link className="btn btn-danger"
+               href={url + "/edit/" + product.id}>
+                <i class="fa fa-trash"></i>
               </Link>
               </td>
             </tr>

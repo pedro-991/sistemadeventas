@@ -3,7 +3,7 @@ import React, { Fragment, useState } from 'react';
 import { Link } from '@inertiajs/inertia-react'
 
 
-const Create = () => {
+const Create = ({ url }) => {
 
 const [codigo_barras, setCodigo_barras] = useState('')
 const [descripcion, setDescripcion] = useState('')
@@ -16,9 +16,11 @@ const [iva, setIva] = useState('')
 const [und, setUnd] = useState('')
 const [existencia, setExistencia] = useState('')
 
+
+
 const saveData = (e) => {
    e.preventDefault();
-   Inertia.post('http://sistemadeventas.com/saveInertia', { codigo_barras, descripcion, precio_compra, precio_venta, preciodollar, referventa, refercompra, iva, und, existencia });
+   Inertia.post(url + "/saveInertia", { codigo_barras, descripcion, precio_compra, precio_venta, preciodollar, referventa, refercompra, iva, und, existencia });
 }
 
     return(
@@ -159,7 +161,7 @@ const saveData = (e) => {
 
 		<div className="form-group mt-3">
 		   <button className="btn btn-success">Guardar</button>
-		   <Link href="http://sistemadeventas.com/indexReact" className="btn btn-primary">Volver al listado</Link>
+		   <Link href={url + "/indexReact"} className="btn btn-primary">Volver al listado</Link>
 		</div>
 	  </form>
 	</Fragment>
