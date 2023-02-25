@@ -24,6 +24,7 @@
 namespace App\Http\Controllers;
 
 use App\Producto;
+use App\Taza;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
@@ -45,15 +46,16 @@ class ProductosController extends Controller
     {
         $url = env("APP_URL");
 
-       /*  $productos = Producto::all();
-
-        $productosOrdenados = Arr::sort($productos); */
 
         $productos = DB::table('productos')
                 ->orderBy('descripcion', 'asc')
                 ->get();
+
+        $taza = Taza::find(1);
+
+        //$numProducts = 100;
        
-        return Inertia::render('ShowProducts', ["products" => $productos, "url" => $url]);
+        return Inertia::render('ShowProducts', ["products" => $productos, "url" => $url, "taza" => $taza->taza]);
         
         
     }
@@ -134,9 +136,8 @@ class ProductosController extends Controller
 
     public function actualizarDollar(Request $request)
     {
-        //Producto::where('existencia', '>', 0)->update(['precio_venta'=>'precio_compra' . '*' . '2.00']);
         $updated = DB::update('update productos set precio_venta = preciodollar * ?', [$request->dollar]);
-        //return "hola";
+        
     }
 
     public function reactTest()
@@ -158,18 +159,7 @@ class ProductosController extends Controller
 
             $url = env("APP_URL");
 
-            /* 
-
-            Session::flash('success', 'User created successfully'); */
-
-            //Session::flash('success', 'User created successfully');
-
-            //return Redirect::to('/');
-
-            //return Inertia::render('ShowProducts');
-
-            //return Inertia::render('ShowProducts', ["products" => Producto::all(), "url" => $url]);
-
+           
             return redirect()->route("indexReact");
 
         }
@@ -186,16 +176,22 @@ class ProductosController extends Controller
         {
             $producto = Producto::findOrFail($id);
             $url = env("APP_URL");
-            /* $producto->name = $request->input('name');
-	        $producto->email = $request->input('email');
-	        $producto->phone = $request->input('phone'); */
 
             $producto->fill($request->input());
             $producto->saveOrFail();
 
-            //return Inertia::render('ShowProducts', ["products" => Producto::all(), "url" => $url]);
-
             return redirect()->route("indexReact");
 
         }
+
+        //Inertia delete
+
+        public function destroyInertia($id)
+    {
+        $producto = Producto::findOrFail($id);
+        $producto->delete();
+        //return redirect()->route("productos.index")->with("mensaje", "Producto eliminado");
+        return redirect()->route("indexReact");
+    }
+
 }

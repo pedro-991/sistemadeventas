@@ -27,11 +27,15 @@ Route::post("/terminarVenta", "VenderController@terminarVenta")->name("terminarV
 Route::post("/guardarVenta", "VenderController@guardarVenta")->name("guardarVenta");
 Route::post("/dollar", "ProductosController@actualizarDollar")->name("dollar");
 Route::post("/update", "TazaController@updateTaza")->name("update");
+//actualizar taza dollar con inertia
+Route::get("/updateTazaInertia/{dollar}", "TazaController@updateTazaInertia")->name("updateTazaInertia");
 Route::get("/showTaza", "TazaController@showTaza")->name("showTaza");
 Route::get("/reactTest", "ProductosController@reactTest")->name("reactTest");
 Route::get("/indexReact", "ProductosController@indexReact")->name("indexReact");
 Route::get("/createInertia", "ProductosController@createInertia")->name("createInertia");
 Route::post("/saveInertia", "ProductosController@storeInertia")->name("saveInertia");
+//ruta para to delete
+Route::get('/delete/{id}', "ProductosController@destroyInertia");
 //ruta para mostrar la vista editar con react
 Route::get('/edit/{id}', "ProductosController@editInertia");
 //ruta para editar el producto con react

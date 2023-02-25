@@ -1,8 +1,11 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import { Link } from '@inertiajs/inertia-react'
 
 
-const ShowProducts = ({ products, url }) => {
+const ShowProducts = ({ products, url, taza }) => {
+
+    const [taza_nueva, setTaza_nueva] = useState('')
+
 
   const BuscarReact = () => {
 
@@ -28,6 +31,8 @@ const ShowProducts = ({ products, url }) => {
     }
 
   }
+
+
     
    
 
@@ -35,19 +40,23 @@ const ShowProducts = ({ products, url }) => {
         <Fragment>
             <div className="row">
                 <h1 className="col-md-3">Productos <i class="fa fa-box"></i></h1>
-                <h2 className="col-md-3">#Productos</h2>
+                <h2 className="col-md-3">{products.length}</h2>
             </div>
             <div className="row">
                 <Link href={url + "/createInertia"} className="btn btn-success mb-2 col-md-2">Agregar</Link>
-                <button id="btnActualizar" className="btn btn-success mb-2 col-md-2" disabled>Actualizar</button>
+                <Link id="btnActualizarInertia" href={url + "/updateTazaInertia/" + taza_nueva} className="btn btn-success mb-2 col-md-2">Actualizar</Link>
                 <input style={{ width: "20%" }}  id="tazaNow" autoComplete="off" name="" type="text"
+                                        value={taza}
                                         className="col-md-3 form-control"
                                         placeholder="" readOnly/>
             </div>
             <div className="row">
-                <input style={{ width: "30%" }} id="inputActualizar" autoComplete="off" name="" type="text"
+                <input style={{ width: "30%" }} id="" autoComplete="off" name="" type="text"
                                     className="col-md-3 form-control"
-                                    placeholder="10.69"/>
+                                    placeholder="10.69"
+                                    value={taza_nueva}
+                                    onChange={(e) => setTaza_nueva(e.target.value)}
+                                    />
                 <input style={{ width: "30%" }} type="text" name="txtBusqueda" id="txtBusqueda" className="col-md-3 form-control" onKeyUp={BuscarReact} placeholder="Busqueda"autoFocus/>
 
             </div>            
@@ -75,7 +84,7 @@ const ShowProducts = ({ products, url }) => {
               </td>
               <td>
               <Link className="btn btn-danger"
-               href={url + "/edit/" + product.id}>
+               href={url + "/delete/" + product.id}>
                 <i class="fa fa-trash"></i>
               </Link>
               </td>
