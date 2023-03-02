@@ -122,9 +122,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('home')}}">Inicio&nbsp;<i class="fa fa-home"></i></a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="{{route('productos.index')}}">Productos&nbsp;<i class="fa fa-box"></i></a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('vender.index')}}">Vender&nbsp;<i class="fa fa-cart-plus"></i></a>
                 </li>
@@ -132,7 +132,7 @@
                     <a class="nav-link" href="{{route('ventas.index')}}">Ventas&nbsp;<i class="fa fa-list"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('docEspera.index')}}">Ventas Guardadas&nbsp;<i class="fa fa-list"></i></a>
+                    <a class="nav-link" href="{{route('docEspera.index')}}">Presupuestos&nbsp;<i class="fa fa-list"></i></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('usuarios.index')}}">Usuarios&nbsp;<i class="fa fa-users"></i></a>
@@ -141,7 +141,7 @@
                     <a class="nav-link" href="{{route('clientes.index')}}">Clientes&nbsp;<i class="fa fa-users"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('indexReact')}}">Productos React&nbsp;<i class="fa fa-box"></i></a>
+                    <a class="nav-link" href="{{route('indexReact')}}">Productos&nbsp;<i class="fa fa-box"></i></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('reportes')}}">Reportes&nbsp;<i class="fa fa-box"></i></a>

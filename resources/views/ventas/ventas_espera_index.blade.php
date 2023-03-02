@@ -19,11 +19,11 @@
     El texto de arriba debe ser incluido en cualquier redistribucion
 --}}
 @extends("maestra")
-@section("titulo", "Ventas Guardadas")
+@section("titulo", "Presupuestos Guardados")
 @section("contenido")
     <div class="row">
         <div class="col-12">
-            <h1>Ventas Guardadas <i class="fa fa-list"></i></h1>
+            <h1>Presupuestos Guardados <i class="fa fa-list"></i></h1>
             @include("notificacion")
             <div class="table-responsive">
                 <table class="table table-bordered">

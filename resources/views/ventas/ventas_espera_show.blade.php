@@ -34,72 +34,143 @@
             </a>
             
             <h2>Productos</h2>
+            
             <div id="divFactura">
-            
 
+                    <!-- aqui empieza la factura a imprimir
+                    ***
+                    *** -->
 
-                <table width="100%" border="0">
-                    <tr>
-                    <td><font face="Courier"><strong>CLIENTE: {{$venta->cliente->nombre}}</strong></font></td>
-                    <td><font face="Courier"><strong>FECHA: <small>{{date_format($venta->created_at, "d/m/Y")}}</strong></small></font></td>
-                    </tr>
-
-                    <tr>
-                    <td><font face="Courier"><strong>RIF/CI: {{$venta->cliente->documento}}</strong></font></td>
-                    </tr>
-
-                    <tr>
-                    <td><font face="Courier"><strong>DIRECCIÓN: <small></small></strong></font></td>
-                    </tr>
-                </table>
+            @php
 
             
-            <table width="100%" border="1">
-                
-                    <thead ><!-- style="border-width: 1; border-style: solid; border-color: black;"> --> <!-- class="thead-light" > -->
-                    
-                        <tr>
-                            <th style="width: 17%;"><font face="Courier">Código</font></th>
-                            <th style="width: 35%;"><font face="Courier">Descripción</font></th>
-                            <th style="width: 17%;"><font face="Courier">Cantidad</font></th>
-                            <th style="width: 10%;"><font face="Courier">Precio</font></th>
-                            <th style="width: 10%;"><font face="Courier">%I.V.A.</font></th>
-                            <th style="width: 10%;"><font face="Courier">Total</font></th>
-                        </tr>
-                    
-                    </thead>
-                
-            </table>
-            <table width="100%" border="0"> <!-- class="table table-bordered table-hover table-sm"> -->
-                
-                <tbody style="min-height: 100px"> <!-- height: 200px; -->
-                @php
-                    $totalIva = 0;
+            $productosPagina = 10;
 
-        @endphp
-                @foreach($venta->productos as $producto)
-                    <tr style="height: 30px;">
-                        <td><font face="Courier"><strong>{{$producto->codigo_barras}}</strong></font></td>
-                        <td><font face="Courier"><strong><small>{{$producto->descripcion}}</small></strong></font></td>
-                        <td><font face="Courier"><strong>{{$producto->cantidad}} {{$producto->und}}</strong></font></td>
-                        <td><font face="Courier"><strong>{{number_format($producto->precio, 2)}}</strong></font></td>
-                        @if($producto->iva == 0)
                         
-                        <td><font face="Courier"><strong>XENTO</strong></font></td>
-                        @else
-                        <td><font face="Courier"><strong>{{$producto->iva}}%</strong></font></td>
-                        @endif
-                        <td><font face="Courier"><strong>{{number_format($producto->cantidad * $producto->precio, 2)}}</strong></font></td>
-                    </tr>
-                  
-                    @php
-                    $totalIva = $totalIva + (($producto->cantidad * $producto->precio) * ($producto->iva / 100));
+            $repetirFor = ceil (count($venta->productos) / $productosPagina);
 
-        @endphp
-                @endforeach
-              
-               
-                </tbody>
+            for ($i=0; $i<$repetirFor; $i++) {
+
+                         
+
+                            $conteoFor = 0;
+	                        $paginaActual = $i + 1;
+	                        $inicioLimite = $i * $productosPagina;
+                           
+
+            @endphp
+
+                    
+            
+
+
+                    <table width="100%" border="0">
+                        <tr>
+                        <td><font face="Courier"><strong>CLIENTE: {{$venta->cliente->nombre}}</strong></font></td>
+                        <td><font face="Courier"><strong>FECHA: <small>{{date_format($venta->created_at, "d/m/Y")}}</strong></small></font></td>
+                        </tr>
+
+                        <tr>
+                        <td><font face="Courier"><strong>RIF/CI: {{$venta->cliente->documento}}</strong></font></td>
+                        <td><font face="Courier"><strong>Pag: {{ $paginaActual }}/{{ $repetirFor }}</strong></font></td>    
+                        </tr>
+
+                        <tr>
+                        <td><font face="Courier"><strong>DIRECCIÓN: <small></small></strong></font></td>
+                        </tr>
+                    </table>
+
+            
+                    <table width="100%" border="1">
+                        
+                            <thead ><!-- style="border-width: 1; border-style: solid; border-color: black;"> --> <!-- class="thead-light" > -->
+                            
+                                <tr>
+                                    <th style="width: 17%;"><font face="Courier">Código</font></th>
+                                    <th style="width: 35%;"><font face="Courier">Descripción</font></th>
+                                    <th style="width: 17%;"><font face="Courier">Cantidad</font></th>
+                                    <th style="width: 10%;"><font face="Courier">Precio</font></th>
+                                    <th style="width: 10%;"><font face="Courier">%I.V.A.</font></th>
+                                    <th style="width: 10%;"><font face="Courier">Total</font></th>
+                                </tr>
+                            
+                            </thead>
+                        
+                </table>
+                <table width="100%" border="0"> <!-- class="table table-bordered table-hover table-sm"> -->
+                        
+                        <tbody style="min-height: 100px"> <!-- height: 200px; -->
+                      
+
+                        
+
+
+                                            @foreach($venta->productos as $producto)
+
+                                            
+
+                                            <!-- aqui abajo el conteo
+                                            * para saber cuantos item lleva
+                                            -->
+                                            
+
+
+                                            <!-- 
+                                                *PRODUCTOS
+                                                *PRODUCTOS
+                                                *PRODUCTOS
+                                                *
+                                            -->
+
+
+                                                @if ($loop->index >= $inicioLimite)
+
+                                                            @php
+                                                                $conteoFor++;
+
+                                                            @endphp
+
+                                                            <tr style="height: 25px;">
+                                                                <td><font face="Courier"><strong>{{$producto->codigo_barras}}</strong></font></td>
+                                                                <td><font face="Courier"><strong><small>{{$producto->descripcion}}</small></strong></font></td>
+                                                                <td><font face="Courier"><strong>{{$producto->cantidad}} {{$producto->und}}</strong></font></td>
+                                                                <td><font face="Courier"><strong>{{number_format($producto->precio, 2)}}</strong></font></td>
+                                                                @if($producto->iva == 0)
+                                                                
+                                                                <td><font face="Courier"><strong>XENTO</strong></font></td>
+                                                                @else
+                                                                <td><font face="Courier"><strong>{{$producto->iva}}%</strong></font></td>
+                                                                @endif
+                                                                <td><font face="Courier"><strong>{{number_format($producto->cantidad * $producto->precio, 2)}}</strong></font></td>
+                                                            </tr>
+                                                        
+                                                         
+
+
+                                                            <!-- 
+                                                            *PRODUCTOS
+                                                            *PRODUCTOS
+                                                            *PRODUCTOS
+                                                            *
+                                                        -->
+
+
+                                                @endif
+
+                                                @php
+                                                if ($conteoFor == $productosPagina) {
+						                            break;    
+					                            };
+                                                @endphp
+                                                
+
+                                                
+                                            @endforeach
+
+                    
+                    
+                    
+                        </tbody>
                 </table>
 
                 <table width="100%" border="1">
@@ -115,13 +186,26 @@
                                     <font face="Courier"><strong>Total:............................</strong></font>
                                     <font face="Courier"><strong>{{number_format($total + $totalIva, 2)}}</strong></font></br>
                                     
+                                    
                                     </td>
                                 </tr>
                                
                     
-            </table>
+                </table>
+
+
+                @php
+                    }
+
+                @endphp
+
+                <!-- aqui termina la factura a imprimir
+                ***
+                *** -->
+
                 
-</div>
+                
+            </div> <!-- <div id="divFactura"> -->
 
         </div>
     </div>

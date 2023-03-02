@@ -461,12 +461,15 @@ $write = fputs($fp, $cmd);
     public function show(Venta $venta)
     {
         $total = 0;
+        $totalIva = 0;
         foreach ($venta->productos as $producto) {
             $total += $producto->cantidad * $producto->precio;
+            $totalIva = $totalIva + (($producto->cantidad * $producto->precio) * ($producto->iva / 100));// $totalIva + (($producto->cantidad * $producto->precio) * ($producto->iva / 100));
         }
         return view("ventas.ventas_show", [
             "venta" => $venta,
             "total" => $total,
+            "totalIva" => $totalIva,
         ]);
     }
 

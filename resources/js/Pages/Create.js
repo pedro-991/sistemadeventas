@@ -12,9 +12,13 @@ const [precio_venta, setPrecio_venta] = useState('')
 const [preciodollar, setPreciodollar] = useState('')
 const [referventa, setReferventa] = useState('')
 const [refercompra, setRefercompra] = useState('')
-const [iva, setIva] = useState('')
+const [iva, setIva] = useState('0')
 const [und, setUnd] = useState('')
 const [existencia, setExistencia] = useState('')
+
+//iva = 0;
+
+//setIva("0");
 
 
 
@@ -39,6 +43,7 @@ const saveData = (e) => {
 		    value={codigo_barras}
 		    onChange={e=>setCodigo_barras(e.target.value)}
 		    placeholder="Ejemp.: 0002211"
+			autocomplete="off"
 			required/>
 		</div>
 
@@ -52,6 +57,7 @@ const saveData = (e) => {
 		    value={descripcion}
 		    onChange={e=>setDescripcion(e.target.value)}
 		    placeholder="Ejemp.: Atun"
+			autocomplete="off"
 			required/>
 		</div>
 
@@ -65,6 +71,7 @@ const saveData = (e) => {
 		    value={precio_compra}
 		    onChange={e=>setPrecio_compra(e.target.value)}
 		    placeholder="Ejemp.: 52.05"
+			autocomplete="off"
 			required/>
 		</div>
 
@@ -78,6 +85,7 @@ const saveData = (e) => {
 		    value={precio_venta}
 		    onChange={e=>setPrecio_venta(e.target.value)}
 		    placeholder="Ejemp.: 52.05"
+			autocomplete="off"
 			required/>
 		</div>
 
@@ -91,6 +99,7 @@ const saveData = (e) => {
 		    value={preciodollar}
 		    onChange={e=>setPreciodollar(e.target.value)}
 		    placeholder="Ejemp.: 5.05"
+			autocomplete="off"
 			required/>
 		</div>
 
@@ -104,6 +113,7 @@ const saveData = (e) => {
 		    value={referventa}
 		    onChange={e=>setReferventa(e.target.value)}
 		    placeholder="Ejemp.: VENTA *$5.05"
+			autocomplete="off"
 			required/>
 		</div>
 
@@ -117,20 +127,25 @@ const saveData = (e) => {
 		    value={refercompra}
 		    onChange={e=>setRefercompra(e.target.value)}
 		    placeholder="Ejemp.: COMPRA *$3.84"
+			autocomplete="off"
 			required/>
 		</div>
 
 		<div className="form-group">
 		  <label htmlFor="iva">I.V.A.</label>
-		  <input
+		  <select
 		    type="text"
 		    className="form-control"
 		    id="iva"
 			name="iva"
-		    value={iva}
+		    
 		    onChange={e=>setIva(e.target.value)}
 		    placeholder="Ejemp.: 16"
-			required/>
+			autocomplete="off"
+			required>
+				<option value="0">0%</option>
+				<option value="16">16%</option>
+			</select>
 		</div>
 
 		<div className="form-group">
@@ -143,6 +158,7 @@ const saveData = (e) => {
 		    value={und}
 		    onChange={e=>setUnd(e.target.value)}
 		    placeholder="Ejemp.: UND"
+			autocomplete="off"
 			required/>
 		</div>
 
@@ -156,6 +172,7 @@ const saveData = (e) => {
 		    value={existencia}
 		    onChange={e=>setExistencia(e.target.value)}
 		    placeholder="Ejemp.: 100"
+			autocomplete="off"
 			required/>
 		</div>
 

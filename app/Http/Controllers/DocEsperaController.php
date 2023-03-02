@@ -22,14 +22,17 @@ class DocEsperaController extends Controller
     {
         $venta = Doc_espera::with(["productos", "cliente"])->findOrFail($request->id);
         $total = 0;
+        $totalIva = 0;
         foreach ($venta->productos as $producto) {
             //aqui podria añadir la variable iva a la ecuacion y enviar el total con iva
             //podria ser $total += $producto->cantidad * ($producto->precio * (($producto->iva/100)+1));
             $total += $producto->cantidad * $producto->precio;
+            $totalIva = $totalIva + (($producto->cantidad * $producto->precio) * ($producto->iva / 100));
         }
         return view("ventas.ventas_espera_show", [
             "venta" => $venta,
             "total" => $total,
+            "totalIva" => $totalIva,
         ]);
     }
 

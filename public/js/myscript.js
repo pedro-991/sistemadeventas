@@ -491,7 +491,7 @@ function selectCode(content) {
                                 //botonCancelarVenta.click();
                                 //aqui puedo remover la class hide de un alert
                                 //para avisar que la venta esta guardada
-                                alertVentaGuardada.innerText = "Venta guardada con exito";
+                                alertVentaGuardada.innerText = "Presupuesto guardado con exito";
                                 alertVentaGuardada.classList.remove('d-none');
                             }
                         });
