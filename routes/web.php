@@ -20,16 +20,44 @@ Auth::routes([
 ]);
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+/* ***
+*****************************
+*controlador VenderController
+*****************************
+* ******/
+
+
 Route::post("/productocodigo", "VenderController@productoFiltro")->name("buscarProducto");
 //ruta para buscar cliente rapido
 Route::post("/clienteFiltro", "VenderController@clienteFiltro")->name("clienteFiltro");
 Route::post("/terminarVenta", "VenderController@terminarVenta")->name("terminarVenta");
 Route::post("/guardarVenta", "VenderController@guardarVenta")->name("guardarVenta");
+
+
+/* ***
+***************************
+*controlador TazaController
+***************************
+* ******/
+
+
 Route::post("/dollar", "ProductosController@actualizarDollar")->name("dollar");
 Route::post("/update", "TazaController@updateTaza")->name("update");
 //actualizar taza dollar con inertia
 Route::get("/updateTazaInertia/{dollar}", "TazaController@updateTazaInertia")->name("updateTazaInertia");
 Route::get("/showTaza", "TazaController@showTaza")->name("showTaza");
+
+
+/* *****
+********************************
+*controlador ProductosController
+********************************
+* ******/
+
+
+
 Route::get("/reactTest", "ProductosController@reactTest")->name("reactTest");
 Route::get("/indexReact", "ProductosController@indexReact")->name("indexReact");
 Route::get("/createInertia", "ProductosController@createInertia")->name("createInertia");
@@ -40,16 +68,40 @@ Route::get('/delete/{id}', "ProductosController@destroyInertia");
 Route::get('/edit/{id}', "ProductosController@editInertia");
 //ruta para editar el producto con react
 Route::post('/update/{id}', "ProductosController@updateInertia");
+
+
+/* *****
+********************************
+*controlador DocEsperaController
+********************************
+* ******/
+
+
 //ruta para mostrar documentos en espera
 Route::get("/docEsperaIndex", "DocEsperaController@index")->name("docEspera.index");
+//ruta para mostrar documentos en espera en react
+Route::get("/docEsperaIndexReact", "DocEsperaController@indexReact")->name("docEsperaIndexReact");
 //ruta para mostrar un solo documento en espera
 Route::get("/docEsperaShow/{id}", "DocEsperaController@show")->name("docEspera.show");
+//ruta para mostrar un solo documento en espera con react
+Route::get("/docEsperaShowReact/{id}", "DocEsperaController@showReact")->name("docEsperaShowReact");
 //ruta para eliminar un documento en espera
 Route::delete("/docEsperaDestroy/{id}", "DocEsperaController@destroy")->name("docEspera.destroy");
+//ruta para eliminar un documento en espera con react
+Route::get("/docEsperaDestroyReact/{id}", "DocEsperaController@destroyReact")->name("docEsperaDestroyReact");
 //ruta para mostrar las ventas en el modal
 Route::get("/indexOnModal", "DocEsperaController@indexOnModal")->name("indexOnModal");
 //
 Route::post("/showCargarVenta", "DocEsperaController@showCargarVenta")->name("showCargarVenta");
+
+
+/* *****
+********************************
+*controlador VentasController
+********************************
+* ******/
+
+
 //ruta para imprimir en la termica
 Route::get("/ticketTest", "VentasController@ticketTest")->name("ticketTest");
 //ruta para imprimir reporte x

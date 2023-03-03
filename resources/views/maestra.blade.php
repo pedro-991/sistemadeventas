@@ -131,8 +131,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('ventas.index')}}">Ventas&nbsp;<i class="fa fa-list"></i></a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="{{route('docEspera.index')}}">Presupuestos&nbsp;<i class="fa fa-list"></i></a>
+                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('docEsperaIndexReact')}}">Presupuestos&nbsp;<i class="fa fa-list"></i></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('usuarios.index')}}">Usuarios&nbsp;<i class="fa fa-users"></i></a>

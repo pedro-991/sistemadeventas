@@ -49,6 +49,7 @@ const Edit = ({ producto, url }) => {
                                 value={codigo_barras}
                                 onChange={(e) => setCodigo_barras(e.target.value)}
                                 placeholder="0123456789"
+                                autocomplete="off"
                                 required
                                 />
                             </div>
@@ -61,6 +62,7 @@ const Edit = ({ producto, url }) => {
                                 value={descripcion}
                                 onChange={(e) => setDescripcion(e.target.value)}
                                 placeholder="Atun Ebeba 500gs"
+                                autocomplete="off"
                                 required
                                 />
                             </div>
@@ -73,6 +75,7 @@ const Edit = ({ producto, url }) => {
                                 value={precio_compra}
                                 onChange={(e) => setPrecio_compra(e.target.value)}
                                 placeholder="20.20"
+                                autocomplete="off"
                                 required
                                 />
                             </div>
@@ -85,6 +88,7 @@ const Edit = ({ producto, url }) => {
                                 value={precio_venta}
                                 onChange={(e) => setPrecio_venta(e.target.value)}
                                 placeholder="24.20"
+                                autocomplete="off"
                                 required
                                 />
                             </div>
@@ -97,6 +101,7 @@ const Edit = ({ producto, url }) => {
                                 value={preciodollar}
                                 onChange={(e) => setPreciodollar(e.target.value)}
                                 placeholder="5.00"
+                                autocomplete="off"
                                 required
                                 />
                             </div>
@@ -109,6 +114,7 @@ const Edit = ({ producto, url }) => {
                                 value={referventa}
                                 onChange={(e) => setReferventa(e.target.value)}
                                 placeholder="7.00"
+                                autocomplete="off"
                                 required
                                 />
                             </div>
@@ -121,6 +127,7 @@ const Edit = ({ producto, url }) => {
                                 value={refercompra}
                                 onChange={(e) => setRefercompra(e.target.value)}
                                 placeholder="6.50"
+                                autocomplete="off"
                                 required
                                 />
                             </div>
@@ -133,6 +140,7 @@ const Edit = ({ producto, url }) => {
                                 value={iva}
                                 onChange={(e) => setIva(e.target.value)}
                                 placeholder="16"
+                                autocomplete="off"
                                 required
                                 />
                             </div>
@@ -145,6 +153,7 @@ const Edit = ({ producto, url }) => {
                                 value={und}
                                 onChange={(e) => setUnd(e.target.value)}
                                 placeholder="UND"
+                                autocomplete="off"
                                 required
                                 />
                             </div>
@@ -157,6 +166,7 @@ const Edit = ({ producto, url }) => {
                                 value={existencia}
                                 onChange={(e) => setExistencia(e.target.value)}
                                 placeholder="100"
+                                autocomplete="off"
                                 required
                                 />
                             </div>
