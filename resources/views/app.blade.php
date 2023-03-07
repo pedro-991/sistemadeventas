@@ -1,6 +1,6 @@
 
 @extends('maestra')
-@section("titulo", "Productos")
+@section("titulo", "Plantilla Inertia")
 @section('headInertia')
 @inertiaHead
 @section('contenido')

@@ -39,6 +39,17 @@ class ClientesController extends Controller
         return redirect()->route("clientes.index")->with("mensaje", "Cliente agregado");
     }
 
+    public function storeJavascript(Request $request)
+    {
+        //(new Cliente($request->input()))->saveOrFail();
+        //return redirect()->route("clientes.index")->with("mensaje", "Cliente agregado");
+    
+        $cliente = new Cliente($request->input());
+        $cliente->saveOrFail();
+
+        return true;
+    }
+
     /**
      * Display the specified resource.
      *

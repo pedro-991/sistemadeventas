@@ -152,6 +152,55 @@ $(function ()
 
 /* termina funcion para cargar factura */
 
+/* funcion para agregar cliente */
+
+$(function ()
+{
+    $("#btnAgregarCliente").on('click', function (e) {
+
+        let inputNombreCliente = document.getElementById('nombre_cliente_script').value;
+        let inputDocumentoCliente = document.getElementById('documento_cliente_script').value;
+        let alertCliente = document.getElementById('alert');
+        
+
+        if (inputNombreCliente != "" && inputDocumentoCliente != "") {
+
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                $.ajax({
+                    url: 'storeJavascript',
+                    type: 'POST',
+                    data:  {
+                        nombre : inputNombreCliente,
+                        documento : inputDocumentoCliente,
+                        telefono : "0000-0000000"
+                    },
+                    success: function (datos) {
+                        alertCliente.innerText = "Cliente agregado con exito";
+                        alertCliente.classList.remove('d-none');
+                    }
+                });
+                return false;
+
+                } else {
+                    alertCliente.innerText = "Nombre y documento del cliente son obligatorios";
+                    alertCliente.classList.remove('d-none');
+                }
+     
+
+ 
+
+    
+    });
+
+});
+
+/* termina funcion para agregar cliente */
+
 
 //funcion para seleccionar el codigo
 
@@ -222,28 +271,7 @@ function selectCode(content) {
     
 
                 var myJson = JSON.parse (content.value);
-              /*   var myInputTitle = document.getElementById('title');
-                var myInputCod = document.getElementById('codigoTdl');
-                var myInputDescrip = document.getElementById('description');
-                var myInputPrec = document.getElementById('precioTdl');
-                var myInputCant = document.getElementById('cantidadTdl');
-                var myInputIva = document.getElementById('ivaTdl');
-                var myInputUnd = document.getElementById('typeUnd');
-                var myInputReferVenta = document.getElementById('referVenta');
-                var myInputReferCompra = document.getElementById('referCompra');
-                var myInputPrecioIva = document.getElementById('precioConIva');
-
-                myInputTitle.value = myJson.id;
-                myInputCod.value = myJson.codigo_barras;
-                myInputDescrip.value = myJson.descripcion;
-                myInputPrec.value = myJson.precio_venta;
-                myInputCant.value = "1";
-                myInputIva.value = myJson.iva;
-                myInputUnd.value = myJson.und;
-                myInputReferVenta.value = myJson.referventa;
-                myInputReferCompra.value = myJson.refercompra;
-                myInputPrecioIva.value = (myJson.precio_venta * ( 1 + (myJson.iva/100))).toFixed(2);
- */
+            
                 console.log(myJson.id);
 
                 

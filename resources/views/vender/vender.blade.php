@@ -27,42 +27,55 @@
             @include("notificacion")
             <div class="row">
                 <div class="col-12 col-md-6">
+
+                        <div class="row">
+                            <div class="form-group col-md-5">
+                                <label for="">Nombre</label>
+                                <input class="form-control" name="nombre_cliente_script" id="nombre_cliente_script" value="" autocomplete="off"/>
+                            </div>
+
+                            <div class="form-group col-md-5">
+                                <label for="">RIF/CI</label>
+                                <input class="form-control" name="documento_cliente_script" id="documento_cliente_script" autocomplete="off"/>
+                            </div>
+                            <div class="form-group col-md-2">
+                            <label for=""></label>
+                            <input name="" id="btnAgregarCliente" value="Agregar" type="button" class="btn btn-success"/>
+                            </div>
+                        </div>
                     
                         <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="id_cliente">Cliente</label>
-                                <!-- <select required class="form-control" name="id_cliente" id="id_cliente">
-                                    @foreach($clientes as $cliente)
-                                        <option value="{{$cliente->id}}">{{$cliente->nombre}}</option>
-                                    @endforeach
-                                </select> -->
-                                <input class="form-control" type="hidden" name="id_cliente" id="id_cliente" value=""/>
-                                <input class="form-control" name="nombre_cliente" id="nombre_cliente" value="" readonly/>
-                            </div>
+                              <div class="form-group col-md-6">
+                                  <label for="id_cliente">Cliente</label>
+                                  <!-- <select required class="form-control" name="id_cliente" id="id_cliente">
+                                      @foreach($clientes as $cliente)
+                                          <option value="{{$cliente->id}}">{{$cliente->nombre}}</option>
+                                      @endforeach
+                                  </select> -->
+                                  <input class="form-control" type="hidden" name="id_cliente" id="id_cliente" value=""/>
+                                  <input class="form-control" name="nombre_cliente" id="nombre_cliente" value="" readonly/>
+                              </div>
 
-                            <div class="form-group col-md-6">
-                                <label for="buscarCliente">Buscar Cliente</label>
-                                <input class="form-control" name="buscarCliente" id="buscarCliente" autocomplete="off"/>
-                            </div>
+                              <div class="form-group col-md-6">
+                                  <label for="buscarCliente">Buscar Cliente</label>
+                                  <input class="form-control" name="buscarCliente" id="buscarCliente" autocomplete="off"/>
+                              </div>
                           </div>
-                        
-                    
-                           
                             
                 </div>
-                <div class="col-12 col-md-6">
-                  <input type="hidden" id="btnModal" class="" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                  <input type="hidden" id="btnCloseModal" data-bs-dismiss="modal" data-bs-target="#exampleModal" />
-                  <div id="contentDiv"></div>
-            
-                  <label for="codigotest">Buscar</label>
-                            <input id="codigotest" autocomplete="off" name="codigotest" type="text"
-                                   class="form-control"
-                                   placeholder="Jabon">
+                      <div class="col-12 col-md-6">
+                        <input type="hidden" id="btnModal" class="" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <input type="hidden" id="btnCloseModal" data-bs-dismiss="modal" data-bs-target="#exampleModal" />
+                        <div id="contentDiv"></div>
+                  
+                        <label for="codigotest">Buscar</label>
+                                  <input id="codigotest" autocomplete="off" name="codigotest" type="text"
+                                        class="form-control"
+                                        placeholder="Jabon">
 
-                                   <input id="typeUnd" autocomplete="off" name="typeUnd" type="hidden"
-                                   class="form-control">
-                </div>
+                                        <input id="typeUnd" autocomplete="off" name="typeUnd" type="hidden"
+                                        class="form-control">
+                      </div>
             </div>
             <div class="row">
             <div class="form-group">

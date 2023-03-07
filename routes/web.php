@@ -36,6 +36,16 @@ Route::post("/terminarVenta", "VenderController@terminarVenta")->name("terminarV
 Route::post("/guardarVenta", "VenderController@guardarVenta")->name("guardarVenta");
 
 
+
+/* ***
+*****************************
+*controlador ClientesController
+*****************************
+* ******/
+
+Route::post("/storeJavascript", "ClientesController@storeJavascript")->name("storeJavascript");
+
+
 /* ***
 ***************************
 *controlador TazaController

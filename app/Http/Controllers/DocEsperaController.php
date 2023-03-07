@@ -217,11 +217,11 @@ class DocEsperaController extends Controller
                                 <thead >
                                 
                                     <tr>
-                                        <th style='width: 17%;'><font face='Courier'>Código</font></th>
-                                        <th style='width: 35%;'><font face='Courier'>Descripción</font></th>
+                                        <th style='width: 12%;'><font face='Courier'>Código</font></th>
+                                        <th style='width: 38%;'><font face='Courier'>Descripción</font></th>
                                         <th style='width: 17%;'><font face='Courier'>Cantidad</font></th>
-                                        <th style='width: 10%;'><font face='Courier'>Precio</font></th>
-                                        <th style='width: 10%;'><font face='Courier'>%I.V.A.</font></th>
+                                        <th style='width: 12%;'><font face='Courier'>Precio</font></th>
+                                        <th style='width: 10%;'><font face='Courier'>I.V.A.</font></th>
                                         <th style='width: 10%;'><font face='Courier'>Total</font></th>
                                     </tr>
                                 
@@ -239,7 +239,9 @@ class DocEsperaController extends Controller
 
                                             
 
-                                       
+                $cantidad = rtrim($producto->cantidad, "0");
+                
+                $cantidad = rtrim($cantidad, ".");
 
                                        
 
@@ -254,20 +256,21 @@ class DocEsperaController extends Controller
 
 
                                 <tr style='height: 25px;'>
-                                    <td><font face='Courier'><strong>" . $producto->codigo_barras . "</strong></font></td>
-                                    <td><font face='Courier'><strong><small>" . $producto->descripcion . "</small></strong></font></td>
-                                    <td><font face='Courier'><strong>" . $producto->cantidad . " " . $producto->und . "</strong></font></td>
-                                    <td><font face='Courier'><strong>" . number_format($producto->precio, 2) . "</strong></font></td>";
+                                    <td WIDTH='100'><font face='Courier New'><strong>" . substr($producto->codigo_barras, 0, 7) . "</strong></font></td>
+                                    <td style='letter-spacing: -0.05em;'><font face='Courier New'><strong><small>" . $producto->descripcion . "</small></strong></font></td>
+                                    <td ALIGN='right'><font face='Courier'><strong>" . $cantidad . "</strong></font></td>
+                                    <td><font face='Courier'><strong>" . $producto->und . "</strong></font></td>
+                                    <td ALIGN='right' WIDTH=''><font face='Courier'><strong>" . number_format($producto->precio, 2) . "</strong></font></td>";
                                     if($producto->iva == 0) {
 
                                         $htmlPresupuesto = $htmlPresupuesto . "
-                                        <td><font face='Courier'><strong>XENTO</strong></font></td>
+                                        <td WIDTH='' style='padding-left: 10px;'><font face='Courier'><strong>XENTO</strong></font></td>
                                         ";
                                     
                                     } else {
 
                                         $htmlPresupuesto = $htmlPresupuesto . "
-                                        <td><font face='Courier'><strong>" . $producto->iva . "%</strong></font></td>
+                                        <td WIDTH='' CELLSPACING='' style='padding-left: 10px;'><font face='Courier'><strong>" . $producto->iva . "%</strong></font></td>
                                         ";
                                     
                                     
@@ -275,7 +278,7 @@ class DocEsperaController extends Controller
 
                                     $htmlPresupuesto = $htmlPresupuesto . "
 
-                                        <td><font face='Courier'><strong>" . number_format($producto->cantidad * $producto->precio, 2) . "</strong></font></td>
+                                        <td ALIGN='right'><font face='Courier'><strong>" . number_format($producto->cantidad * $producto->precio, 2) . "</strong></font></td>
                                     </tr>
 
 
@@ -318,11 +321,11 @@ class DocEsperaController extends Controller
                                     
                                     <td align='right' style='padding-right: 5%;'>
                                 
-                                    <font face='Courier'><strong>Sub Total:...................</strong></font>
+                                    <font face='Courier'><strong>Sub Total:.............</strong></font>
                                     <font face='Courier'><strong>" . number_format($total, 2) . "</strong></font></br>
                                     <font face='Courier'><strong>I.V.A. 16.00%:.............</strong></font>
                                     <font face='Courier'><strong>" . number_format($totalIva, 2) . "</strong></font></br>
-                                    <font face='Courier'><strong>Total:............................</strong></font>
+                                    <font face='Courier'><strong>Total:.................</strong></font>
                                     <font face='Courier'><strong>" . number_format($total + $totalIva, 2) . "</strong></font></br>
                                     
                                     
