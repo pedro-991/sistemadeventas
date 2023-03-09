@@ -71,8 +71,15 @@ class VenderController extends Controller
             // Lo guardamos
             $productoVendido->saveOrFail();
             // Y restamos la existencia del original
-            $productoActualizado = Producto::find($producto[0]);
+            /* $productoActualizado = Producto::find($producto[0]);
             $productoActualizado->existencia -= $productoVendido->cantidad;
+            $productoActualizado->saveOrFail(); */
+
+            $productoCompuestoFraccion = Producto::find($producto[0]);
+            $productoActualizado = Producto::where('codigo_barras', '=', $productoCompuestoFraccion->compuesto)->first();
+            $productoActualizado->existencia -= $productoCompuestoFraccion->fraccion * $productoVendido->cantidad;
+
+            //guardamos
             $productoActualizado->saveOrFail();
         }
         $this->vaciarProductos();
@@ -108,6 +115,27 @@ class VenderController extends Controller
             // Lo guardamos
             $product_espera->saveOrFail();
             // Y restamos la existencia del original
+            //$productoActualizado = Producto::find($producto[0]);
+            //$productoActualizado->existencia -= $product_espera->cantidad;
+            //$productoActualizado->saveOrFail();
+            // ENCONTRAR PRODUCTO ACTUALIZADO debe ser el producto compuesto
+            //$productoActualizado = Producto::find($producto[0]);
+            //$productoActualizado = Producto::find(AQUI METER EL CODIGO DEL COMPUESTO);
+            //$productoActualizado = Producto::find($product_espera->compuesto);
+            //$productoActualizado = Producto::find($product_espera->compuesto);
+            //$productoCompuestoFraccion = Producto::find($producto[0]);
+            //$productoActualizado = Producto::find($productoCompuestoFraccion->compuesto);
+            $productoCompuestoFraccion = Producto::find($producto[0]);
+            $productoActualizado = Producto::where('codigo_barras', '=', $productoCompuestoFraccion->compuesto)->first();
+
+            //se resta la fraccion a la existencia del compuesto
+            //para ser exactos se resta la fraccion multiplicada por la cantidad a vender
+            //$productoFraccion = Producto::find($producto[0]);
+            $productoActualizado->existencia -= $productoCompuestoFraccion->fraccion * $product_espera->cantidad;
+
+            //guardamos
+            $productoActualizado->saveOrFail();
+
         }
             return true;
     }

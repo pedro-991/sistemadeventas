@@ -14,11 +14,13 @@ export default class View {
     this.ivaTotal = document.getElementById('ivaTotal');
     this.tazaNow = document.getElementById('tazaNow');
     this.h2TotalDollar = document.getElementById('h2TotalDollar');
-   
-    
 
-    this.addTodoForm.onClick((title, codigo_barras, description, precio_venta, cantidad, iva, und, total, referventa, refercompra) => this.addTodo(title, codigo_barras, description, precio_venta, cantidad, iva, und, total, referventa, refercompra));
-    this.modal.onClick((id, values) => 
+    this.addTodoForm.onClick((title, codigo_barras, description, precio_venta, cantidad, iva, und, total, referventa, refercompra) => {
+      this.addTodo(title, codigo_barras, description, precio_venta, cantidad, iva, und, total, referventa, refercompra);
+      
+    });
+  
+      this.modal.onClick((id, values) => 
     {
       //this.showTotal();
       this.editTodo(id, values);
@@ -41,6 +43,7 @@ export default class View {
     //console.log(description);
     //console.log(referventa);
     const todo = this.model.addTodo(title, codigo_barras, description, precio_venta, cantidad, iva, und, total, referventa, refercompra);
+    //this.descripcion = "";
     this.showTotal();
     this.createRow(todo);
   }

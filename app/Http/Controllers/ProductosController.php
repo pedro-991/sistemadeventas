@@ -154,6 +154,11 @@ class ProductosController extends Controller
 
         public function storeInertia(Request $request)
         {
+
+            //SI NO ES COMPUESTO
+            //COLOCAR EN COPUESTO EL CODIGO DEL MISMO PRODUCTO
+
+
             $producto = new Producto($request->input());
             $producto->saveOrFail();
 

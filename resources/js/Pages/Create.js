@@ -15,16 +15,21 @@ const [refercompra, setRefercompra] = useState('')
 const [iva, setIva] = useState('0')
 const [und, setUnd] = useState('')
 const [existencia, setExistencia] = useState('')
+const [compuesto, setCompuesto] = useState('')
+const [fraccion, setFraccion] = useState('')
 
 //iva = 0;
 
 //setIva("0");
 
-
+const test = () => {
+	var inputFraccion = document.getElementById('fraccion').value;
+	console.log(inputFraccion);
+}
 
 const saveData = (e) => {
    e.preventDefault();
-   Inertia.post(url + "/saveInertia", { codigo_barras, descripcion, precio_compra, precio_venta, preciodollar, referventa, refercompra, iva, und, existencia });
+   Inertia.post(url + "/saveInertia", { codigo_barras, descripcion, precio_compra, precio_venta, preciodollar, referventa, refercompra, iva, und, existencia, compuesto, fraccion });
 }
 
     return(
@@ -174,6 +179,44 @@ const saveData = (e) => {
 		    placeholder="Ejemp.: 100"
 			autocomplete="off"
 			required/>
+		</div>
+
+		<div className="form-group">
+		  <label htmlFor="compuesto">COMPUESTO</label>
+		  <input
+		    type="text"
+		    className="form-control"
+		    id="compuesto"
+			name="compuesto"
+		    
+		    onChange={e=>setCompuesto(e.target.value)}
+		    placeholder=""
+			autocomplete="off"
+			list="listacompuesto"
+			required/>
+
+			<datalist id="listacompuesto">
+				<option value={codigo_barras}>NO COMPUESTO</option>
+			</datalist>
+		</div>
+
+		<div className="form-group">
+		  <label htmlFor="fraccion">Fraccion Compuesto</label>
+		  <input
+		    type="text"
+		    className="form-control"
+		    id="fraccion"
+			name="fraccion"
+		    
+		    onChange={e=>setFraccion(e.target.value)}
+		    placeholder=""
+			autocomplete="off"
+			list="listafraccion"
+			required/>
+
+			<datalist id="listafraccion">
+				<option value="1">NO COMPUESTO</option>
+			</datalist>
 		</div>
 
 		<div className="form-group mt-3">
