@@ -14,6 +14,9 @@ const Edit = ({ producto, url }) => {
     const [iva, setIva] = useState('')
     const [und, setUnd] = useState('')
     const [existencia, setExistencia] = useState('')
+    const [compuesto, setCompuesto] = useState('')
+    const [fraccion, setFraccion] = useState('')
+    const [buscar_compuesto, setBuscar_compuesto] = useState('')
 
 	useEffect(() => {
 		setCodigo_barras(producto.codigo_barras)
@@ -26,17 +29,41 @@ const Edit = ({ producto, url }) => {
         setIva(producto.iva)
         setUnd(producto.und)
         setExistencia(producto.existencia)
+        setCompuesto(producto.compuesto)
+        setFraccion(producto.fraccion)
 
 	}, []);
 
+    const buscar = () => {
+
+        console.log(buscar_compuesto);
+        $.ajaxSetup({
+            headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+          });
+    
+    $.ajax({
+        url: url + '/productoCompuesto',
+        type: 'POST',
+        data:  {txtcodigo : buscar_compuesto},
+        success: function (datos) {
+            $("#contentTable").html(datos);
+            openmodal();
+        }
+    });
+    }
+
 	const updateUser = (e) => {
 		e.preventDefault();
-		Inertia.post(url + '/update/' + producto.id, { codigo_barras, descripcion, precio_compra, precio_venta, preciodollar, referventa, refercompra, iva, und, existencia });
+		Inertia.post(url + '/update/' + producto.id, { codigo_barras, descripcion, precio_compra, precio_venta, preciodollar, referventa, refercompra, iva, und, existencia, compuesto, fraccion });
 	};
 
 	return (
             <Fragment>
                 <h1>Editar producto</h1>
+                <input type="hidden" id="btnModal" class="" data-bs-toggle="modal" data-bs-target="#exampleModal"></input>
+		        <input type="hidden" id="btnCloseModal" data-bs-dismiss="modal" data-bs-target="#exampleModal" />
                 <div className="card">
                     <div className="card-body">
                         <form onSubmit={updateUser}>
@@ -165,6 +192,47 @@ const Edit = ({ producto, url }) => {
                                 id="existencia"
                                 value={existencia}
                                 onChange={(e) => setExistencia(e.target.value)}
+                                placeholder="100"
+                                autocomplete="off"
+                                required
+                                />
+                            </div>
+                            <div className="row">
+                                <div className="form-group col-md-6">
+                                    <label htmlFor="compuesto">Compuesto</label>
+                                    <input
+                                    type="text"
+                                    className="form-control"
+                                    id="compuesto"
+                                    value={compuesto}
+                                    onFocus={e=>setCompuesto(e.target.value)}
+                                    onChange={(e) => setCompuesto(e.target.value)}
+                                    placeholder="100"
+                                    autocomplete="off"
+                                    required
+                                    />
+                                </div>
+                                <div className="form-group col-md-6">
+                                    <label htmlFor="buscar_compuesto">Buscar Compuesto</label>
+                                    <input
+                                    type="text"
+                                    className="form-control"
+                                    id="buscar_compuesto"
+                                    onChange={e=>setBuscar_compuesto(e.target.value)}
+                                    onDoubleClick={buscar}
+                                    placeholder=""
+                                    autocomplete="off"
+                                    />
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="fraccion">Fraccion</label>
+                                <input
+                                type="text"
+                                className="form-control"
+                                id="fraccion"
+                                value={fraccion}
+                                onChange={(e) => setFraccion(e.target.value)}
                                 placeholder="100"
                                 autocomplete="off"
                                 required

@@ -243,6 +243,33 @@ function selectCode(content) {
             };
 
             /* 
+            ******************************
+            * comienzo funcion para buscar compuesto
+            * *****************************
+            *  */
+
+            function selectCodeCompuesto(content) {
+
+                var btnCloseModal = document.getElementById('btnCloseModal');
+    
+
+                var myJson = JSON.parse (content.value);
+                var myInputCompuesto = document.getElementById('compuesto');
+                
+
+                myInputCompuesto.value = myJson.codigo_barras;
+
+                myInputCompuesto.focus();
+                
+
+                console.log(myJson.codigo_barras);
+
+                
+                btnCloseModal.click();
+    
+            };
+
+            /* 
             # FUNCION SELECCIONAR EL CLIENTE
             #
             #

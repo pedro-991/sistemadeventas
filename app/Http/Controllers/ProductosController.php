@@ -199,4 +199,84 @@ class ProductosController extends Controller
         return redirect()->route("indexReact");
     }
 
+    public function productoFiltro(Request $request)
+    {
+        $codigo = $request->post("txtcodigo") . "%";
+        //$respuesta = $codigo . " desde laravel";
+        //$codigo = "<h1>Hola desde laravel</h1>";
+        //return $respuesta;
+        $producto = Producto::where("descripcion", "LIKE", $codigo)->get();
+        $htmlproducto = "";
+            if ($producto) {
+
+                $htmlproducto = "<table class='table table-bordered' id='tblProducto'>";
+
+                $htmlproducto = $htmlproducto . "<tr><th>Descripcion</th><th>Precio+IVA</th><th>Refer Venta</th><th>Existencia</th><th>Seleccionar</th></tr>";
+
+                foreach($producto as $pro) {
+
+                    //$htmlproducto = $htmlproducto . "<p>" . $pro->descripcion . "</p>";
+                    /****
+                     * inicion html
+                     */
+
+                     //$proJson = $pro->json();
+
+                    $htmlproducto = $htmlproducto . "
+                    
+                    <tr align='center'>
+
+                    <td>
+                    
+                    " . $pro->descripcion . "
+                      
+                    </td>
+
+                    
+<td>
+" . number_format($pro->precio_venta * ($pro->iva/100+1), 2) . "
+</td>
+
+<td>
+" . $pro->referventa . "
+</td>
+
+
+<td>
+" . $pro->existencia . "
+</td>
+                    
+                
+                    <td>
+
+<input type='radio' name='selectPro' id='selectPro' onclick='selectCodeCompuesto(this)' value='" . $pro . "'>
+  
+ 
+</td>
+
+                    
+                    </tr>
+                    
+                    
+                    ";
+
+                    
+               /******
+                * fin html
+                */
+                 }
+                 //return $htmlproducto;
+
+                 $htmlproducto = $htmlproducto . "</table>";
+                 
+            };
+
+            if ($htmlproducto != "") {
+                return $htmlproducto;
+            } else {
+
+            return "Producto no encontrado";
+            }
+    }
+
 }

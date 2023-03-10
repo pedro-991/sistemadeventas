@@ -78,6 +78,8 @@ Route::get('/delete/{id}', "ProductosController@destroyInertia");
 Route::get('/edit/{id}', "ProductosController@editInertia");
 //ruta para editar el producto con react
 Route::post('/update/{id}', "ProductosController@updateInertia");
+//ruta para buscar compuesto
+Route::post("/productoCompuesto", "ProductosController@productoFiltro")->name("productoCompuesto");
 
 
 /* *****

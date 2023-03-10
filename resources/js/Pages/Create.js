@@ -17,14 +17,51 @@ const [und, setUnd] = useState('')
 const [existencia, setExistencia] = useState('')
 const [compuesto, setCompuesto] = useState('')
 const [fraccion, setFraccion] = useState('')
+const [buscar_compuesto, setBuscar_compuesto] = useState('')
 
 //iva = 0;
 
 //setIva("0");
 
-const test = () => {
-	var inputFraccion = document.getElementById('fraccion').value;
-	console.log(inputFraccion);
+const buscar = () => {
+	//let buscar = document.getElementById('buscar_compuesto');
+	//console.log(this.value);
+	//console.log(e.value);
+	console.log(buscar_compuesto);
+	$.ajaxSetup({
+		headers: {
+			  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		  }
+	  });
+
+$.ajax({
+	url: url + '/productoCompuesto',
+	type: 'POST',
+	data:  {txtcodigo : buscar_compuesto},
+	success: function (datos) {
+		$("#contentTable").html(datos);
+		openmodal();
+	}
+});
+}
+
+const copiarCodigo = () => {
+
+	var btnCloseModal = document.getElementById('btnCloseModal');
+    
+
+	var myJson = JSON.parse (content.value);
+	var myInputCompuesto = document.getElementById('compuesto');
+	
+
+	myInputCompuesto.value = myJson.codigo_barras;
+	
+
+	console.log(myJson.codigo_barras);
+
+	
+	btnCloseModal.click();
+
 }
 
 const saveData = (e) => {
@@ -35,6 +72,8 @@ const saveData = (e) => {
     return(
 	<Fragment>
           <h1>Agregar producto</h1>
+		  <input type="hidden" id="btnModal" class="" data-bs-toggle="modal" data-bs-target="#exampleModal"></input>
+		  <input type="hidden" id="btnCloseModal" data-bs-dismiss="modal" data-bs-target="#exampleModal" />
 	 
 	  <form onSubmit={saveData}>
 
@@ -181,23 +220,38 @@ const saveData = (e) => {
 			required/>
 		</div>
 
-		<div className="form-group">
-		  <label htmlFor="compuesto">COMPUESTO</label>
-		  <input
-		    type="text"
-		    className="form-control"
-		    id="compuesto"
-			name="compuesto"
-		    
-		    onChange={e=>setCompuesto(e.target.value)}
-		    placeholder=""
-			autocomplete="off"
-			list="listacompuesto"
-			required/>
+		<div className="row">
+			<div className="form-group col-md-6">
+			<label htmlFor="compuesto">COMPUESTO</label>
+			<input
+				type="text"
+				className="form-control"
+				id="compuesto"
+				name="compuesto"
+				onFocus={e=>setCompuesto(e.target.value)}
+				onChange={e=>setCompuesto(e.target.value)}
+				placeholder="Ejemp.: 000001"
+				autocomplete="off"
+				list="listacompuesto"
+				required/>
 
-			<datalist id="listacompuesto">
-				<option value={codigo_barras}>NO COMPUESTO</option>
-			</datalist>
+				<datalist id="listacompuesto">
+					<option value={codigo_barras}>NO COMPUESTO</option>
+				</datalist>
+			</div>
+			<div className="form-group col-md-6">
+				<label htmlFor="buscar_compuesto">BUSCAR COMPUESTO</label>
+				<input
+					type="text"
+					className="form-control"
+					id="buscar_compuesto"
+					name="buscar_compuesto"
+					onChange={e=>setBuscar_compuesto(e.target.value)}
+					onDoubleClick={buscar}
+					placeholder="Ejemp.: Jabon"
+					autocomplete="off"
+					/>
+			</div>
 		</div>
 
 		<div className="form-group">
@@ -209,7 +263,7 @@ const saveData = (e) => {
 			name="fraccion"
 		    
 		    onChange={e=>setFraccion(e.target.value)}
-		    placeholder=""
+		    placeholder="Ejemp.: 0.0015"
 			autocomplete="off"
 			list="listafraccion"
 			required/>
