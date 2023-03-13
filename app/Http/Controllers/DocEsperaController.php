@@ -6,6 +6,7 @@ use App\Doc_espera;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
+use App\Producto;
 
 class DocEsperaController extends Controller
 {
@@ -131,8 +132,30 @@ class DocEsperaController extends Controller
     {
         $venta = Doc_espera::with(["productos", "cliente"])->findOrFail($request->id);
         
+        //aqui podria consultar de una vez los datos completos de cada producto
+        //y pasar los productos con los datos completos para anexarlo
+        //a la tabla facturacion
+        //array
+        //consulto un producto
+        //array push
 
-        return $venta;
+        $productosCompletos = array();
+
+        foreach ($venta->productos as $producto) {
+
+            $productoCompleto = [Producto::where("descripcion", "LIKE", $producto->descripcion)->get(), "precio_v"=>$producto->precio, "cantidad_v"=>$producto->cantidad];
+
+            //array_push($productoCompleto, $producto->precio, $producto->cantidad);
+
+            array_push($productosCompletos, $productoCompleto);
+
+        }
+
+
+
+        //return $venta;
+        //return ["venta" => $venta, "productosCompletos" => $productosCompletos];
+        return $productosCompletos;
     }
 
 

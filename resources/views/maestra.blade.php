@@ -202,7 +202,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      <input type="text" name="txtBusqueda" id="txtBusqueda" class="form-control" onkeyup="Buscar()" placeholder="Busqueda" autofocus>
+      <input type="text" name="txtBusqueda" id="txtBusqueda" class="form-control" onkeyup="Buscar()" placeholder="Busqueda" autocomplete="off" autofocus>
         <div id="contentTable"></div>
       </div>
       <div class="modal-footer">

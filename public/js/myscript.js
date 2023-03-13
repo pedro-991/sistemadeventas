@@ -298,11 +298,23 @@ function selectCode(content) {
             function selectCodeVenta(content) {
 
                 var btnCloseModal = document.getElementById('btnCloseModal');
-    
-
                 var myJson = JSON.parse (content.value);
-            
-                console.log(myJson.id);
+                let btnadd = document.getElementById('add');
+                let myInputPrec = document.getElementById('precioTdl');
+                let myInputCant = document.getElementById('cantidadTdl');
+
+                
+                var myInputTitle = document.getElementById('title');
+                var myInputCod = document.getElementById('codigoTdl');
+                var myInputDescrip = document.getElementById('description');
+                
+                var myInputIva = document.getElementById('ivaTdl');
+                var myInputUnd = document.getElementById('typeUnd');
+                var myInputReferVenta = document.getElementById('referVenta');
+                var myInputReferCompra = document.getElementById('referCompra');
+                var myInputPrecioIva = document.getElementById('precioConIva');
+                
+    
 
                 
                 //btnCloseModal.click();
@@ -318,14 +330,40 @@ function selectCode(content) {
                 type: 'POST',
                 data:  {id : myJson.id},
                 success: function (datos) {
+                    //console.log(datos);
                     //$("#contentTable").html(datos);
                     //openmodal();
                     /* aqui presiona el radio */
                     /* aqui haz click en el boton agregar */
                     //console.log(datos.productos);
-                    datos.productos.forEach((producto) => {
-                        //console.log(producto);
-                        $.ajax({
+                    datos.forEach((producto) => {
+                        console.log(producto[0][0].codigo_barras);
+                        console.log(producto.precio_v);
+
+
+                        myInputTitle.value = producto[0][0].id;
+                        myInputCod.value = producto[0][0].codigo_barras;
+                        myInputDescrip.value = producto[0][0].descripcion;
+                        myInputPrec.value = producto[0][0].precio_venta;
+                        myInputCant.value = "1";
+                        myInputIva.value = producto[0][0].iva;
+                        myInputUnd.value = producto[0][0].und;
+                        myInputReferVenta.value = producto[0][0].referventa;
+                        myInputReferCompra.value = producto[0][0].refercompra;
+                        myInputPrecioIva.value = (producto[0][0].precio_venta * ( 1 + (producto[0][0].iva/100))).toFixed(2);
+
+                        myInputPrec.value = producto.precio_v;
+                        myInputCant.value = producto.cantidad_v;
+
+                        btnadd.click();
+                
+                        
+
+
+
+
+
+                       /*  $.ajax({
                             url: 'productocodigo',
                             type: 'POST',
                             data:  {txtcodigo : producto.descripcion},
@@ -333,24 +371,29 @@ function selectCode(content) {
                                 $("#contentTable").html(datos);
                                 //openmodal();
                                 const x = () => 1 * 1;
-                                setTimeout(x, 1000);
+                                setTimeout(x, 2000);
                                 console.log(producto);
                                 let btnradio = document.getElementById('selectPro');
                                 let btnadd = document.getElementById('add');
                                 let myInputPrec = document.getElementById('precioTdl');
                                 let myInputCant = document.getElementById('cantidadTdl');
+                                //----------------------------
                                 btnradio.click();
+                                //----------------------------
                                 myInputPrec.value = producto.precio;
                                 myInputCant.value = producto.cantidad;
                                 
-                                setTimeout(x, 1000);
+                                setTimeout(x, 2000);
                                 //setTimeout(btnadd.click, 1000);
                                 btnadd.click();
                                 //btnadd.click();
                             }
                         });
+                        const y = () => 1 * 1;
+                        setTimeout(y, 2000); */
 
                       });
+                      btnCloseModal.click();
                 }
             });
     
