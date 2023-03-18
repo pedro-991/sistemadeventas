@@ -6,6 +6,7 @@ export default class Modal {
     this.codigo_barras = document.getElementById('modal-codigo_barras');
     this.description = document.getElementById('modal-description');
     this.precio_venta = document.getElementById('modal-precio_venta');
+    this.precio_venta_iva = document.getElementById('modal-precio_venta_iva');
     this.cantidad = document.getElementById('modal-cantidad');
     this.iva = document.getElementById('modal-iva');
     this.btn = document.getElementById('modal-btn');
@@ -30,6 +31,7 @@ export default class Modal {
     this.total = todo.total;
     this.referventa.value = todo.referventa;
     this.refercompra.value = todo.refercompra;
+    this.precio_venta_iva.value = ((todo.iva/100+1) * todo.precio_venta).toFixed(2);
   }
 
   onClick(callback) {

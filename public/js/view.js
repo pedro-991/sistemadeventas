@@ -133,8 +133,8 @@ export default class View {
       <td>${todo.und}</td>
       <td>${(todo.precio_venta * todo.cantidad).toFixed(2)}</td>
       <th>${((todo.iva/100+1) * todo.precio_venta).toFixed(2)}</th>
-      <th>${todo.referventa}</th>
-      <th>${todo.refercompra}</th>
+      <th style="display: none;">${todo.referventa}</th>
+      <th style="display: none;">${todo.refercompra}</th>
       
 
       

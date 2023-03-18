@@ -131,6 +131,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('ventas.index')}}">Ventas&nbsp;<i class="fa fa-list"></i></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('ventaIndexReact')}}">Ventas React&nbsp;<i class="fa fa-list"></i></a>
+                </li>
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="{{route('docEspera.index')}}">Presupuestos&nbsp;<i class="fa fa-list"></i></a>
                 </li> -->
@@ -229,7 +232,7 @@
           <button
             type="button"
             class="close"
-            data-dismiss="modal"
+            data-bs-dismiss="modal"
             aria-label="Close"
           >
             <span aria-hidden="true">&times;</span>
@@ -241,12 +244,13 @@
           </div>
           <form>
             <div class="form-group">
-              <label>Title</label>
+              <label>Id</label>
               <input
                 id="modal-title"
                 type="text"
                 class="form-control"
                 placeholder=""
+                readonly
               />
             </div>
 
@@ -257,23 +261,42 @@
                 type="text"
                 class="form-control"
                 placeholder="Do Something"
+                readonly
               />
             </div>
 
             <div class="form-group">
               <label>Description</label>
-              <textarea class="form-control" id="modal-description" rows="3">
-
-              </textarea>
+              <input
+                id="modal-description"
+                type="text"
+                class="form-control"
+                placeholder="Do Something"
+                readonly
+              />
             </div>
 
             <div class="form-group">
               <label>Precio</label>
+              <div class="row">
+                <input
+                  id="modal-precio_venta"
+                  type="text"
+                  class="form-control col-md"
+                  placeholder="Do Something"
+                />
+                <input type="button" id="roundIvaModal" class="btn btn-success col-md-3" value="+" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Precio + Iva</label>
               <input
-                id="modal-precio_venta"
+                id="modal-precio_venta_iva"
                 type="text"
                 class="form-control"
                 placeholder="Do Something"
+                readonly
               />
             </div>
 
@@ -284,6 +307,7 @@
                 type="text"
                 class="form-control"
                 placeholder=""
+                readonly
               />
             </div>
 
@@ -294,6 +318,7 @@
                 type="text"
                 class="form-control"
                 placeholder=""
+                readonly
               />
             </div>
 
@@ -314,13 +339,14 @@
                 type="text"
                 class="form-control"
                 placeholder="Do Something"
+                readonly
               />
             </div>
 
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
             Close
           </button>
           <button type="button" class="btn btn-info" id="modal-btn">

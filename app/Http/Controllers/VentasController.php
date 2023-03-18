@@ -25,6 +25,7 @@ namespace App\Http\Controllers;
 
 //require __DIR__ . '/../vendor/autoload.php';
 use App\Venta;
+use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Mike42\Escpos\PrintConnectors\FilePrintConnector;
@@ -542,6 +543,418 @@ $write = fputs($fp, $cmd);
 
         return view("ventas.ventas_reportes");
         
+    }
+
+    /* 
+    ********************************************
+    ********************************************
+    * funciones para inertia y react
+    ********************************************
+    ********************************************
+     */
+
+     public function indexReact()
+    {
+
+        $ventasConTotales = Venta::join("productos_vendidos", "productos_vendidos.id_venta", "=", "ventas.id" )
+            ->join("clientes", "clientes.id", "=", "ventas.id_cliente" )
+            ->select("clientes.*", "ventas.*", DB::raw("sum(productos_vendidos.cantidad * (productos_vendidos.precio*((productos_vendidos.iva/100)+1))) as total"))
+            ->groupBy("ventas.id", "ventas.created_at", "ventas.updated_at", "ventas.id_cliente")
+            ->get();
+
+            $url = env("APP_URL");
+       
+        return Inertia::render('Ventas', ["ventas" => $ventasConTotales, "url" => $url]);
+    
+
+    }
+
+    public function ticketTestReact($id) {
+
+        //$venta = Venta::findOrFail($request->get("id"));
+        $venta = Venta::findOrFail($id);
+
+        $idVenta = $id;
+
+        /* 
+        conseguir el id venta para enviarlo a la factura
+        */
+
+        $array = str_split($idVenta);
+	
+            
+            
+            
+            if (count($array) < 11) {
+                while (count($array) < 11){
+                    array_unshift($array, "0");
+                }
+                
+            }
+            
+            
+            $idVentaFinal = implode($array);
+
+
+
+        /* 
+        arriba conseguir el id venta para enviarlo a la factura
+        */
+
+        $itObj = new Tfhka();
+
+        $out = "";
+
+        $total = 0;
+
+        $factura = array();
+
+        $conteo = 0;
+
+        $factura[$conteo] = "iR*" . $venta->cliente->documento . "\n";
+        $conteo++;
+        $factura[$conteo] = "iS*" . $venta->cliente->nombre . "\n";
+        $conteo++;
+        $factura[$conteo] = "iF*" . $idVentaFinal . "\n";
+        $conteo++;
+
+        foreach ($venta->productos as $producto) {
+            $subtotal = $producto->cantidad * $producto->precio;
+            $total += $subtotal;
+            //como yo se donde esta el valor iva
+            //$producto->iva
+
+            // convertir iva
+
+            if ($producto->iva == 0) {
+                $taza = " ";
+            }
+
+            if ($producto->iva == 16) {
+                $taza = "!";
+            }
+
+            //convertir precio
+            //precio = ?.00 ejemplo: 15.14, 245.45, 1247.44
+
+            $array = str_split($producto->precio);
+	
+            
+            $resta = count($array) - 3;
+            
+            unset($array[$resta]);
+            
+            
+            if (count($array) < 10) {
+                while (count($array) < 10){
+                    array_unshift($array, "0");
+                }
+                
+            }
+            
+            
+            $precioFinal = implode($array);
+
+            /* 
+            ---------------------------
+            */
+            /* aqui abajo
+            convertir cantidad */
+            
+
+            $array = str_split($producto->cantidad);
+	
+            
+            $resta = count($array) - 3;
+            
+            unset($array[$resta]);
+            
+            array_push($array, "0");
+            
+           
+            
+            if (count($array) < 8) {
+                while (count($array) < 8){
+                    array_unshift($array, "0");
+                }
+                
+            }
+            
+            
+            $cantidadFinal = implode($array);
+
+            /* 
+            ############################
+             */
+
+             /* -----------------
+             largo de descripcion
+             limitar el largo de descripcion
+             */
+
+             $descripcionFinal = substr($producto->descripcion, 0, 50);
+
+
+            
+                 $factura[$conteo] = $taza . $precioFinal . $cantidadFinal . $descripcionFinal . "\n";
+            
+        
+                 $conteo++;
+                }
+
+                $factura[$conteo] = "101\n";
+                $conteo++;
+                $factura[$conteo] = "199";
+
+       /*  $factura = array(0 => "! 0000001000 00001000 HarinaLaravel\n",
+        1 => " 000000150000001500Jamon\n",
+        2 => "\"000000205000003000Patilla\n",
+        3 => "#000005000000001000Caja de Whisky\n",
+        4 => "101"); */
+        //agregar aqui el comando 199 con pruebas con la impresora 
+        //fisica
+$file = "Factura.txt";	
+$fp = fopen($file, "w+");
+$write = fputs($fp, "");
+    
+foreach($factura as $campo => $cmd)
+{
+$write = fputs($fp, $cmd);
+}
+   
+    fclose($fp); 
+    
+    $out =  $itObj->SendFileCmd($file);
+
+
+    //return redirect()->back()->with("mensaje", "Ticket impreso");
+    //enviar aqui a una pagina que diga ticket impreso
+    return redirect()->route("impreso");
+
+
+
+    }
+
+    public function impreso()
+    {
+
+        $url = env("APP_URL");
+       
+    
+       
+        return Inertia::render('Impreso', ["url" => $url]);
+    
+
+    }
+
+    /* mostrar el detalle de una venta
+    con react
+     */
+
+     public function showReact(Request $request)
+    {
+        $venta = Venta::with(["productos", "cliente"])->findOrFail($request->id);
+        $total = 0;
+        $totalIva = 0;
+        $url = env("APP_URL");
+        foreach ($venta->productos as $producto) {
+            //aqui podria añadir la variable iva a la ecuacion y enviar el total con iva
+            //podria ser $total += $producto->cantidad * ($producto->precio * (($producto->iva/100)+1));
+            $total += $producto->cantidad * $producto->precio;
+            $totalIva = $totalIva + (($producto->cantidad * $producto->precio) * ($producto->iva / 100));
+        }
+
+        
+
+        /* 
+        ******************
+        html con laravel
+        ******************
+        */
+
+        $productosPagina = 10;
+
+                        
+        $repetirFor = ceil (count($venta->productos) / $productosPagina);
+
+        $htmlPresupuesto = "";
+
+        for ($i=0; $i<$repetirFor; $i++) {
+
+                         
+
+            $conteoFor = 0;
+            $paginaActual = $i + 1;
+            $inicioLimite = $i * $productosPagina;
+
+
+            $htmlPresupuesto = $htmlPresupuesto . "
+            
+                    <table width='100%' border='0'>
+                        <tr>
+                        <td><font face='Courier'><strong>CLIENTE: " . $venta->cliente->nombre . "</strong></font></td>
+                        <td><font face='Courier'><strong>FECHA: <small>" . date_format($venta->created_at, 'd/m/Y') . "</strong></small></font></td>
+                        </tr>
+
+                        <tr>
+                        <td><font face='Courier'><strong>RIF/CI: " . $venta->cliente->documento . "</strong></font></td>
+                        <td><font face='Courier'><strong>Pag: " .  $paginaActual . "/" .  $repetirFor . "</strong></font></td>    
+                        </tr>
+
+                        <tr>
+                        <td><font face='Courier'><strong>DIRECCIÓN: <small></small></strong></font></td>
+                        </tr>
+                    </table>
+
+                    <table width='100%' border='1'>
+                                    
+                                <thead >
+                                
+                                    <tr>
+                                        <th style='width: 12%;'><font face='Courier'>Código</font></th>
+                                        <th style='width: 38%;'><font face='Courier'>Descripción</font></th>
+                                        <th style='width: 17%;'><font face='Courier'>Cantidad</font></th>
+                                        <th style='width: 12%;'><font face='Courier'>Precio</font></th>
+                                        <th style='width: 10%;'><font face='Courier'>I.V.A.</font></th>
+                                        <th style='width: 10%;'><font face='Courier'>Total</font></th>
+                                    </tr>
+                                
+                                </thead>
+                
+                    </table>
+                    <table width='100%' border='0'>
+    
+                        <tbody style='min-height: 100px'> 
+  
+
+            ";
+
+            foreach ($venta->productos as $clave => $producto) {
+
+                                            
+
+                $cantidad = rtrim($producto->cantidad, "0");
+                
+                $cantidad = rtrim($cantidad, ".");
+
+                                       
+
+                    if ($clave >= $inicioLimite)
+
+                    {
+
+                                
+                            $conteoFor++;
+
+                            $htmlPresupuesto = $htmlPresupuesto . "
+
+
+                                <tr style='height: 25px;'>
+                                    <td WIDTH='100'><font face='Courier New'><strong>" . substr($producto->codigo_barras, 0, 7) . "</strong></font></td>
+                                    <td style='letter-spacing: -0.05em;'><font face='Courier New'><strong><small>" . $producto->descripcion . "</small></strong></font></td>
+                                    <td ALIGN='right'><font face='Courier'><strong>" . $cantidad . "</strong></font></td>
+                                    <td><font face='Courier'><strong>" . $producto->und . "</strong></font></td>
+                                    <td ALIGN='right' WIDTH=''><font face='Courier'><strong>" . number_format($producto->precio, 2) . "</strong></font></td>";
+                                    if($producto->iva == 0) {
+
+                                        $htmlPresupuesto = $htmlPresupuesto . "
+                                        <td WIDTH='' style='padding-left: 10px;'><font face='Courier'><strong>XENTO</strong></font></td>
+                                        ";
+                                    
+                                    } else {
+
+                                        $htmlPresupuesto = $htmlPresupuesto . "
+                                        <td WIDTH='' CELLSPACING='' style='padding-left: 10px;'><font face='Courier'><strong>" . $producto->iva . "%</strong></font></td>
+                                        ";
+                                    
+                                    
+                                    };
+
+                                    $htmlPresupuesto = $htmlPresupuesto . "
+
+                                        <td ALIGN='right'><font face='Courier'><strong>" . number_format($producto->cantidad * $producto->precio, 2) . "</strong></font></td>
+                                    </tr>
+
+
+
+                            ";
+                                
+
+                                
+                            
+                            
+
+
+                        
+
+                    };
+
+            
+                    if ($conteoFor == $productosPagina) {
+                        break;    
+                    };
+           
+            
+
+        
+
+
+            };
+
+        
+
+            $htmlPresupuesto = $htmlPresupuesto . " 
+                    
+                    
+                        </tbody>
+                </table>
+
+                <table width='100%' border='1'>
+                    
+                                <tr>
+                                    
+                                    <td align='right' style='padding-right: 5%;'>
+                                
+                                    <font face='Courier'><strong>Sub Total:.............</strong></font>
+                                    <font face='Courier'><strong>" . number_format($total, 2) . "</strong></font></br>
+                                    <font face='Courier'><strong>I.V.A. 16.00%:.............</strong></font>
+                                    <font face='Courier'><strong>" . number_format($totalIva, 2) . "</strong></font></br>
+                                    <font face='Courier'><strong>Total:.................</strong></font>
+                                    <font face='Courier'><strong>" . number_format($total + $totalIva, 2) . "</strong></font></br>
+                                    
+                                    
+                                    </td>
+                                </tr>
+                               
+                    
+                </table>
+           
+        
+            ";
+
+
+        };
+    
+
+        return Inertia::render('VentasShow', [
+            "venta" => $venta,
+            "total" => $total,
+            "totalIva" => $totalIva,
+            "url" => $url,
+            "htmlPresupuesto" => $htmlPresupuesto,
+        ]);
+        
+   
+    }
+
+    /* eliminar una venta con react */
+
+    public function destroyReact($id)
+    {
+        $venta = Venta::findOrFail($id);
+        $venta->delete();
+        
+        return redirect()->route("ventaIndexReact");
     }
 
     

@@ -43,6 +43,39 @@ $(function ()
 
 
 /* ****************************** */
+
+
+/* 
+* funcion para redondear
+* el precio a los productos con iva en el modal
+*/
+
+$(function ()
+{
+
+        $("#roundIvaModal").on('click', function (e) {
+
+            
+            var myInputPrec = document.getElementById('modal-precio_venta');
+            var myInputIva = document.getElementById('modal-iva');
+
+            /* si iva es cero dejo el precio como esta
+            en el input precio
+            si iva es 16 divido el precio que esta en el input entre
+            1.16 y luego coloco este nuevo precio en el input*/
+
+            if (myInputIva.value == "16") {
+                myInputPrec.value = (myInputPrec.value / 1.16).toFixed(3);
+            }
+
+
+        
+        });
+
+});
+
+
+/* ****************************** */
             
 
   $(function ()

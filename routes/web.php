@@ -113,7 +113,16 @@ Route::post("/showCargarVenta", "DocEsperaController@showCargarVenta")->name("sh
 ********************************
 * ******/
 
-
+//ruta para mostrar mensaje ticket impreso
+Route::get("/impreso", "VentasController@impreso")->name("impreso");
+//ruta para mostrar venta en react
+Route::get("/ventaIndexReact", "VentasController@indexReact")->name("ventaIndexReact");
+//ruta para imprimir en la termica con react
+Route::get("/ticketTestReact/{id}", "VentasController@ticketTestReact")->name("ticketTestReact");
+//ruta para mostrar una sola venta con react
+Route::get("/ventasShowReact/{id}", "VentasController@showReact")->name("ventasShowReact");
+//ruta para eliminar una venta con react
+Route::get("/ventaDestroyReact/{id}", "VentasController@destroyReact")->name("ventaDestroyReact");
 //ruta para imprimir en la termica
 Route::get("/ticketTest", "VentasController@ticketTest")->name("ticketTest");
 //ruta para imprimir reporte x

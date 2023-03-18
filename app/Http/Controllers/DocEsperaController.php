@@ -143,7 +143,7 @@ class DocEsperaController extends Controller
 
         foreach ($venta->productos as $producto) {
 
-            $productoCompleto = [Producto::where("descripcion", "LIKE", $producto->descripcion)->get(), "precio_v"=>$producto->precio, "cantidad_v"=>$producto->cantidad];
+            $productoCompleto = [Producto::where("codigo_barras", "LIKE", $producto->codigo_barras)->get(), "precio_v"=>$producto->precio, "cantidad_v"=>$producto->cantidad];
 
             //array_push($productoCompleto, $producto->precio, $producto->cantidad);
 
