@@ -15,6 +15,8 @@ export default class Modal {
     this.total = "";
     this.referventa = document.getElementById('modal-venta-dollar');
     this.refercompra = document.getElementById('modal-compra-dollar');
+    this.tazaNow = document.getElementById('tazaNow');
+    this.precio_venta_dollar = document.getElementById('precioDollarModal');
 
     this.todo = null;
   }
@@ -32,6 +34,7 @@ export default class Modal {
     this.referventa.value = todo.referventa;
     this.refercompra.value = todo.refercompra;
     this.precio_venta_iva.value = ((todo.iva/100+1) * todo.precio_venta).toFixed(2);
+    this.precio_venta_dollar.value = (((todo.iva/100+1) * todo.precio_venta) / this.tazaNow.value).toFixed(2);
   }
 
   onClick(callback) {

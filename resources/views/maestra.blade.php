@@ -291,13 +291,16 @@
 
             <div class="form-group">
               <label>Precio + Iva</label>
-              <input
-                id="modal-precio_venta_iva"
-                type="text"
-                class="form-control"
-                placeholder="Do Something"
-                readonly
-              />
+              <div class="row">
+                <input
+                  id="modal-precio_venta_iva"
+                  type="text"
+                  class="form-control col-md"
+                  placeholder="Do Something"
+                  readonly
+                />
+                <input type="text" id="precioDollarModal" class="form-control-sm col-md-3" value="" readonly />
+            </div>
             </div>
 
             <div class="form-group">
