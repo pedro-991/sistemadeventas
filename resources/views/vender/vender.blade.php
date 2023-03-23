@@ -147,11 +147,11 @@
                     readonly
                   >
              
-            <div class="col-md-3 col-sm-3 d-sm-flex align-items-center">
-              <div class="row"> 
-                <label class="col-md-6 m-sm-0">Description</label>
+            <div class="">
+              <div class=""> 
+                
                 <input
-                  type="text"
+                  type="hidden"
                   id="description"
                   class="form-control ml-sm-2 col-md-6"
                   placeholder=""
@@ -159,29 +159,29 @@
                 >
               </div>
             </div>
-            <div class="col-md-2 col-sm-2 d-sm-flex align-items-center">
-              <div class="row"> 
-                <label class="col-md-6 m-sm-0">Precio</label>
-                <div class="form-control ml-sm-2 col-md-6">
-                  <div class="row">
+            <div class="">
+              <div class=""> 
+                
+                <div class="">
+                  <div class="">
                     <input
-                      type="text"
+                      type="hidden"
                       id="precioTdl"
                       class="col-md-9"
                       placeholder=""
                       autocomplete="off"
                     >
-                    <input type="button" id="roundIva" class="btn btn-success col-md-3" value="+" />
+                    <input type="hidden" id="roundIva" class="btn btn-success col-md-3" value="+" />
                       <!-- <i class="fa fa-info col-md-1"></i> -->
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-2 col-sm-2 d-sm-flex align-items-center">
-              <div class="row"> 
-                <label class="col-md-6 m-sm-0">Precio+IVA</label>
+            <div class="">
+              <div class=""> 
+                
                 <input
-                  type="text"
+                  type="hidden"
                   id="precioConIva"
                   class="form-control ml-sm-2 col-md-6"
                   placeholder=""
@@ -189,25 +189,25 @@
                 >
               </div>
             </div>
-            <div class="col-md-1 col-sm-1 d-sm-flex align-items-center">
-              <div class="row"> 
-                <label class="col-md-6 m-sm-0">Cantidad</label>
+            <div class="">
+              <div class=""> 
+                
                 <input
-                  type="text"
+                  type="hidden"
                   id="cantidadTdl"
-                  class="form-control ml-sm-2 col-md-6"
+                  class=""
                   placeholder=""
                 >
               </div>
             </div>
 
-            <div class="col-md-1 col-sm-1 d-sm-flex align-items-center">
-              <div class="row"> 
-                <label class="col-md-6 m-sm-0">I.V.A.</label>
+            <div class="">
+              <div class=""> 
+                
                 <input
-                  type="text"
+                  type="hidden"
                   id="ivaTdl"
-                  class="form-control ml-sm-2 col-md-6"
+                  class=""
                   placeholder=""
                   readonly
                 >
@@ -216,7 +216,7 @@
             
              
             <div class="col-md-2 col-sm-2 mt-4">
-              <input type="button" class="btn btn-success" id="add" value="Agregar"/>
+              <input type="hidden" class="btn btn-success" id="add" value="Agregar"/>
                
             </div>
           </div>

@@ -240,6 +240,7 @@ $(function ()
 function selectCode(content) {
 
                 var btnCloseModal = document.getElementById('btnCloseModal');
+                let btnAdd = document.getElementById('add');
     
 
                 var myJson = JSON.parse (content.value);
@@ -272,6 +273,7 @@ function selectCode(content) {
 
                 
                 btnCloseModal.click();
+                btnAdd.click();
     
             };
 

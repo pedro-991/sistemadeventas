@@ -29,6 +29,7 @@ use App\ProductoVendido;
 use App\Venta;
 use App\Doc_espera;
 use App\Product_espera;
+use App\License;
 use Illuminate\Http\Request;
 
 class VenderController extends Controller
@@ -386,15 +387,29 @@ class VenderController extends Controller
      */
     public function index()
     {
-        $total = 0;
-        foreach ($this->obtenerProductos() as $producto) {
-            $total += $producto->cantidad * $producto->precio_venta;
-        }
-        return view("vender.vender",
-            [
-                "total" => $total,
-                "clientes" => Cliente::all(),
+        $license = License::find(1);
+        //fecha expiracion = fecha update + dias expiracion
+        $d = strtotime("$license->updated_at + $license->days days");
+        $fExpiration =  date_create(date("d-m-Y", $d));
+        $fActual =  date_create(date("d-m-Y"));
+        //$interval = date_diff($fExpiration, $fExpiration2);
+        //if fechaexpiration es menor que now vista1 else vista2
+
+        if ($fExpiration > $fActual) 
+        {
+            return view("vender.vender", [
+                "clientes" => Cliente::all()
             ]);
+        } else {
+
+
+            return view("vender.license",)
+            ->with([
+                "mensaje" => "Licencia Vencida, proceda a realizar la activación
+                para ingresar a la pestaña Vender",
+                "tipo" => "danger"
+            ]);
+        }
     }
 
     /* ****************************
