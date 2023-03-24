@@ -34,6 +34,8 @@ Route::post("/productocodigo", "VenderController@productoFiltro")->name("buscarP
 Route::post("/clienteFiltro", "VenderController@clienteFiltro")->name("clienteFiltro");
 Route::post("/terminarVenta", "VenderController@terminarVenta")->name("terminarVenta");
 Route::post("/guardarVenta", "VenderController@guardarVenta")->name("guardarVenta");
+//ruta para activar licencia
+Route::post("/renovacionLicencia", "VenderController@renovacionLicencia")->name("renovacionLicencia");
 
 
 

@@ -412,6 +412,32 @@ class VenderController extends Controller
         }
     }
 
+
+    /* ****************************
+    #******************************
+    #renovacion licencia
+    #******************************
+    #***************************
+    *************************/
+
+
+
+
+    public function renovacionLicencia(Request $request) {
+
+        //request recibidos licencia y vencimiento
+        $license = $request->post("licencia");
+        $days = $request->post("vencimiento");
+
+        License::where('license', $license)->update(['days' => $days]);
+
+        return redirect()->route("vender.index");
+
+    }
+
+
+    
+
     /* ****************************
     #buscar cliente
     #

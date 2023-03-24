@@ -15,7 +15,7 @@
               
         </div>
 
-        <form method="POST" action="{{route('productos.store')}}">
+        <form method="POST" action="{{route('renovacionLicencia')}}">
                 @csrf
                 
                 <div class="form-group">
@@ -31,7 +31,7 @@
                 
 
                 @include("notificacion")
-                <button class="btn btn-success" disabled>Registrar Licencia</button>
+                <button class="btn btn-success">Registrar Licencia</button>
             </form>
    
 
