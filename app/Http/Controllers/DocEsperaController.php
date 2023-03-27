@@ -293,7 +293,7 @@ class DocEsperaController extends Controller
                                     } else {
 
                                         $htmlPresupuesto = $htmlPresupuesto . "
-                                        <td WIDTH='' CELLSPACING='' style='padding-left: 10px;'><font face='Courier'><strong>" . $producto->iva . "%</strong></font></td>
+                                        <td WIDTH='' CELLSPACING='' style='padding-left: 10px;'><font face='Courier'><strong>" . $producto->iva . ".00</strong></font></td>
                                         ";
                                     
                                     

@@ -76,6 +76,43 @@ $(function ()
 
 
 /* ****************************** */
+
+
+/* 
+* funcion para redondear
+* el precio en dollar en el modal
+*/
+
+$(function ()
+{
+
+        $("#roundDollarModal").on('click', function (e) {
+
+            
+            var myInputPrec = document.getElementById('modal-precio_venta');
+            var myInputIva = document.getElementById('modal-iva');
+            let myInputDollarModal = document.getElementById('precioDollarModal');
+            let taza = document.getElementById('tazaNow').value;
+            
+            myInputPrec.value = (myInputDollarModal.value * taza).toFixed(3);
+
+            /* si iva es cero dejo el precio como esta
+            en el input precio
+            si iva es 16 divido el precio que esta en el input entre
+            1.16 y luego coloco este nuevo precio en el input*/
+
+            if (myInputIva.value == "16") {
+                myInputPrec.value = (myInputPrec.value / 1.16).toFixed(3);
+            }
+
+
+        
+        });
+
+});
+
+
+/* ****************************** */
             
 
   $(function ()

@@ -104,7 +104,7 @@
     
             
     <main>
-    <div class="container pt-3">
+    <div class="container">
       <div class="alert alert-danger d-none" role="alert" id="alert">
       A simple danger alert—check it out!
       </div>
@@ -215,7 +215,7 @@
             </div>
             
              
-            <div class="col-md-2 col-sm-2 mt-4">
+            <div class="">
               <input type="hidden" class="btn btn-success" id="add" value="Agregar"/>
                
             </div>
@@ -223,7 +223,7 @@
         </form>
       </div>
 
-      <div class="mt-5">
+      <div class="">
         <table class="table table-striped" id="table">
           <thead>
             <tr>
@@ -236,7 +236,7 @@
               <th scope="col">UND</th>
               <th scope="col">TOTAL</th>
              
-              <th scope="col"></th>
+              <th scope="col">PRECIO+IVA</th>
             </tr>
           </thead>
           <tbody>

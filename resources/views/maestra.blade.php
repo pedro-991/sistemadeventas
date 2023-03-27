@@ -299,7 +299,8 @@
                   placeholder="Do Something"
                   readonly
                 />
-                <input type="text" id="precioDollarModal" class="form-control-sm col-md-3" value="" readonly />
+                <input type="text" id="precioDollarModal" class="form-control-sm col-md-3" value=""/>
+                <input type="button" id="roundDollarModal" class="btn btn-success col-md-3" value="+" />
             </div>
             </div>
 
