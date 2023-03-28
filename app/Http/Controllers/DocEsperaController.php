@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use App\Producto;
 
+
 class DocEsperaController extends Controller
 {
     //
@@ -186,6 +187,7 @@ class DocEsperaController extends Controller
         $total = 0;
         $totalIva = 0;
         $url = env("APP_URL");
+        
         foreach ($venta->productos as $producto) {
             //aqui podria añadir la variable iva a la ecuacion y enviar el total con iva
             //podria ser $total += $producto->cantidad * ($producto->precio * (($producto->iva/100)+1));
@@ -342,16 +344,34 @@ class DocEsperaController extends Controller
                     
                                 <tr>
                                     
-                                    <td align='right' style='padding-right: 5%;'>
+                                    <td align='right' style='padding-right: 5%; width: 70%; border: hidden;'>
                                 
-                                    <font face='Courier'><strong>Sub Total:.............</strong></font>
-                                    <font face='Courier'><strong>" . number_format($total, 2) . "</strong></font></br>
-                                    <font face='Courier'><strong>I.V.A. 16.00%:.............</strong></font>
-                                    <font face='Courier'><strong>" . number_format($totalIva, 2) . "</strong></font></br>
-                                    <font face='Courier'><strong>Total:.................</strong></font>
-                                    <font face='Courier'><strong>" . number_format($total + $totalIva, 2) . "</strong></font></br>
+                                        <font face='Courier'><strong>Sub Total:</strong></font>
+                                        
+                                        
                                     
-                                    
+                                    </td>
+                                    <td align='left' style='padding-right: 0%; border: hidden;'>
+                                        <font face='Courier'><strong>" . number_format($total, 2) . "</strong></font>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align='right' style='padding-right: 5%; width: 70%; border: hidden;'>
+                                        <font face='Courier'><strong>I.V.A. 16.00%:</strong></font>
+                                        
+                                    </td>   
+                                    <td align='left' style='padding-right: 0%; border: hidden;'>
+                                        <font face='Courier'><strong>" . number_format($totalIva, 2) . "</strong></font>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align='right' style='padding-right: 5%; width: 70%; border: hidden;'>
+                                        <font face='Courier'><strong>Total:</strong></font>
+                                        
+                                    </td>
+                                    <td align='left' style='padding-right: 0%; border: hidden;'>
+                                        <font face='Courier'><strong>" . number_format($total + $totalIva, 2) . "</strong></font>
+                                        <font face='Courier'><strong>REF: " . number_format(($total + $totalIva)/$venta->taza, 2) . "</strong></font>
                                     </td>
                                 </tr>
                                

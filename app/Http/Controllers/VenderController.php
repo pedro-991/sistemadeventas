@@ -30,6 +30,7 @@ use App\Venta;
 use App\Doc_espera;
 use App\Product_espera;
 use App\License;
+use App\Taza;
 use Illuminate\Http\Request;
 
 class VenderController extends Controller
@@ -93,10 +94,15 @@ class VenderController extends Controller
     {
         // Crear una venta
         $doc_espera = new Doc_espera();
+
+        $taza = Taza::find(1);
         
         $doc_espera->id_cliente = $request->post("id_cliente");
+        $doc_espera->taza = $taza->taza;
         $doc_espera->saveOrFail();
         $idDoc_espera = $doc_espera->id;
+
+        
         
         $productos = $request->post("productos");
         // Recorrer carrito de compras
