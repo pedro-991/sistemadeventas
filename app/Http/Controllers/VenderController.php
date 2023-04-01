@@ -432,7 +432,7 @@ class VenderController extends Controller
     public function renovacionLicencia(Request $request) {
 
         //request recibidos licencia y vencimiento
-        $license = $request->post("licencia");
+        $license = md5($request->post("licencia"));
         $days = $request->post("vencimiento");
 
         License::where('license', $license)->update(['days' => $days]);

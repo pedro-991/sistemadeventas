@@ -21,7 +21,7 @@
                 <div class="form-group">
                     <label class="label">Licencia</label>
                     <input required autocomplete="off" name="licencia" class="form-control"
-                           type="text" placeholder="012452245">
+                           type="password" placeholder="012452245">
                 </div>
                 <div class="form-group">
                     <label class="label">Vencimiento</label>

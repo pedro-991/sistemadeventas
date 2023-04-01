@@ -340,7 +340,7 @@ class DocEsperaController extends Controller
                         </tbody>
                 </table>
 
-                <table width='100%' border='1'>
+                <table width='100%' border='2'>
                     
                                 <tr>
                                     
