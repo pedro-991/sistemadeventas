@@ -33,6 +33,7 @@ ____          _____               _ _           _
                         <th>Nombre</th>
                         <th>RIF/CI</th>
                         <th>Teléfono</th>
+                        <th>Dirección</th>
 
                         <th>Editar</th>
                         <th>Eliminar</th>
@@ -44,6 +45,7 @@ ____          _____               _ _           _
                             <td>{{$cliente->nombre}}</td>
                             <td>{{$cliente->documento}}</td>
                             <td>{{$cliente->telefono}}</td>
+                            <td>{{$cliente->direccion}}</td>
                             <td>
                                 <a class="btn btn-warning" href="{{route('clientes.edit',[$cliente])}}">
                                     <i class="fa fa-edit"></i>

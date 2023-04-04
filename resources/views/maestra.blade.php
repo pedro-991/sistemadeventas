@@ -178,7 +178,7 @@
         }
     });
 </script>
-<main class="container-fluid mt-5">
+<main class="container-fluid mt-0">
     @yield("contenido")
     
 </main>

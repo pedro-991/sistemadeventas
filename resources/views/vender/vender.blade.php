@@ -43,6 +43,13 @@
                             <input name="" id="btnAgregarCliente" value="Agregar" type="button" class="btn btn-success"/>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-10">
+                                <label for="">Dirección</label>
+                                <input class="form-control" name="direccion_cliente_script" id="direccion_cliente_script" value="" autocomplete="off"/>
+                            </div>
+                        </div>
                     
                         <div class="row">
                               <div class="form-group col-md-6">

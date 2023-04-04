@@ -44,6 +44,13 @@ ____          _____               _ _           _
                            type="text" placeholder="Teléfono">
                 </div>
 
+                <div class="form-group">
+                    <label class="label">Dirección</label>
+                    <input required value="{{$cliente->direccion}}" autocomplete="off" name="direccion"
+                           class="form-control"
+                           type="text" placeholder="Ciudad Bolívar">
+                </div>
+
                 @include("notificacion")
                 <button class="btn btn-success">Guardar</button>
                 <a class="btn btn-primary" href="{{route('clientes.index')}}">Volver</a>

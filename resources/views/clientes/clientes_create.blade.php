@@ -41,6 +41,11 @@ ____          _____               _ _           _
                     <input required autocomplete="off" name="telefono" class="form-control"
                            type="text" placeholder="0000-0000000">
                 </div>
+                <div class="form-group">
+                    <label class="label">Dirección</label>
+                    <input required autocomplete="off" name="direccion" class="form-control"
+                           type="text" placeholder="Ciudad Bolívar">
+                </div>
 
                 @include("notificacion")
                 <button class="btn btn-success">Guardar</button>
