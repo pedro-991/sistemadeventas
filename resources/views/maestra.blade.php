@@ -143,8 +143,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('usuarios.index')}}">Usuarios&nbsp;<i class="fa fa-users"></i></a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="{{route('clientes.index')}}">Clientes&nbsp;<i class="fa fa-users"></i></a>
+                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('indexReactCliente')}}">Clientes&nbsp;<i class="fa fa-users"></i></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('indexReact')}}">Productos&nbsp;<i class="fa fa-box"></i></a>

@@ -46,7 +46,18 @@ Route::post("/renovacionLicencia", "VenderController@renovacionLicencia")->name(
 * ******/
 
 Route::post("/storeJavascript", "ClientesController@storeJavascript")->name("storeJavascript");
-
+//ruta para mostrar todos los clientes con react
+Route::get("/indexReactCliente", "ClientesController@indexReact")->name("indexReactCliente");
+//ruta para mostrar la vista de crear clientes con react
+Route::get("/createClienteInertia", "ClientesController@createInertia")->name("createClienteInertia");
+//ruta para guardar cliente creado
+Route::post("/saveClienteInertia", "ClientesController@storeInertia")->name("saveClienteInertia");
+//ruta para mostrar la vista editar con react
+Route::get('/editClienteReact/{id}', "ClientesController@editInertia");
+//ruta para editar el cliente con react
+Route::post('/updateClienteReact/{id}', "ClientesController@updateInertia");
+//ruta para to delete with react
+Route::get('/deleteClienteReact/{id}', "ClientesController@destroyInertia");
 
 /* ***
 ***************************
