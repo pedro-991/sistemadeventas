@@ -295,11 +295,16 @@ $impresora -> initialize();
         $factura = array();
 
         $conteo = 0;
-
+        //identificacion
         $factura[$conteo] = "iR*" . $venta->cliente->documento . "\n";
         $conteo++;
+        //razon social
         $factura[$conteo] = "iS*" . $venta->cliente->nombre . "\n";
         $conteo++;
+        //linea adicional 01 se puede usar para la direccion
+        $factura[$conteo] = "i01" . $venta->cliente->direccion . "\n";
+        $conteo++;
+        //numero de factura en caso de la bixolon te la da automatico
         $factura[$conteo] = "iF*" . $idVentaFinal . "\n";
         $conteo++;
 
@@ -611,10 +616,16 @@ $write = fputs($fp, $cmd);
 
         $conteo = 0;
 
+        //identificacion
         $factura[$conteo] = "iR*" . $venta->cliente->documento . "\n";
         $conteo++;
+        //razon social
         $factura[$conteo] = "iS*" . $venta->cliente->nombre . "\n";
         $conteo++;
+        //linea adicional 01 se puede usar para la direccion
+        $factura[$conteo] = "i01" . $venta->cliente->direccion . "\n";
+        $conteo++;
+        //numero de factura en caso de la bixolon te la da automatico
         $factura[$conteo] = "iF*" . $idVentaFinal . "\n";
         $conteo++;
 

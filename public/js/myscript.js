@@ -230,6 +230,7 @@ $(function ()
 
         let inputNombreCliente = document.getElementById('nombre_cliente_script').value;
         let inputDocumentoCliente = document.getElementById('documento_cliente_script').value;
+        let inputDireccionCliente = document.getElementById('direccion_cliente_script').value;
         let alertCliente = document.getElementById('alert');
         
 
@@ -247,7 +248,8 @@ $(function ()
                     data:  {
                         nombre : inputNombreCliente,
                         documento : inputDocumentoCliente,
-                        telefono : "0000-0000000"
+                        telefono : "0000-0000000",
+                        direccion : inputDireccionCliente
                     },
                     success: function (datos) {
                         alertCliente.innerText = "Cliente agregado con exito";
