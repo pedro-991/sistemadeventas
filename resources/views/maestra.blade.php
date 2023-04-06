@@ -155,6 +155,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('reportes')}}">Reportes&nbsp;<i class="fa fa-box"></i></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('reportesReact')}}">Reportes R&nbsp;<i class="fa fa-box"></i></a>
+                </li>
                
             @endguest
         </ul>

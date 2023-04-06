@@ -968,5 +968,57 @@ $write = fputs($fp, $cmd);
         return redirect()->route("ventaIndexReact");
     }
 
+
+    /* reportes */
+
+    public function reporteXReact()
+    {
+
+        $itObj = new Tfhka();
+
+        $out = "";
+
+        $out =  $itObj->SendCmd("I0X");
+
+
+        return redirect()->route("reporteImpreso");
+        
+    }
+
+    public function reporteZReact()
+    {
+
+        $itObj = new Tfhka();
+
+        $out = "";
+
+        $out =  $itObj->SendCmd("I0Z");
+
+
+        return redirect()->route("reporteImpreso");
+        
+    }
+
+    public function reportesReact()
+    {
+
+        $url = env("APP_URL");
+        //return view("ventas.ventas_reportes");
+        return Inertia::render('Reportes', ["url" => $url]);
+        
+    }
+
+    public function reporteImpreso()
+    {
+
+        $url = env("APP_URL");
+       
+    
+       
+        return Inertia::render('ReporteImpreso', ["url" => $url]);
+    
+
+    }
+
     
 }

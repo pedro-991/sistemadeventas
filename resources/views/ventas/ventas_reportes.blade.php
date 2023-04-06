@@ -26,12 +26,10 @@
             <h1>Reportes <i class="fa fa-list"></i></h1>
             @include("notificacion")
             <p><a class="btn btn-info" href="{{route('reporteX')}}">
-              <!-- <i class="fa fa-print"></i> -->
                 Reporte X
             </a></p>
 
             <p><a class="btn btn-info" href="{{route('reporteZ')}}">
-              <!-- <i class="fa fa-print"></i> -->
                 Reporte Z
             </a></p>
                       

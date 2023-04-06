@@ -136,6 +136,14 @@ Route::get("/ticketTestReact/{id}", "VentasController@ticketTestReact")->name("t
 Route::get("/ventasShowReact/{id}", "VentasController@showReact")->name("ventasShowReact");
 //ruta para eliminar una venta con react
 Route::get("/ventaDestroyReact/{id}", "VentasController@destroyReact")->name("ventaDestroyReact");
+//ruta para imprimir reporte x con react
+Route::get("/reporteXReact", "VentasController@reporteXReact")->name("reporteXReact");
+//ruta para imprimir reporte z con react
+Route::get("/reporteZReact", "VentasController@reporteZReact")->name("reporteZReact");
+//ruta para mostrar vista reportes con react
+Route::get("/reportesReact", "VentasController@reportesReact")->name("reportesReact");
+//ruta para mostrar mensaje reporte impreso
+Route::get("/reporteImpreso", "VentasController@reporteImpreso")->name("reporteImpreso");
 //ruta para imprimir en la termica
 Route::get("/ticketTest", "VentasController@ticketTest")->name("ticketTest");
 //ruta para imprimir reporte x
