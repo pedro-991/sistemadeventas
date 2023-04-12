@@ -140,8 +140,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('docEsperaIndexReact')}}">Presupuestos&nbsp;<i class="fa fa-list"></i></a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="{{route('usuarios.index')}}">Usuarios&nbsp;<i class="fa fa-users"></i></a>
+                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('indexReactUser')}}">Usuarios&nbsp;<i class="fa fa-users"></i></a>
                 </li>
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="{{route('clientes.index')}}">Clientes&nbsp;<i class="fa fa-users"></i></a>
@@ -152,11 +155,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('indexReact')}}">Productos&nbsp;<i class="fa fa-box"></i></a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="{{route('reportes')}}">Reportes&nbsp;<i class="fa fa-box"></i></a>
-                </li>
+                </li> -->
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('reportesReact')}}">Reportes R&nbsp;<i class="fa fa-box"></i></a>
+                    <a class="nav-link" href="{{route('reportesReact')}}">Reportes&nbsp;<i class="fa fa-box"></i></a>
                 </li>
                
             @endguest

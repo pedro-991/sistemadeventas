@@ -2,7 +2,7 @@ import { Inertia } from '@inertiajs/inertia';
 import React, { Fragment, useEffect, useState } from "react";
 import { Link } from '@inertiajs/inertia-react';
 
-/* abajo la variable producto es la enviada por el controlador de laravel */
+/* abajo la variable cliente es la enviada por el controlador de laravel */
 const ClientesEdit = ({ cliente, url }) => {
     
 

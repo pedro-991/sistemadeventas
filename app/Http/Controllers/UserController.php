@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Inertia\Inertia;
 
 class UserController extends Controller
 {
@@ -92,4 +93,74 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route("usuarios.index")->with("mensaje", "Usuario eliminado");
     }
+
+    /* **************************
+    *****************************
+    ** CRUD CON INERTIA Y REACT
+    *****************************
+    ***************************** */
+
+
+    public function indexReact()
+    {
+
+        $url = env("APP_URL");
+        return Inertia::render('UsuariosShow', ["users" => User::all(), "url" => $url]);
+        
+    }
+
+    //crear usuarios
+
+    public function createReact()
+    {
+        $url = env("APP_URL");
+        return Inertia::render('UsuariosCreate', ["url" => $url]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeReact(Request $request)
+    {
+        $usuario = new User($request->input());
+        $usuario->password = Hash::make($usuario->password);
+        $usuario->saveOrFail();
+        return redirect()->route("indexReactUser");
+    }
+
+    //editar clientes
+
+    //Inertia editar
+    public function editInertia($id)
+    {
+        $usuario = User::find($id);
+        $url = env("APP_URL");
+        return Inertia::render('UsuariosEdit', ['usuario' => $usuario, "url" => $url]);
+    }
+
+    public function updateInertia(Request $request, $id)
+    {
+        $usuario = User::findOrFail($id);
+
+        $usuario->fill($request->input());
+        $usuario->saveOrFail();
+
+        return redirect()->route("indexReactUser");
+
+    }
+
+
+    //Inertia delete
+
+    public function destroyInertia($id)
+    {
+        $usuario = User::findOrFail($id);
+        $usuario->delete();
+        
+        return redirect()->route("indexReactUser");
+    }
+
 }

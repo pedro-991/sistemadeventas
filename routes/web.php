@@ -153,6 +153,25 @@ Route::get("/reporteZ", "VentasController@reporteZ")->name("reporteZ");
 //ruta para mostrar vista reportes
 Route::get("/reportes", "VentasController@reportes")->name("reportes");
 
+/* *****
+********************************
+*controlador UserController
+********************************
+* ******/
+
+//ruta para mostrar todos los usuarios con react
+Route::get("/indexReactUser", "UserController@indexReact")->name("indexReactUser");
+//ruta para mostrar la vista de crear usuarios con react
+Route::get("/createUsuarioInertia", "UserController@createReact")->name("createUsuarioInertia");
+//ruta para guardar usuario creado
+Route::post("/saveUsuarioInertia", "UserController@storeReact")->name("saveUsuarioInertia");
+//ruta para mostrar la vista editar usuario con react
+Route::get('/editUsuarioReact/{id}', "UserController@editInertia");
+//ruta para editar usuario con react
+Route::post('/updateUsuarioReact/{id}', "UserController@updateInertia");
+//ruta para to delete with react
+Route::get('/deleteUsuarioReact/{id}', "UserController@destroyInertia");
+
 //Route::post("/mostrarSesion", "VenderController@mostrarSesion")->name("mostrarSesion");
 Route::get("/inertia", function () {
     return Inertia::render('Home');
