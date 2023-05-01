@@ -713,9 +713,92 @@ $write = fputs($fp, $cmd);
                  $conteo++;
                 }
 
-                $factura[$conteo] = "101\n";
-                $conteo++;
-                $factura[$conteo] = "199";
+                /* **********************************
+                aqui colocar un if
+                si efectivo 1 es mayor a cero quiere decir que tiene
+                que pagar en efectivo 1 entonces
+                se hace un pago parciel en bs del efectivo 1
+                y luego se hace el pago directo en dolares
+                *************************************
+                */
+
+                /* ¿como hago cuando el efectivo es mayor al total
+                en este caso todo se paga en efectivo creo no equivocarme
+                y entra en el mismo caso
+                "si efectivo 1 es mayor a cero y ademas
+                es igual al total + iva"
+                */
+
+                if ($venta->efectivo > 0 && $venta->efectivo < $venta->total) {
+                    //pasar de 5.00 a 000000000500
+                    //2 01 0000000005 00
+                    //comando pago parcial -> 2 codigo pago -> 01 monto -> 0000000005 decimales -> 00
+                    
+                    //divido efectivo en un array de un caracter en cada posicion
+                    $array = str_split($venta->efectivo); 
+            
+                    //resta es igual a la tercera posicion del vector de atras hacia delante
+                    $resta = count($array) - 3; 
+            
+                    //elimina el caracter en la posicion resta que es un punto decimal
+                    unset($array[$resta]); 
+            
+            
+                    if (count($array) < 12) {
+                        while (count($array) < 12){
+                            array_unshift($array, "0");
+                        }
+                        
+                    }
+            
+            
+                    $precioParcial = implode($array);
+                    
+                    //$factura[$conteo] = "201000000000500\n";
+                    $factura[$conteo] = "201" . $precioParcial . "\n";
+                    $conteo++;
+                    $factura[$conteo] = "120\n";
+                    $conteo++;
+                    $factura[$conteo] = "199";
+                };
+
+                /* **********************************
+                si efectivo 1 es cero o menor
+                se cancela todo en divisa
+                por lo que se hace un pago directo
+                en divisa
+                *************************************
+                */
+
+                if ($venta->efectivo <= 0) {
+                    $factura[$conteo] = "120\n";
+                    $conteo++;
+                    $factura[$conteo] = "199";
+                };
+
+                /* **********************************
+                si efectivo 1 es mayor a cero y ademas
+                es igual al total + iva
+                entonces todo se paga en efectivo 1
+                y no se paga nada en divisa
+                entonces se hace un pago directo
+                en bs y no se cobra igtf
+                de la misma manera como siempre
+                se ha venido haciendo normalmente
+                *************************************
+                */
+
+                //aqui podria colocar sin problema
+                //if ($venta->efectivo >= $venta->total) {
+                //si el efectivo es mayor al total
+                //pero no creo que sea necesario
+                if ($venta->efectivo == $venta->total) {
+                    $factura[$conteo] = "101\n";
+                    $conteo++;
+                    $factura[$conteo] = "199";
+                };
+
+                
 
        /*  $factura = array(0 => "! 0000001000 00001000 HarinaLaravel\n",
         1 => " 000000150000001500Jamon\n",
@@ -1018,6 +1101,76 @@ $write = fputs($fp, $cmd);
         return Inertia::render('ReporteImpreso', ["url" => $url]);
     
 
+    }
+
+    /* 
+    TEST
+    */
+
+    public function testIf($id) {
+
+        $venta = Venta::findOrFail($id);
+
+        /* **********************************
+                aqui colocar un if
+                si efectivo 1 es mayor a cero quiere decir que tiene
+                que pagar en efectivo 1 entonces
+                se hace un pago parciel en bs del efectivo 1
+                y luego se hace el pago directo en dolares
+                *************************************
+                */
+
+                /* ¿como hago cuando el efectivo es mayor al total
+                en este caso todo se paga en efectivo creo no equivocarme
+                y entra en el mismo caso
+                "si efectivo 1 es mayor a cero y ademas
+                es igual al total + iva"
+                */
+
+                if ($venta->efectivo > 0 && $venta->efectivo < $venta->total) {
+                    $mensaje = "pago parcial en bs";
+                };
+
+                /* **********************************
+                si efectivo 1 es cero o menor
+                se cancela todo en divisa
+                por lo que se hace un pago directo
+                en divisa
+                *************************************
+                */
+
+                if ($venta->efectivo <= 0) {
+                    $mensaje = "pago directo en divisa";
+                };
+
+                /* **********************************
+                si efectivo 1 es mayor a cero y ademas
+                es igual al total + iva
+                entonces todo se paga en efectivo 1
+                y no se paga nada en divisa
+                entonces se hace un pago directo
+                en bs y no se cobra igtf
+                de la misma manera como siempre
+                se ha venido haciendo normalmente
+                *************************************
+                */
+
+                if ($venta->efectivo == $venta->total) {
+                    $mensaje = "pago directo en bs";
+                };
+
+                $url = env("APP_URL");
+       
+    
+       
+        return Inertia::render('Test', [
+            "url" => $url,
+            "mensaje" => $mensaje,
+            "efectivo" => $venta->efectivo,
+            "total" => $venta->total,
+            "venta" => $venta,
+    
+    ]);
     }
 
     

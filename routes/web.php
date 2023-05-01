@@ -36,6 +36,8 @@ Route::post("/terminarVenta", "VenderController@terminarVenta")->name("terminarV
 Route::post("/guardarVenta", "VenderController@guardarVenta")->name("guardarVenta");
 //ruta para activar licencia
 Route::post("/renovacionLicencia", "VenderController@renovacionLicencia")->name("renovacionLicencia");
+//ruta para mostrar vender con react
+Route::get("/indexReactVender", "VenderController@indexReact")->name("indexReactVender");
 
 
 
@@ -152,6 +154,9 @@ Route::get("/reporteX", "VentasController@reporteX")->name("reporteX");
 Route::get("/reporteZ", "VentasController@reporteZ")->name("reporteZ");
 //ruta para mostrar vista reportes
 Route::get("/reportes", "VentasController@reportes")->name("reportes");
+//ruta para probar IGTF
+Route::get("/testIf/{id}", "VentasController@testIf")->name("testIf");
+
 
 /* *****
 ********************************

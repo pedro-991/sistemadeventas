@@ -24,7 +24,7 @@ class CreateProductEsperasTable extends Migration
             $table->string("descripcion");
             $table->string("codigo_barras");
             $table->decimal("precio", 9, 2);
-            $table->decimal("cantidad", 9, 2);
+            $table->decimal("cantidad", 9, 3);
             $table->integer("iva")->default('0');
             $table->string("und")->default('');
             $table->timestamps();

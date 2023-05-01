@@ -82,7 +82,64 @@
 
                                         <input id="typeUnd" autocomplete="off" name="typeUnd" type="hidden"
                                         class="form-control">
+
+                            <!-- <div class="row"> -->
+                                <div class="row">
+                                  <h2>FORMA DE PAGO</h2>
+                                </div>
+                                <div class="row">
+                                  <div class="col-md-3">
+                                    <label for="">DIVISA 1</label>
+                                  </div>
+                                  <div class="col-md-6">
+                                      <input id="divisa1" autocomplete="off" name="" type="number"
+                                            value="0"
+                                            class="form-control"
+                                            placeholder="">
+                                  </div>
+                                  <div class="col-md-3">
+                                    <input name="" id="" value="Calcular" type="button" class="btn btn-success"/>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-md-3">
+                                    <label for="">EFECTIVO 1</label>
+                                  </div>
+                                  <div class="col-md-6">
+                                      <input id="efectivo1" autocomplete="off" name="efectivo1" type="text"
+                                            value="0"
+                                            class="form-control"
+                                            placeholder=""
+                                            readonly/>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-md-3">
+                                    <label for="">I.G.T.F. 3%</label>
+                                  </div>
+                                  <div class="col-md-6">
+                                      <input id="igtf" autocomplete="off" name="" type="text"
+                                            value="0"
+                                            class="form-control"
+                                            placeholder=""
+                                            readonly/>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-md-3">
+                                    <label for="">Total a pagar: </label>
+                                  </div>
+                                  <div class="col-md-6">
+                                      <input id="totalPagar" autocomplete="off" name="" type="text"
+                                            value="0"
+                                            class="form-control"
+                                            placeholder=""
+                                            readonly/>
+                                  </div>
+                                </div>
+                            <!-- </div> -->
                       </div>
+                      
             </div>
             <div class="row">
             <div class="form-group">
@@ -103,7 +160,7 @@
                 </div>
             </h5>
             <h2><div class="row"><div class="col-md-3" id="h2Total">Total: Bs 0</div><div class="col-md-3" id="h2TotalDollar">Total: $ 0</div></div></h2>
-               
+            <input type="hidden" id="totalBs" name="totalBs" value="0"/>
             
         </div>
     </div>

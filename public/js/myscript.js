@@ -519,6 +519,9 @@ function selectCode(content) {
         let inputTypeUnd = document.getElementById('typeUnd').value;
         let botonCancelarVenta = document.getElementById('btnCancelarVenta');
         let alertVentaGuardada = document.getElementById('alert');
+        let btnGuardarPresupuesto = document.getElementById('btnGuardarVenta');
+        let efectivo1 = document.getElementById('efectivo1').value;
+        let totalBs = document.getElementById('totalBs').value; //total + iva
 
 
 
@@ -529,6 +532,7 @@ function selectCode(content) {
     } else
             {
 
+                
 
                 $("table#table tr").each(function() {
                     var arrayOfThisRow = [];
@@ -552,10 +556,13 @@ function selectCode(content) {
                     type: 'POST',
                     data:  {
                         id_cliente : inputIdCliente,
+                        efectivo : efectivo1,
+                        total : totalBs,
                         productos : myTableArray
                     },
                     success: function (datos) {
                         //$("#tablaVenta").html(datos);
+                        btnGuardarPresupuesto.click();
                         botonCancelarVenta.click();
                     }
                 });
@@ -680,5 +687,56 @@ function selectCode(content) {
       });
   
   });
+
+  /* **********************
+  *************************
+  funcion para IGTF
+  *************************
+  ************************* */
+
+
+  $(function ()
+{
+    $("#divisa1").on('keyup', function (e) {
+
+
+        let divisa1 = document.getElementById('divisa1').value;
+        let efectivo1 = document.getElementById('efectivo1');
+        let igtf = document.getElementById('igtf');
+        let tazaNow = document.getElementById('tazaNow').value;
+        let totalBs = document.getElementById('totalBs').value; //total + iva
+        let montoBs = (divisa1 * tazaNow).toFixed(2); //divisa 1 en bs
+        let totalPagar = document.getElementById('totalPagar'); // input para mostrar total + iva + igtf
+
+        //let montoIgtf = (montoBs * 0.03).toFixed(2);
+
+        if (parseFloat(montoBs) < parseFloat(totalBs)) {
+                console.log("soy caso 1")
+                efectivo1.value = (totalBs - montoBs).toFixed(2);
+                igtf.value = (montoBs * 0.03).toFixed(2);
+                totalPagar.value = (parseFloat(totalBs) + parseFloat(montoBs * 0.03)).toFixed(2);
+        } else if (parseFloat(montoBs) > parseFloat(totalBs)) {
+                console.log("soy caso 2")
+                efectivo1.value = (totalBs - montoBs).toFixed(2);
+                igtf.value = (totalBs * 0.03).toFixed(2);
+                totalPagar.value = (parseFloat(totalBs) + parseFloat(totalBs * 0.03)).toFixed(2);
+        } else {
+                console.log("soy caso 3")
+                efectivo1.value = (totalBs - montoBs).toFixed(2);
+                igtf.value = (montoBs * 0.03).toFixed(2);
+                totalPagar.value = (parseFloat(totalBs) + parseFloat(montoBs * 0.03)).toFixed(2);
+          }
+
+        /* efectivo1.value = (totalBs - montoBs).toFixed(2);
+
+        igtf.value = (montoBs * 0.03).toFixed(2); */
+
+        
+
+        //console.log(totalBs);
+        //console.log(montoBs);
+    });
+
+});
 
       

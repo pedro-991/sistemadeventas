@@ -32,6 +32,7 @@ use App\Product_espera;
 use App\License;
 use App\Taza;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class VenderController extends Controller
 {
@@ -50,8 +51,14 @@ class VenderController extends Controller
     {
         // Crear una venta
         $venta = new Venta();
+
+        $taza = Taza::find(1);
+        
         
         $venta->id_cliente = $request->post("id_cliente");
+        $venta->efectivo = $request->post("efectivo");
+        $venta->total = $request->post("total");
+        $venta->taza = $taza->taza;
         $venta->saveOrFail();
         $idVenta = $venta->id;
         
@@ -529,67 +536,38 @@ class VenderController extends Controller
             }
     }
 
+    /* 
+    **********************
+    funciones con react
+    **********************
+     */
+
+     public function indexReact()
+    {
+        $url = env("APP_URL");
+        $license = License::find(1);
+        //fecha expiracion = fecha update + dias expiracion
+        $d = strtotime("$license->updated_at + $license->days days");
+        $fExpiration =  date_create(date("d-m-Y", $d));
+        $fActual =  date_create(date("d-m-Y"));
+        //$interval = date_diff($fExpiration, $fExpiration2);
+        //if fechaexpiration es menor que now vista1 else vista2
+
+        if ($fExpiration > $fActual) 
+        {
+            return Inertia::render('Vender', [
+                "url" => $url
+            ]);
+        } else {
+
+
+            return view("vender.license",)
+            ->with([
+                "mensaje" => "Licencia Vencida, proceda a realizar la activación
+                para ingresar a la pestaña Vender",
+                "tipo" => "danger"
+            ]);
+        }
+    }
+
 }
-/* 
-
-$codigo = $request->post("txtcodigo") . "%";
-$cliente = Cliente::where("descripcion", "LIKE", $codigo)->get();
-$htmlproducto = "";
-    if ($cliente) {
-
-        $htmlproducto = "<table class='table table-bordered' id='tblProducto'>";
-
-        $htmlproducto = $htmlproducto . "<tr><th>Nombre</th><th>RIF/CI</th><th>Telefono</th></tr>";
-
-        foreach($cliente as $cli) {
-
-          
-
-            $htmlproducto = $htmlproducto . "
-            
-            <tr align='center'>
-
-            <td>
-            
-            " . $cli->nombre . "
-              
-            </td>
-
-            
-            <td>
-            " . $cli->documento . "
-            </td>
-
-            <td>
-            " . $cli->telefono . "
-            </td>
-
-
-
-            
-        
-            <td>
-            <input type='radio' name='selectPro' id='selectPro' onclick='selectCode(this)' value='" . $cli . "'>
-
-
-            </td>
-
-            
-            </tr>
-            
-            
-            ";
-
-            
-       
-
-         $htmlproducto = $htmlproducto . "</table>";
-         
-    };
-
-    if ($htmlproducto != "") {
-        return $htmlproducto;
-    } else {
-
-    return "Producto no encontrado";
-    } */

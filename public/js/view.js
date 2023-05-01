@@ -11,6 +11,8 @@ export default class View {
     this.btnCancelar = document.getElementById('btnCancelarVenta');
     this.btnCancelar.onclick = () => this.removeTodoCancelar();
     this.h2Total = document.getElementById('h2Total');
+    this.efectivo1 = document.getElementById('efectivo1');
+    this.totalBs = document.getElementById('totalBs');
     this.ivaTotal = document.getElementById('ivaTotal');
     this.tazaNow = document.getElementById('tazaNow');
     this.h2TotalDollar = document.getElementById('h2TotalDollar');
@@ -86,6 +88,8 @@ export default class View {
     this.ivaTotal.innerHTML = "I.V.A.: Bs " + 0;
     this.h2Total.innerHTML = "Total: Bs " + 0;
     this.h2TotalDollar.innerHTML = "Total: $ " + 0;
+    this.efectivo1.value = 0;
+    this.totalBs.value = 0;
   }
 
   showTotal() {
@@ -112,6 +116,8 @@ export default class View {
     let totalWithIva = sumaTotal + ivaTotal;
     //console.log(sumaTotal);
     this.h2Total.innerHTML = "Total: Bs " + totalWithIva.toFixed(2);
+    this.efectivo1.value = totalWithIva.toFixed(2);
+    this.totalBs.value = totalWithIva.toFixed(2);
 
     //total en $
 

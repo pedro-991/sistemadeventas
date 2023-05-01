@@ -129,6 +129,9 @@
                     <a class="nav-link" href="{{route('vender.index')}}">Vender&nbsp;<i class="fa fa-cart-plus"></i></a>
                 </li>
                 <!-- <li class="nav-item">
+                    <a class="nav-link" href="{{route('indexReactVender')}}">Vender R&nbsp;<i class="fa fa-cart-plus"></i></a>
+                </li> -->
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="{{route('ventas.index')}}">Ventas&nbsp;<i class="fa fa-list"></i></a>
                 </li> -->
                 <li class="nav-item">
@@ -339,9 +342,10 @@
               <label>Cantidad</label>
               <input
                 id="modal-cantidad"
-                type="text"
+                type="number"
                 class="form-control"
                 placeholder="Do Something"
+                autocomplete="off"
               />
             </div>
 
