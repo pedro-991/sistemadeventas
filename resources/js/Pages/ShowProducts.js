@@ -38,6 +38,7 @@ const ShowProducts = ({ products, url, taza }) => {
 
     return(
         <Fragment>
+          <div className=''>
             <div className="row">
                 <h1 className="col-md-3">Productos <i class="fa fa-box"></i></h1>
                 <h2 className="col-md-3">{products.length}</h2>
@@ -95,6 +96,8 @@ const ShowProducts = ({ products, url, taza }) => {
       
       
        </table>
+
+       </div>
       </Fragment>
     )
 

@@ -33,7 +33,7 @@ createInertiaApp({
   resolve: name => require(`./Pages/${name}`),
   setup({ el, App, props }) {
     render(
-      <div className="container mt-5">
+      <div className="">
     <App {...props} />
     </div>, 
     el)

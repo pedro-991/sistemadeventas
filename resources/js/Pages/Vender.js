@@ -1,10 +1,264 @@
+import { Inertia } from '@inertiajs/inertia';
 import React, { Fragment, useState } from 'react'
 import { Link } from '@inertiajs/inertia-react'
 
 
 const Vender = ({ url }) => {
 
-   
+  const [buscar_producto, setBuscar_producto] = useState('')
+  const [buscar_cliente, setBuscar_cliente] = useState('')
+  const [name_cliente, setName_cliente] = useState('')
+  const [id_cliente, setId_cliente] = useState('')
+
+  function buscar(e) { 
+    
+                          console.log(e) 
+
+                          if (e.key === "Enter") {
+
+                                    let a = "hola"
+                                    console.log(a);
+
+                                    $.ajaxSetup({
+                                      headers: {
+                                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                        }
+                                    });
+
+                                
+
+                                    $.ajax({
+                                        url: url + '/productocodigo',
+                                        type: 'POST',
+                                        data:  {txtcodigo : buscar_producto},
+                                        success: function (datos) {
+                                            $("#contentTable").html(datos);
+                                            openmodal();
+                                        }
+                                    });
+                                
+
+
+                          }
+    
+  } 
+
+  function agregarCliente() {
+
+    let inputNombreCliente = document.getElementById('nombre_cliente_script').value;
+    let inputDocumentoCliente = document.getElementById('documento_cliente_script');
+    let inputDireccionCliente = document.getElementById('direccion_cliente_script');
+    let alertCliente = document.getElementById('alert');
+    
+
+    if (inputNombreCliente != "" && inputDocumentoCliente.value != "") {
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+            $.ajax({
+                url: url + '/storeJavascript',
+                type: 'POST',
+                data:  {
+                    nombre : inputNombreCliente,
+                    documento : inputDocumentoCliente.value,
+                    telefono : "0000-0000000",
+                    direccion : inputDireccionCliente.value
+                },
+                success: function (datos) {
+                    inputDocumentoCliente.value = "";
+                    inputDireccionCliente.value = "";
+                    alertCliente.innerText = "Cliente agregado con exito";
+                    alertCliente.classList.remove('d-none');
+                }
+            });
+            return false;
+
+            } else {
+                alertCliente.innerText = "Nombre y documento del cliente son obligatorios";
+                alertCliente.classList.remove('d-none');
+            }
+
+
+  }
+
+  function buscarCliente(e) { 
+
+              if (e.key === "Enter") {
+
+                    
+
+                $.ajaxSetup({
+                    headers: {
+                          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                      }
+                  });
+
+                $.ajax({
+                    url: url + '/clienteFiltro',
+                    type: 'POST',
+                    data:  {txtcodigo : buscar_cliente},
+                    success: function (datos) {
+                        $("#contentTable").html(datos);
+                        openmodal();
+                    }
+                });
+                return false;
+
+
+
+
+              }
+
+
+
+  }
+
+  function guardarVenta() {
+
+    var myTableArray = [];
+    let inputIdCliente = document.getElementById('id_cliente');
+    let inputNameCliente = document.getElementById('nombre_cliente');
+    //let inputTypeUnd = document.getElementById('typeUnd').value;
+    //let botonCancelarVenta = document.getElementById('btnCancelarVenta');
+    let alertVentaGuardada = document.getElementById('alert');
+
+
+if (inputNameCliente.value === "") 
+{
+    alertVentaGuardada.innerText = "El nombre del cliente es obligatorio";
+    alertVentaGuardada.classList.remove('d-none');
+} else
+        {
+
+                    $("table#table tr").each(function() {
+                        var arrayOfThisRow = [];
+                        var tableData = $(this).find('td');
+                        if (tableData.length > 0) {
+                            tableData.each(function() { arrayOfThisRow.push($(this).text()); });
+                            myTableArray.push(arrayOfThisRow);
+                        }
+                    });
+
+                    //console.log(myTableArray);
+    
+                    $.ajaxSetup({
+                        headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+    
+                    $.ajax({
+                        url: url + '/guardarVenta',
+                        type: 'POST',
+                        data:  {
+                            id_cliente : inputIdCliente.value,
+                            productos : myTableArray
+                        },
+                        success: function (datos) {
+                            //botonCancelarVenta.click();
+                            //aqui puedo remover la class hide de un alert
+                            //para avisar que la venta esta guardada
+                            alertVentaGuardada.innerText = "Presupuesto guardado con exito";
+                            alertVentaGuardada.classList.remove('d-none');
+                        }
+                    });
+
+                    
+                    return false;
+
+        }
+
+    }
+
+    function cargarVenta() {
+
+            $.ajaxSetup({
+              headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                url: url + '/indexOnModal',
+                type: 'GET',
+                success: function (datos) {
+                    $("#contentTable").html(datos);
+                    openmodal();
+                    /* aqui presiona el radio */
+                    /* aqui haz click en el boton agregar */
+                }
+            });
+
+
+    }
+
+    function terminarVenta() {
+
+      var myTableArray = [];
+        let inputIdCliente = document.getElementById('id_cliente').value;
+        let inputNameCliente = document.getElementById('nombre_cliente').value;
+        let inputTypeUnd = document.getElementById('typeUnd').value;
+        let botonCancelarVenta = document.getElementById('btnCancelarVenta');
+        let alertVentaGuardada = document.getElementById('alert');
+        let btnGuardarPresupuesto = document.getElementById('btnGuardarVenta');
+        let efectivo1 = document.getElementById('efectivo1').value;
+        let totalBs = document.getElementById('totalBs').value; //total + iva
+
+
+
+    if (inputNameCliente === "") 
+    {
+        alertVentaGuardada.innerText = "El nombre del cliente es obligatorio";
+        alertVentaGuardada.classList.remove('d-none');
+    } else
+            {
+
+                
+
+                $("table#table tr").each(function() {
+                    var arrayOfThisRow = [];
+                    var tableData = $(this).find('td');
+                    if (tableData.length > 0) {
+                        tableData.each(function() { arrayOfThisRow.push($(this).text()); });
+                        myTableArray.push(arrayOfThisRow);
+                    }
+                });
+
+                //console.log(myTableArray);
+  
+                $.ajaxSetup({
+                    headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+  
+                $.ajax({
+                    url: url + '/terminarVenta',
+                    type: 'POST',
+                    data:  {
+                        id_cliente : inputIdCliente,
+                        efectivo : efectivo1,
+                        total : totalBs,
+                        productos : myTableArray
+                    },
+                    success: function (datos) {
+                        //$("#tablaVenta").html(datos);
+                        btnGuardarPresupuesto.click();
+                        botonCancelarVenta.click();
+                    }
+                });
+
+                return false;
+
+            }
+
+    }
+
+ 
 
     return(
         <Fragment>
@@ -12,7 +266,7 @@ const Vender = ({ url }) => {
 
 
 
-            <div className="container">
+            <div className="">
 
 
 
@@ -28,7 +282,7 @@ const Vender = ({ url }) => {
                                                                 <div className="row">
                                                                     <div className="form-group col-md-5">
                                                                         <label htmlFor="">Nombre</label>
-                                                                        <input className="form-control" name="nombre_cliente_script" id="nombre_cliente_script" value="" autocomplete="off"/>
+                                                                        <input className="form-control" name="nombre_cliente_script" id="nombre_cliente_script" autocomplete="off"/>
                                                                     </div>
 
                                                                     <div className="form-group col-md-5">
@@ -37,14 +291,15 @@ const Vender = ({ url }) => {
                                                                     </div>
                                                                     <div className="form-group col-md-2">
                                                                     <label htmlFor=""></label>
-                                                                    <input name="" id="btnAgregarCliente" value="Agregar" type="button" className="btn btn-success"/>
+                                                                    <input name="" id="btnAgregarCliente" value="Agregar" type="button" className="btn btn-success"
+                                                                    onClick={agregarCliente}/>
                                                                     </div>
                                                                 </div>
 
                                                                 <div className="row">
                                                                     <div className="form-group col-md-10">
                                                                         <label htmlFor="">Dirección</label>
-                                                                        <input className="form-control" name="direccion_cliente_script" id="direccion_cliente_script" value="" autocomplete="off"/>
+                                                                        <input className="form-control" name="direccion_cliente_script" id="direccion_cliente_script" autocomplete="off"/>
                                                                     </div>
                                                                 </div>
                                                       
@@ -52,38 +307,136 @@ const Vender = ({ url }) => {
                                                                     <div className="form-group col-md-6">
                                                                         <label htmlFor="id_cliente">Cliente</label>
                                                                         
-                                                                        <input className="form-control" type="hidden" name="id_cliente" id="id_cliente" value=""/>
-                                                                        <input className="form-control" name="nombre_cliente" id="nombre_cliente" value="" readonly/>
+                                                                        <input className="form-control" 
+                                                                        type="hidden" name="id_cliente" 
+                                                                        id="id_cliente" 
+                                                                        value={id_cliente} 
+                                                                        onClick={e=>setId_cliente(e.target.value)}
+                                                                        />
+
+                                                                        <input className="form-control" 
+                                                                        name="nombre_cliente" 
+                                                                        id="nombre_cliente" 
+                                                                        value={name_cliente} 
+                                                                        onClick={e=>setName_cliente(e.target.value)}
+                                                                        readonly/>
                                                                     </div>
 
                                                                     <div className="form-group col-md-6">
                                                                         <label htmlFor="buscarCliente">Buscar Cliente</label>
-                                                                        <input className="form-control" name="buscarCliente" id="buscarCliente" autocomplete="off"/>
+                                                                        <input className="form-control" 
+                                                                        name="buscarCliente" 
+                                                                        id="buscarCliente" 
+                                                                        onChange={e=>setBuscar_cliente(e.target.value)}
+                                                                        onKeyDown={buscarCliente}
+                                                                        autocomplete="off"/>
                                                                     </div>
                                                                 </div>
                                                   </div> {/* col-12 col-md-6 */}
-                                            </div> {/* row */}          
-                                </div> {/* col-12 */}
-                                              <div className="col-12 col-md-6">
-                                                <input type="hidden" id="btnModal" className="" data-bs-toggle="modal" data-bs-target="#exampleModal"/>
-                                                <input type="hidden" id="btnCloseModal" data-bs-dismiss="modal" data-bs-target="#exampleModal" />
-                                                
-                                          
-                                                <label htmlFor="codigotest">Buscar</label>
+
+                                                  <div className="col-12 col-md-6">
+                                                          <input type="hidden" id="btnModal" className="" data-bs-toggle="modal" data-bs-target="#exampleModal"/>
+                                                          <input type="hidden" id="btnCloseModal" data-bs-dismiss="modal" data-bs-target="#exampleModal" />
+                                                          
+                                              
+                                                          <label htmlFor="codigotest">Buscar</label>
                                                           <input id="codigotest" autocomplete="off" name="codigotest" type="text"
                                                                 className="form-control"
-                                                                placeholder="Jabon"/>
+                                                                placeholder="Jabon"
+                                                                onChange={e=>setBuscar_producto(e.target.value)}
+                                                                onKeyDown={buscar}/>
 
                                                                 <input id="typeUnd" autocomplete="off" name="typeUnd" type="hidden"
                                                                 className="form-control"/>
-                                                </div> {/* col-12 col-md-6 */}
+
+
+                                                                  {/* <div class="row"> */}
+
+                                                                 
+                                                            <div className="row">
+                                                              <h2>FORMA DE PAGO</h2>
+                                                            </div>
+                                                            <div className="row">
+                                                              <div className="col-md-3">
+                                                                <label htmlFor="">DIVISA 1</label>
+                                                              </div>
+                                                              <div className="col-md-6">
+                                                                  <input id="divisa1" autocomplete="off" name="" type="number"
+                                                                    
+                                                                        className="form-control"
+                                                                        placeholder=""/>
+                                                              </div>
+                                                            </div>
+                                                            <div className="row">
+                                                              <div className="col-md-3">
+                                                                <label htmlFor="">EFECTIVO 1</label>
+                                                              </div>
+                                                              <div className="col-md-6">
+                                                                  <input id="efectivo1" autocomplete="off" name="efectivo1" type="text"
+                                                                        
+                                                                        className="form-control"
+                                                                        placeholder=""
+                                                                        readonly/>
+                                                              </div>
+                                                            </div>
+                                                            <div className="row">
+                                                              <div className="col-md-3">
+                                                                <label htmlFor="">I.G.T.F. 3%</label>
+                                                              </div>
+                                                              <div className="col-md-6">
+                                                                  <input id="igtf" autocomplete="off" name="" type="text"
+                                                                        
+                                                                        className="form-control"
+                                                                        placeholder=""
+                                                                        readonly/>
+                                                              </div>
+                                                            </div>
+                                                            <div className="row">
+                                                              <div className="col-md-3">
+                                                                <label htmlFor="">Total a pagar: </label>
+                                                              </div>
+                                                              <div className="col-md-6">
+                                                                  <input id="totalPagar" autocomplete="off" name="" type="text"
+                                                                        
+                                                                        className="form-control"
+                                                                        placeholder=""
+                                                                        readonly/>
+                                                              </div>
+                                                            </div>
+                            
+
+
+                                                                  {/* </div> */}
+
+                                                  </div> {/* col-12 col-md-6 */}
+
+                                            </div> {/* row */}          
+                                </div> {/* col-12 */}
+
+
+
+                                            
                           </div> {/* row */}
 
                             <div className="row">
                                       <div className="form-group">
-                                                          <input name="accion" id="btnTerminarVenta" value="Terminar Venta" type="button" className="btn btn-warning"/>
-                                                          <input name="accion" id="btnGuardarVenta" value="Guardar Presupuesto" type="button" className="btn btn-success"/>
-                                                          <input name="accion" id="btnCargarVenta" value="Cargar Presupuesto" type="button" className="btn btn-success"/>
+                                                          <input name="accion" id="btnTerminarVenta" 
+                                                          value="Terminar Venta" type="button" 
+                                                          className="btn btn-warning"
+                                                          onClick={terminarVenta}
+                                                          />
+
+                                                          <input name="accion" id="btnGuardarVenta" 
+                                                          value="Guardar Presupuesto" type="button" 
+                                                          className="btn btn-success"
+                                                          onClick={guardarVenta}
+                                                          />
+
+                                                          <input name="accion" id="btnCargarVenta" 
+                                                          value="Cargar Presupuesto" type="button" 
+                                                          className="btn btn-success"
+                                                          onClick={cargarVenta}/>
+                                                          
                                                           <input name="accion2" id="btnCancelarVenta" value="Cancelar" type="button" className="btn btn-danger"/>
                                       </div>
 
@@ -97,7 +450,7 @@ const Vender = ({ url }) => {
                                 </div>
                             </h5>
                             <h2><div className="row"><div className="col-md-3" id="h2Total">Total: Bs 0</div><div className="col-md-3" id="h2TotalDollar">Total: $ 0</div></div></h2>
-                              
+                            <input type="hidden" id="totalBs" name="totalBs" />
                         
                     
 

@@ -59,6 +59,8 @@ class DocEsperaController extends Controller
 
         //$ventas = ["ventas" => $ventasConTotales,];
 
+        $url = env("APP_URL");
+
         $htmlproducto = "";
         
 
@@ -101,7 +103,7 @@ class DocEsperaController extends Controller
             
                 <td>
 
-                <input type='radio' name='selectVenta' id='selectVenta' onclick='selectCodeVenta(this)' value='" . $ventaConTotal . "'>
+                <input type='radio' name='selectVenta' id='selectVenta' onclick='selectCodeVenta(this, \"" . $url . "\")' value='" . $ventaConTotal . "'/>
 
 
                 </td>

@@ -153,7 +153,7 @@ $(function ()
 
 $(function ()
 {
-    $("#buscarCliente").on('keyup', function (e) {
+    $("#buscarCliente...").on('keyup', function (e) {
 
         
         if (e.keyCode == 13) {
@@ -189,7 +189,7 @@ $(function ()
 
 $(function ()
 {
-    $("#btnCargarVenta").on('click', function (e) {
+    $("#btnCargarVenta...").on('click', function (e) {
 
         
         
@@ -226,7 +226,7 @@ $(function ()
 
 $(function ()
 {
-    $("#btnAgregarCliente").on('click', function (e) {
+    $("#btnAgregarCliente...").on('click', function (e) {
 
         let inputNombreCliente = document.getElementById('nombre_cliente_script').value;
         let inputDocumentoCliente = document.getElementById('documento_cliente_script').value;
@@ -361,15 +361,24 @@ function selectCode(content) {
 
                 myInputCliente.value = myJson.id;
                 myInputClienteNombre.value = myJson.nombre;
+                myInputCliente.click();
+                myInputClienteNombre.click();
+
+
+                myInputCliente.value = myJson.id;
+                myInputClienteNombre.value = myJson.nombre;
+                myInputCliente.click();
+                myInputClienteNombre.click();
                 
                 //console.log(myJson);
 
                 
                 btnCloseModal.click();
+                
     
             };
 
-            function selectCodeVenta(content) {
+            function selectCodeVenta(content, url) {
 
                 var btnCloseModal = document.getElementById('btnCloseModal');
                 var myJson = JSON.parse (content.value);
@@ -389,6 +398,7 @@ function selectCode(content) {
                 var myInputPrecioIva = document.getElementById('precioConIva');
                 
     
+                console.log(url);
 
                 
                 //btnCloseModal.click();
@@ -400,7 +410,7 @@ function selectCode(content) {
                   });
     
             $.ajax({
-                url: 'showCargarVenta',
+                url: url + '/showCargarVenta',
                 type: 'POST',
                 data:  {id : myJson.id},
                 success: function (datos) {
@@ -511,7 +521,7 @@ function selectCode(content) {
                         
   $(function ()
   {
-      $("#btnTerminarVenta").on('click', function () {
+      $("#btnTerminarVenta...").on('click', function () {
 
         var myTableArray = [];
         let inputIdCliente = document.getElementById('id_cliente').value;
@@ -626,9 +636,11 @@ function selectCode(content) {
 
   /* aqui abajo para guardar venta */
 
-  $(function ()
-  {
-      $("#btnGuardarVenta").on('click', function () {
+  //$(function ()
+  //{
+      //$("#btnGuardarVenta...").on('click', function () {
+
+        function guardarVentaxxx(url) {
 
         var myTableArray = [];
         let inputIdCliente = document.getElementById('id_cliente').value;
@@ -663,7 +675,7 @@ function selectCode(content) {
                             });
         
                         $.ajax({
-                            url: 'guardarVenta',
+                            url: url + '/guardarVenta',
                             type: 'POST',
                             data:  {
                                 id_cliente : inputIdCliente,
@@ -682,11 +694,13 @@ function selectCode(content) {
                         return false;
 
             }
+
+        }
        
   
-      });
+      //});
   
-  });
+  //});
 
   /* **********************
   *************************

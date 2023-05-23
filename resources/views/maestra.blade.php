@@ -128,9 +128,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('vender.index')}}">Vender&nbsp;<i class="fa fa-cart-plus"></i></a>
                 </li>
-                <!-- <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link" href="{{route('indexReactVender')}}">Vender R&nbsp;<i class="fa fa-cart-plus"></i></a>
-                </li> -->
+                </li>
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="{{route('ventas.index')}}">Ventas&nbsp;<i class="fa fa-list"></i></a>
                 </li> -->

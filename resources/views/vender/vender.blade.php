@@ -97,9 +97,9 @@
                                             class="form-control"
                                             placeholder="">
                                   </div>
-                                  <div class="col-md-3">
+                                  <!-- <div class="col-md-3">
                                     <input name="" id="" value="Calcular" type="button" class="btn btn-success"/>
-                                  </div>
+                                  </div> -->
                                 </div>
                                 <div class="row">
                                   <div class="col-md-3">
