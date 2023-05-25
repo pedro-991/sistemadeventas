@@ -1,45 +1,6 @@
-{{--
 
-  ____          _____               _ _           _
- |  _ \        |  __ \             (_) |         | |
- | |_) |_   _  | |__) |_ _ _ __ _____| |__  _   _| |_ ___
- |  _ <| | | | |  ___/ _` | '__|_  / | '_ \| | | | __/ _ \
- | |_) | |_| | | |  | (_| | |   / /| | |_) | |_| | ||  __/
- |____/ \__, | |_|   \__,_|_|  /___|_|_.__/ \__, |\__\___|
-         __/ |                               __/ |
-        |___/                               |___/
-
-    Blog:       https://parzibyte.me/blog
-    Ayuda:      https://parzibyte.me/blog/contrataciones-ayuda/
-    Contacto:   https://parzibyte.me/blog/contacto/
-
-    Copyright (c) 2020 Luis Cabrera Benito
-    Licenciado bajo la licencia MIT
-
-    El texto de arriba debe ser incluido en cualquier redistribucion
---}}
 <!doctype html>
 <html lang="es">
-<!--
-
-  ____          _____               _ _           _
- |  _ \        |  __ \             (_) |         | |
- | |_) |_   _  | |__) |_ _ _ __ _____| |__  _   _| |_ ___
- |  _ <| | | | |  ___/ _` | '__|_  / | '_ \| | | | __/ _ \
- | |_) | |_| | | |  | (_| | |   / /| | |_) | |_| | ||  __/
- |____/ \__, | |_|   \__,_|_|  /___|_|_.__/ \__, |\__\___|
-         __/ |                               __/ |
-        |___/                               |___/
-
-    Blog:       https://parzibyte.me/blog
-    Ayuda:      https://parzibyte.me/blog/contrataciones-ayuda/
-    Contacto:   https://parzibyte.me/blog/contacto/
-
-    Copyright (c) 2020 Luis Cabrera Benito
-    Licenciado bajo la licencia MIT
-
-    El texto de arriba debe ser incluido en cualquier redistribucion
--->
 
 <head>
     <meta charset="utf-8">
@@ -79,19 +40,19 @@
         var myModalEl = document.getElementById('exampleModal');
         var myUrl = '{{env("APP_URL")}}';
                
-            myModalEl.addEventListener('hidden.bs.modal', function (event) {
+          /*   myModalEl.addEventListener('hidden.bs.modal', function (event) {
               console.log('modal cerrado');
              
 
-            })
+            }) */
             
-            $.ajax({
+            /* $.ajax({
                     url: myUrl + '/showTaza',
                     type: 'GET',
                     success: function (datos) {
                       inputTaza.value = datos;
                     }
-                });
+                }); */
 
             });
 
@@ -125,45 +86,45 @@
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="{{route('productos.index')}}">Productos&nbsp;<i class="fa fa-box"></i></a>
                 </li> -->
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="{{route('vender.index')}}">Vender&nbsp;<i class="fa fa-cart-plus"></i></a>
-                </li>
+                </li> -->
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('indexReactVender')}}">Vender R&nbsp;<i class="fa fa-cart-plus"></i></a>
+                    <a class="nav-link" href="{{route('indexReactVender')}}">Vender&nbsp;<i class="fa fa-cart-plus"></i></a>
                 </li>
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="{{route('ventas.index')}}">Ventas&nbsp;<i class="fa fa-list"></i></a>
                 </li> -->
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="{{route('ventaIndexReact')}}">Ventas&nbsp;<i class="fa fa-list"></i></a>
-                </li>
+                </li> -->
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="{{route('docEspera.index')}}">Presupuestos&nbsp;<i class="fa fa-list"></i></a>
                 </li> -->
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="{{route('docEsperaIndexReact')}}">Presupuestos&nbsp;<i class="fa fa-list"></i></a>
-                </li>
+                </li> -->
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="{{route('usuarios.index')}}">Usuarios&nbsp;<i class="fa fa-users"></i></a>
                 </li> -->
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="{{route('indexReactUser')}}">Usuarios&nbsp;<i class="fa fa-users"></i></a>
-                </li>
+                </li> -->
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="{{route('clientes.index')}}">Clientes&nbsp;<i class="fa fa-users"></i></a>
                 </li> -->
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="{{route('indexReactCliente')}}">Clientes&nbsp;<i class="fa fa-users"></i></a>
-                </li>
-                <li class="nav-item">
+                </li> -->
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="{{route('indexReact')}}">Productos&nbsp;<i class="fa fa-box"></i></a>
-                </li>
+                </li> -->
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="{{route('reportes')}}">Reportes&nbsp;<i class="fa fa-box"></i></a>
                 </li> -->
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="{{route('reportesReact')}}">Reportes&nbsp;<i class="fa fa-box"></i></a>
-                </li>
+                </li> -->
                
             @endguest
         </ul>
@@ -199,8 +160,8 @@
         <i class="fa fa-code text-white"></i>
         con
         <i class="fa fa-heart" style="color: #ff2b56;"></i>
-        por
-        <a class="text-white" href="//parzibyte.me/blog">Parzibyte</a>
+        
+        <a class="text-white" href=""></a>
         &nbsp;|&nbsp;
         <a target="_blank" class="text-white" href="//github.com/parzibyte/sistema_ventas_laravel">
             <i class="fab fa-github"></i>

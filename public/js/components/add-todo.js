@@ -21,6 +21,7 @@ export default class AddTodo {
 
   onClick(callback) {
     this.btn.onclick = () => {
+      //const btnClick = () => {
       if (title.value === '' || description.value === '') {
         this.alert.show('Title and description are required');
       } else {

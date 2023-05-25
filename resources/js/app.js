@@ -28,12 +28,44 @@ my scripts
 import React from 'react'
 import { render } from 'react-dom'
 import { createInertiaApp } from '@inertiajs/inertia-react'
+import { Link } from '@inertiajs/inertia-react'
+
+/* const uri = import.meta.env.APP_URL; */
+
+const uri = "http://localhost/sistemadeventas-git/public";
 
 createInertiaApp({
   resolve: name => require(`./Pages/${name}`),
   setup({ el, App, props }) {
     render(
       <div className="">
+        <nav className="navbar navbar-expand-lg bg-body-tertiary bg-dark" data-bs-theme="dark">
+            <div className="collapse navbar-collapse" id="">
+              <ul className="navbar-nav mr-auto">
+                    <li className="nav-item">
+                        <Link className="nav-link" style={{ color: "white" }} href={uri + "/indexReactVender"}>Vender &nbsp;<i class="fa fa-cart-plus"></i></Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" style={{ color: "white" }} href={uri + "/ventaIndexReact"}>Ventas &nbsp;<i class="fa fa-cart-plus"></i></Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" style={{ color: "white" }} href={uri + "/docEsperaIndexReact"}>Presupuestos &nbsp;<i class="fa fa-cart-plus"></i></Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" style={{ color: "white" }} href={uri + "/indexReactUser"}>Usuarios &nbsp;<i class="fa fa-cart-plus"></i></Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" style={{ color: "white" }} href={uri + "/indexReactCliente"}>Clientes &nbsp;<i class="fa fa-cart-plus"></i></Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" style={{ color: "white" }} href={uri + "/indexReact"}>Productos &nbsp;<i class="fa fa-cart-plus"></i></Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" style={{ color: "white" }} href={uri + "/reportesReact"}>Reportes &nbsp;<i class="fa fa-cart-plus"></i></Link>
+                    </li>
+              </ul>
+            </div>
+        </nav>
     <App {...props} />
     </div>, 
     el)

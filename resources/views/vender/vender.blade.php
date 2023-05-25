@@ -280,7 +280,7 @@
             
              
             <div class="">
-              <input type="hidden" class="btn btn-success" id="add" value="Agregar"/>
+              <input type="hidden" class="btn btn-success" id="addxxx" value="Agregar"/>
                
             </div>
           </div>

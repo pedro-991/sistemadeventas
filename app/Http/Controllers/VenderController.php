@@ -545,6 +545,7 @@ class VenderController extends Controller
      public function indexReact()
     {
         $url = env("APP_URL");
+        $taza = Taza::find(1);
         $license = License::find(1);
         //fecha expiracion = fecha update + dias expiracion
         $d = strtotime("$license->updated_at + $license->days days");
@@ -556,7 +557,8 @@ class VenderController extends Controller
         if ($fExpiration > $fActual) 
         {
             return Inertia::render('Vender', [
-                "url" => $url
+                "url" => $url,
+                "taza" => $taza->taza
             ]);
         } else {
 

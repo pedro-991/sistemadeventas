@@ -1,14 +1,26 @@
 import { Inertia } from '@inertiajs/inertia';
 import React, { Fragment, useState } from 'react'
 import { Link } from '@inertiajs/inertia-react'
+import Model from './model.js';
+import View from './view.js';
 
 
-const Vender = ({ url }) => {
+const Vender = ({ url, taza }) => {
 
   const [buscar_producto, setBuscar_producto] = useState('')
   const [buscar_cliente, setBuscar_cliente] = useState('')
   const [name_cliente, setName_cliente] = useState('')
   const [id_cliente, setId_cliente] = useState('')
+
+  document.addEventListener('inertia:success', (event) => {
+    console.log(`Starting a visit to `)
+    const model = new Model();
+    const view = new View();
+    model.setView(view);
+    view.setModel(model);
+
+    view.render();
+  })
 
   function buscar(e) { 
     
@@ -444,7 +456,8 @@ if (inputNameCliente.value === "")
                             <h5>
                                 <div className="row">
                                         <div className="col-md-2" id="ivaTotal">I.V.A.: Bs 0</div>
-                                        <input style={{ width: "20%" }} id="tazaNow" autocomplete="off" name="" type="text"
+                                        <input style={{ width: "20%" }} id="tazaNow" value={taza}
+                                        autocomplete="off" name="" type="text"
                                         className="col-md-3 form-control"
                                         placeholder="" readonly/>
                                 </div>
@@ -569,7 +582,10 @@ if (inputNameCliente.value === "")
                                         
                                         
                                                   <div className="">
-                                                    <input type="hidden" className="btn btn-success" id="add" value="Agregar"/>
+                                                    <input type="hidden" 
+                                                    className="btn btn-success" 
+                                                    id="add" value="Agregar"
+                                                    />
                                                     
                                                   </div>
                                       </div>
