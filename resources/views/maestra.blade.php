@@ -33,28 +33,28 @@
 
 <script>
   
-  $(document).ready(function(){
+  /* $(document).ready(function(){
 
     
         var inputTaza = document.getElementById('tazaNow');
         var myModalEl = document.getElementById('exampleModal');
         var myUrl = '{{env("APP_URL")}}';
                
-          /*   myModalEl.addEventListener('hidden.bs.modal', function (event) {
+            myModalEl.addEventListener('hidden.bs.modal', function (event) {
               console.log('modal cerrado');
              
 
-            }) */
+            })
             
-            /* $.ajax({
+            $.ajax({
                     url: myUrl + '/showTaza',
                     type: 'GET',
                     success: function (datos) {
                       inputTaza.value = datos;
                     }
-                }); */
+                });
 
-            });
+            }); */
 
 </script>
 @yield("headInertia")
@@ -80,18 +80,18 @@
                     </a>
                 </li>
             @else
-                <li class="nav-item">
+               <!--  <li class="nav-item">
                     <a class="nav-link" href="{{route('home')}}">Inicio&nbsp;<i class="fa fa-home"></i></a>
-                </li>
+                </li> -->
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="{{route('productos.index')}}">Productos&nbsp;<i class="fa fa-box"></i></a>
                 </li> -->
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="{{route('vender.index')}}">Vender&nbsp;<i class="fa fa-cart-plus"></i></a>
                 </li> -->
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="{{route('indexReactVender')}}">Vender&nbsp;<i class="fa fa-cart-plus"></i></a>
-                </li>
+                </li> -->
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="{{route('ventas.index')}}">Ventas&nbsp;<i class="fa fa-list"></i></a>
                 </li> -->

@@ -592,8 +592,9 @@ if (inputNameCliente.value === "")
                                     </form>
                                 </div>
 
-                                  <div className="">
-                                    <table className="table table-striped" id="table">
+                                  <div className="table-responsive" style={{ height: "300px"}}>
+                                    <table className="table table-sm table-dark table-striped" id="table"
+                                    style={{ overflowY: "auto", overflowX: "hidden"}}>
                                       <thead>
                                         <tr>
                                           <th scope="col">ID</th>
@@ -606,11 +607,11 @@ if (inputNameCliente.value === "")
                                           <th scope="col">TOTAL</th>
                                         
                                           <th scope="col">PRECIO+IVA</th>
+                                          <th scope="col"></th>
                                         </tr>
                                       </thead>
-                                      <tbody>
-                                        <div id="tablaVenta">
-                                        </div>
+                                      <tbody id="tablaVenta">
+                                        {/* here codec generated with javascript */}
                                       </tbody>
                                     </table>
                                   </div>
