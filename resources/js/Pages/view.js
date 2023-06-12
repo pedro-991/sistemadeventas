@@ -5,7 +5,8 @@ import Modal from './components/modal.js';
 export default class View {
   constructor() {
     this.model = null;
-    this.table = document.getElementById('table');
+    //this.table = document.getElementById('table');
+    this.table = document.getElementById('tablaVenta');
     this.addTodoForm = new AddTodo();
     this.modal = new Modal();
     this.btnCancelar = document.getElementById('btnCancelarVenta');
@@ -127,14 +128,14 @@ export default class View {
   }
 
   createRow(todo) {
-    const row = table.insertRow();
+    const row = this.table.insertRow();
     row.setAttribute('id', todo.id);
     row.innerHTML = `
       <td>${todo.title}</td>
       <td>${todo.codigo_barras}</td>
       <td>${todo.description}</td>
       <td>${todo.precio_venta}</td>
-      <td>${todo.cantidad}</td>
+      <td align="center">${todo.cantidad}</td>
       <td>${todo.iva}</td>
       <td>${todo.und}</td>
       <td>${(todo.precio_venta * todo.cantidad).toFixed(2)}</td>

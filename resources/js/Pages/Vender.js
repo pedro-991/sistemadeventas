@@ -13,7 +13,7 @@ const Vender = ({ url, taza }) => {
   const [id_cliente, setId_cliente] = useState('')
 
   document.addEventListener('inertia:success', (event) => {
-    console.log(`Starting a visit to `)
+    
     const model = new Model();
     const view = new View();
     model.setView(view);

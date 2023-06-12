@@ -21,6 +21,16 @@ Auth::routes([
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+/* *****
+********************************
+*controlador HomeController
+********************************
+* ******/
+
+Route::get('/respaldarIndex', 'HomeController@respaldarIndex')->name('respaldarIndex');
+Route::get('/respaldar', 'HomeController@respaldar')->name('respaldar');
+//ruta para mostrar mensaje Respaldo realizado
+Route::get("/pantalla", "HomeController@pantalla")->name("pantalla");
 
 /* ***
 *****************************
@@ -176,6 +186,7 @@ Route::get('/editUsuarioReact/{id}', "UserController@editInertia");
 Route::post('/updateUsuarioReact/{id}', "UserController@updateInertia");
 //ruta para to delete with react
 Route::get('/deleteUsuarioReact/{id}', "UserController@destroyInertia");
+
 
 //Route::post("/mostrarSesion", "VenderController@mostrarSesion")->name("mostrarSesion");
 Route::get("/inertia", function () {
