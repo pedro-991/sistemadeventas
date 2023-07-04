@@ -115,7 +115,8 @@ const Vender = ({ url, taza }) => {
                     data:  {txtcodigo : buscar_cliente},
                     success: function (datos) {
                         $("#contentTable").html(datos);
-                        openmodal();
+                        //openmodal();
+                        $('#exampleModal').modal('toggle');
                     }
                 });
                 return false;
@@ -597,7 +598,7 @@ if (inputNameCliente.value === "")
                                     style={{ overflowY: "auto", overflowX: "hidden"}}>
                                       <thead>
                                         <tr>
-                                          <th scope="col">ID</th>
+                                          {/* <th scope="col">ID</th> */}
                                           <th scope="col">Código</th>
                                           <th scope="col">Description</th>
                                           <th scope="col">Precio</th>

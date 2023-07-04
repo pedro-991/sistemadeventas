@@ -1,5 +1,5 @@
-import Model from './model.js';
-import View from './view.js';
+import Model from '../../resources/js/Pages/model.js';
+import View from '../../resources/js/Pages/view.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const model = new Model();

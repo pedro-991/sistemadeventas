@@ -48,6 +48,10 @@ Route::post("/guardarVenta", "VenderController@guardarVenta")->name("guardarVent
 Route::post("/renovacionLicencia", "VenderController@renovacionLicencia")->name("renovacionLicencia");
 //ruta para mostrar vender con react
 Route::get("/indexReactVender", "VenderController@indexReact")->name("indexReactVender");
+//ruta para productos en la tabla
+Route::get("/productosTabla", "VenderController@productosTabla")->name("productosTabla");
+//ruta para actualizar productos en la tabla
+Route::post("/productosTablaUpdate", "VenderController@productosTablaUpdate")->name("productosTablaUpdate");
 
 
 

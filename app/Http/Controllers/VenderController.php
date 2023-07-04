@@ -551,4 +551,20 @@ class VenderController extends Controller
         }
     }
 
+    /* esta funcion productosTablaUpdate
+    nunca la utilice, supuestamente era para
+    editar la tabla con jquery */
+
+    public function productosTablaUpdate(Request $request)
+    {
+        if ($request->ajax()) {
+            /* User::find($request->pk)
+                ->update([
+                    $request->name => $request->value
+                ]); */
+  
+            return response()->json(['success' => true]);
+        }
+    }
+
 }

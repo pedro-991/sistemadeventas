@@ -132,7 +132,8 @@ export default class View {
     const row = this.table.insertRow();
     row.setAttribute('id', todo.id);
     row.innerHTML = `
-      <td>${todo.title}</td>
+      
+      <td style="display: none;">${todo.title}</td>
       <td>${todo.codigo_barras}</td>
       <td>${todo.description}</td>
       <td>${todo.precio_venta}</td>
@@ -150,6 +151,26 @@ export default class View {
 
       </th>
     `;
+
+    const editBtnCant = document.createElement('button');
+    editBtnCant.classList.add('btn', 'btn-primary', 'mb-1');
+    editBtnCant.innerHTML = 'Cant.';
+    editBtnCant.setAttribute('data-bs-toggle', 'modal');
+    editBtnCant.setAttribute('data-bs-target', '#modal');
+    editBtnCant.onclick = () => this.modal.setValues({
+      id: todo.id,
+      title: row.children[0].innerText,
+      codigo_barras: row.children[1].innerText,
+      description: row.children[2].innerText,
+      precio_venta: row.children[3].innerText,
+      cantidad: row.children[4].innerText,
+      iva: row.children[5].innerText,
+      und: row.children[6].innerText,
+      total: row.children[7].innerText,
+      referventa: row.children[9].innerText,
+      refercompra: row.children[10].innerText,
+    });
+    row.children[11].appendChild(editBtnCant);
 
     const editBtn = document.createElement('button');
     editBtn.classList.add('btn', 'btn-primary', 'mb-1');

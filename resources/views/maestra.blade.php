@@ -21,11 +21,14 @@
             padding-bottom: 70px;
         }
     </style>
-     <!-- Scripts -->
-     <script src="{{ asset('js/app.js') }}" defer></script>
-     <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script> 
-     <script src="{{ asset('js/index.js') }}" type="module"></script>
+      <!-- Scripts -->
+      <script src="{{ asset('js/app.js') }}" defer></script>
+      <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script> 
+      <script src="{{ asset('js/index.js') }}" type="module"></script>
       <script src="{{ asset('js/myscript.js') }}" defer></script> 
+
+      
+
      <!--<script src="{{ asset('js/jquery-3.3.1.min.js') }}" defer></script> -->
        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
      
@@ -163,7 +166,7 @@
         
         <a class="text-white" href=""></a>
         &nbsp;|&nbsp;
-        <a target="_blank" class="text-white" href="//github.com/parzibyte/sistema_ventas_laravel">
+        <a target="_blank" class="text-white" href="#">
             <i class="fab fa-github"></i>
         </a>
     </span>
@@ -334,4 +337,157 @@
       </div>
     </div>
   </div>
+  <!-- fin modal 2 -->
+
+  <!-- Modal 3 edit cantidad -->
+  <div
+    class="modal fade"
+    id="modalEditCant"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            Edit Cantidad
+          </h5>
+          <button
+            type="button"
+            class="close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-danger d-none" role="alert" id="modal-alert">
+            A simple danger alert—check it out!
+          </div>
+          <form>
+            
+              
+              <input
+                id="modal-title2"
+                type="hidden"
+                class="form-control"
+                placeholder=""
+                readonly
+              />
+            
+
+            
+              
+              <input
+                id="modal-codigo_barras2"
+                type="hidden"
+                class="form-control"
+                placeholder="Do Something"
+                readonly
+              />
+            
+
+            
+              
+              <input
+                id="modal-description2"
+                type="hidden"
+                class="form-control"
+                placeholder="Do Something"
+                readonly
+              />
+            
+
+            <div class="form-group">
+              <label>Precio</label>
+              <div class="row">
+                <input
+                  id="modal-precio_venta2"
+                  type="text"
+                  class="form-control col-md"
+                  placeholder="Do Something"
+                />
+                <input type="button" id="roundIvaModal2" class="btn btn-success col-md-3" value="R iva" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Precio + Iva</label>
+              <div class="row">
+                <input
+                  id="modal-precio_venta_iva2"
+                  type="text"
+                  class="form-control col-md"
+                  placeholder="Do Something"
+                  readonly
+                />
+                <input type="text" id="precioDollarModal2" class="form-control-sm col-md-3" value=""/>
+                <input type="button" id="roundDollarModal2" class="btn btn-success col-md-3" value="+" />
+            </div>
+            </div>
+
+            
+              
+              <input
+                id="modal-compra-dollar2"
+                type="hidden"
+                class="form-control"
+                placeholder=""
+                readonly
+              />
+            
+
+            
+              
+              <input
+                id="modal-venta-dollar2"
+                type="hidden"
+                class="form-control"
+                placeholder=""
+                readonly
+              />
+            
+
+            <div class="form-group">
+              <label>Cantidad</label>
+              <input
+                id="modal-cantidad2"
+                type="number"
+                class="form-control"
+                placeholder="Do Something"
+                autocomplete="off"
+              />
+            </div>
+
+            <div class="form-group">
+              <label>I.V.A</label>
+              <input
+                id="modal-iva2"
+                type="text"
+                class="form-control"
+                placeholder="Do Something"
+                readonly
+              />
+            </div>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modalEditCant">
+            Close
+          </button>
+          <button type="button" class="btn btn-info" id="modal-btn2">
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- fin modal 3 -->
+
+
 </html>
