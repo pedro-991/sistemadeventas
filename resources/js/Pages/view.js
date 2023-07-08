@@ -49,6 +49,17 @@ export default class View {
     todos.forEach((todo) => this.createRow(todo));
   }
 
+  /* funcion para renderizar la tabla de nuevo
+  sin eliminarla del localstorage
+  y poder colocarle los numeros de item */
+  renderGo() {
+    
+    const todos = this.model.getTodos();
+    const arrayId = this.model.removeTodoTableGo();
+    arrayId.forEach((id) => document.getElementById(id).remove());
+    todos.forEach((todo, index) => this.createRowGo(todo, index));
+  }
+
   addTodo(title, codigo_barras, description, precio_venta, cantidad, iva, und, total, referventa, refercompra) {
     //console.log(refercompra);
     //console.log(description);
@@ -85,6 +96,7 @@ export default class View {
     this.model.removeTodo(id);
     document.getElementById(id).remove();
     this.showTotal();
+    this.renderGo();
   }
 
   removeTodoCancelar() {
@@ -140,6 +152,7 @@ export default class View {
     row.setAttribute('id', todo.id);
     row.innerHTML = `
       
+      <th>${todo.id+1}</th>
       <td style="display: none;">${todo.title}</td>
       <td>${todo.codigo_barras}</td>
       <td>${todo.description}</td>
@@ -166,18 +179,18 @@ export default class View {
     editBtnCant.setAttribute('data-bs-target', '#modalEditCant');
     editBtnCant.onclick = () => this.modalcant.setValues({
       id: todo.id,
-      title: row.children[0].innerText,
-      codigo_barras: row.children[1].innerText,
-      description: row.children[2].innerText,
-      precio_venta: row.children[3].innerText,
-      cantidad: row.children[4].innerText,
-      iva: row.children[5].innerText,
-      und: row.children[6].innerText,
-      total: row.children[7].innerText,
-      referventa: row.children[9].innerText,
-      refercompra: row.children[10].innerText,
+      title: row.children[1].innerText,
+      codigo_barras: row.children[2].innerText,
+      description: row.children[3].innerText,
+      precio_venta: row.children[4].innerText,
+      cantidad: row.children[5].innerText,
+      iva: row.children[6].innerText,
+      und: row.children[7].innerText,
+      total: row.children[8].innerText,
+      referventa: row.children[10].innerText,
+      refercompra: row.children[11].innerText,
     });
-    row.children[11].appendChild(editBtnCant);
+    row.children[12].appendChild(editBtnCant);
 
     const editBtn = document.createElement('button');
     editBtn.classList.add('btn', 'btn-primary', 'mb-1');
@@ -186,23 +199,97 @@ export default class View {
     editBtn.setAttribute('data-bs-target', '#modal');
     editBtn.onclick = () => this.modal.setValues({
       id: todo.id,
-      title: row.children[0].innerText,
-      codigo_barras: row.children[1].innerText,
-      description: row.children[2].innerText,
-      precio_venta: row.children[3].innerText,
-      cantidad: row.children[4].innerText,
-      iva: row.children[5].innerText,
-      und: row.children[6].innerText,
-      total: row.children[7].innerText,
-      referventa: row.children[9].innerText,
-      refercompra: row.children[10].innerText,
+      title: row.children[1].innerText,
+      codigo_barras: row.children[2].innerText,
+      description: row.children[3].innerText,
+      precio_venta: row.children[4].innerText,
+      cantidad: row.children[5].innerText,
+      iva: row.children[6].innerText,
+      und: row.children[7].innerText,
+      total: row.children[8].innerText,
+      referventa: row.children[10].innerText,
+      refercompra: row.children[11].innerText,
     });
-    row.children[11].appendChild(editBtn);
+    row.children[12].appendChild(editBtn);
 
     const removeBtn = document.createElement('button');
     removeBtn.classList.add('btn', 'btn-danger', 'mb-1', 'ml-1');
     removeBtn.innerHTML = '<i class="fa fa-trash"></i>';
     removeBtn.onclick = () => this.removeTodo(todo.id);
-    row.children[11].appendChild(removeBtn);
+    row.children[12].appendChild(removeBtn);
+    this.renderGo();
   }
+
+  createRowGo(todo, contador) {
+    const row = this.table.insertRow();
+    row.setAttribute('id', todo.id);
+    row.innerHTML = `
+      
+      <th>${contador+1}</th>
+      <td style="display: none;">${todo.title}</td>
+      <td>${todo.codigo_barras}</td>
+      <td>${todo.description}</td>
+      <td>${todo.precio_venta}</td>
+      <td align="center">${todo.cantidad}</td>
+      <td>${todo.iva}</td>
+      <td>${todo.und}</td>
+      <td>${(todo.precio_venta * todo.cantidad).toFixed(2)}</td>
+      <th>${((todo.iva/100+1) * todo.precio_venta).toFixed(2)}</th>
+      <th style="display: none;">${todo.referventa}</th>
+      <th style="display: none;">${todo.refercompra}</th>
+      
+
+      
+      <th class="text-right">
+
+      </th>
+    `;
+
+    const editBtnCant = document.createElement('button');
+    editBtnCant.classList.add('btn', 'btn-primary', 'mb-1');
+    editBtnCant.innerHTML = 'Cant.';
+    editBtnCant.setAttribute('data-bs-toggle', 'modal');
+    editBtnCant.setAttribute('data-bs-target', '#modalEditCant');
+    editBtnCant.onclick = () => this.modalcant.setValues({
+      id: todo.id,
+      title: row.children[1].innerText,
+      codigo_barras: row.children[2].innerText,
+      description: row.children[3].innerText,
+      precio_venta: row.children[4].innerText,
+      cantidad: row.children[5].innerText,
+      iva: row.children[6].innerText,
+      und: row.children[7].innerText,
+      total: row.children[8].innerText,
+      referventa: row.children[10].innerText,
+      refercompra: row.children[11].innerText,
+    });
+    row.children[12].appendChild(editBtnCant);
+
+    const editBtn = document.createElement('button');
+    editBtn.classList.add('btn', 'btn-primary', 'mb-1');
+    editBtn.innerHTML = '<i class="fa fa-edit" aria-hidden="true"></i>';
+    editBtn.setAttribute('data-bs-toggle', 'modal');
+    editBtn.setAttribute('data-bs-target', '#modal');
+    editBtn.onclick = () => this.modal.setValues({
+      id: todo.id,
+      title: row.children[1].innerText,
+      codigo_barras: row.children[2].innerText,
+      description: row.children[3].innerText,
+      precio_venta: row.children[4].innerText,
+      cantidad: row.children[5].innerText,
+      iva: row.children[6].innerText,
+      und: row.children[7].innerText,
+      total: row.children[8].innerText,
+      referventa: row.children[10].innerText,
+      refercompra: row.children[11].innerText,
+    });
+    row.children[12].appendChild(editBtn);
+
+    const removeBtn = document.createElement('button');
+    removeBtn.classList.add('btn', 'btn-danger', 'mb-1', 'ml-1');
+    removeBtn.innerHTML = '<i class="fa fa-trash"></i>';
+    removeBtn.onclick = () => this.removeTodo(todo.id);
+    row.children[12].appendChild(removeBtn);
+  }
+
 }

@@ -1,22 +1,22 @@
 import Alert from './alert.js';
 
-export default class Modal {
+export default class Modalcant {
   constructor() {
-    this.title = document.getElementById('modal-title');
-    this.codigo_barras = document.getElementById('modal-codigo_barras');
-    this.description = document.getElementById('modal-description');
-    this.precio_venta = document.getElementById('modal-precio_venta');
-    this.precio_venta_iva = document.getElementById('modal-precio_venta_iva');
-    this.cantidad = document.getElementById('modal-cantidad');
-    this.iva = document.getElementById('modal-iva');
-    this.btn = document.getElementById('modal-btn');
+    this.title = document.getElementById('modal-title2');
+    this.codigo_barras = document.getElementById('modal-codigo_barras2');
+    this.description = document.getElementById('modal-description2');
+    this.precio_venta = document.getElementById('modal-precio_venta2');
+    this.precio_venta_iva = document.getElementById('modal-precio_venta_iva2');
+    this.cantidad = document.getElementById('modal-cantidad2');
+    this.iva = document.getElementById('modal-iva2');
+    this.btn = document.getElementById('modal-btn2');
     this.alert = new Alert('modal-alert');
     this.und = "";
     this.total = "";
-    this.referventa = document.getElementById('modal-venta-dollar');
-    this.refercompra = document.getElementById('modal-compra-dollar');
+    this.referventa = document.getElementById('modal-venta-dollar2');
+    this.refercompra = document.getElementById('modal-compra-dollar2');
     this.tazaNow = document.getElementById('tazaNow');
-    this.precio_venta_dollar = document.getElementById('precioDollarModal');
+    this.precio_venta_dollar = document.getElementById('precioDollarModal2');
 
     this.todo = null;
   }
@@ -44,7 +44,7 @@ export default class Modal {
         return;
       }
 
-      $('#modal').modal('toggle');
+      $('#modalEditCant').modal('toggle');
 
       callback(this.todo.id, {
         title: this.title.value,

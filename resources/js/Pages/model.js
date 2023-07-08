@@ -57,6 +57,7 @@ export default class Model {
     //console.log(values);
     
     //this.save();
+    this.save();
     //this.view.showTotal();
   }
 
@@ -84,6 +85,7 @@ export default class Model {
     this.todos.push(todo);
     //console.log(todo);
     //this.save();
+    this.save();
 
     return {...todo};
   }
@@ -103,6 +105,21 @@ export default class Model {
     this.todos.splice(0, this.todos.length);
       
     this.save();
+    
+    return this.arrayId;
+  }
+
+  /* esta funcion es para remover solo la tabla
+  sin eliminar los datos del vector */
+  removeTodoTableGo() {
+    //console.log('soy remove todo table');
+    this.arrayId = [];
+    this.todos.forEach((todo) => {
+      this.arrayId.push(todo.id);
+    });
+    //this.todos.splice(0, this.todos.length);
+      
+    //this.save();
     
     return this.arrayId;
   }

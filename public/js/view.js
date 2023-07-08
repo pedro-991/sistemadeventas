@@ -1,15 +1,16 @@
 import AddTodo from './components/add-todo.js';
 import Modal from './components/modal.js';
+import Modalcant from './components/modalcant.js';
 
 
 export default class View {
   constructor() {
     this.model = null;
     //this.table = document.getElementById('table');
-    //this.table = document.getElementsByTagName("tbody")[0];
     this.table = document.getElementById('tablaVenta');
     this.addTodoForm = new AddTodo();
     this.modal = new Modal();
+    this.modalcant = new Modalcant();
     this.btnCancelar = document.getElementById('btnCancelarVenta');
     this.btnCancelar.onclick = () => this.removeTodoCancelar();
     this.h2Total = document.getElementById('h2Total');
@@ -25,6 +26,12 @@ export default class View {
     });
   
       this.modal.onClick((id, values) => 
+    {
+      //this.showTotal();
+      this.editTodo(id, values);
+    });
+
+    this.modalcant.onClick((id, values) => 
     {
       //this.showTotal();
       this.editTodo(id, values);
@@ -156,8 +163,8 @@ export default class View {
     editBtnCant.classList.add('btn', 'btn-primary', 'mb-1');
     editBtnCant.innerHTML = 'Cant.';
     editBtnCant.setAttribute('data-bs-toggle', 'modal');
-    editBtnCant.setAttribute('data-bs-target', '#modal');
-    editBtnCant.onclick = () => this.modal.setValues({
+    editBtnCant.setAttribute('data-bs-target', '#modalEditCant');
+    editBtnCant.onclick = () => this.modalcant.setValues({
       id: todo.id,
       title: row.children[0].innerText,
       codigo_barras: row.children[1].innerText,

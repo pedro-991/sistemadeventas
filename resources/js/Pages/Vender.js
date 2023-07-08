@@ -599,6 +599,7 @@ if (inputNameCliente.value === "")
                                       <thead>
                                         <tr>
                                           {/* <th scope="col">ID</th> */}
+                                          <th scope="col">Item</th>
                                           <th scope="col">Código</th>
                                           <th scope="col">Description</th>
                                           <th scope="col">Precio</th>
