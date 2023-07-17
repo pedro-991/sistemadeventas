@@ -6,6 +6,7 @@ import Modalcant from './components/modalcant.js';
 export default class View {
   constructor() {
     this.model = null;
+    this.x = 0;
     //this.table = document.getElementById('table');
     this.table = document.getElementById('tablaVenta');
     this.addTodoForm = new AddTodo();
@@ -46,6 +47,8 @@ export default class View {
 
   render() {
     const todos = this.model.getTodos();
+    console.log("soy render");
+    console.log(todos);
     todos.forEach((todo) => this.createRow(todo));
   }
 
@@ -55,9 +58,26 @@ export default class View {
   renderGo() {
     
     const todos = this.model.getTodos();
+    //const todosCopy = {...todos};
+    console.log("soy renderGo page");
     const arrayId = this.model.removeTodoTableGo();
     arrayId.forEach((id) => document.getElementById(id).remove());
+    const todosCopy = this.model.getTodos();
+    console.log("soy todosCopy");
+    console.log(todosCopy);
     todos.forEach((todo, index) => this.createRowGo(todo, index));
+  }
+
+  renderEnlace(variablea) {
+    this.model.save2(variablea);
+    const contador = this.model.getContador();
+    console.log('soy renderEnlace en page');
+    console.log(contador);
+    //console.log('soy variablea ' + variablea);
+    const todos = this.model.getTodos();
+    if (contador == null) {
+    todos.forEach((todo, index) => this.createRowGo(todo, index));
+    }
   }
 
   addTodo(title, codigo_barras, description, precio_venta, cantidad, iva, und, total, referventa, refercompra) {
@@ -66,6 +86,7 @@ export default class View {
     //console.log(referventa);
     const todo = this.model.addTodo(title, codigo_barras, description, precio_venta, cantidad, iva, und, total, referventa, refercompra);
     //this.descripcion = "";
+    this.model.resetContador();
     this.showTotal();
     this.createRow(todo);
   }
@@ -80,15 +101,15 @@ export default class View {
     this.model.editTodo(id, values);
     this.showTotal();
     const row = document.getElementById(id);
-    row.children[0].innerText = values.title;
-    row.children[1].innerText = values.codigo_barras;
-    row.children[2].innerText = values.description;
-    row.children[3].innerText = values.precio_venta;
-    row.children[4].innerText = values.cantidad;
-    row.children[5].innerText = values.iva;
-    row.children[7].innerText = (values.precio_venta * values.cantidad).toFixed(2);
-    row.children[9].innerText = values.referventa;
-    row.children[10].innerText = values.refercompra;
+    row.children[1].innerText = values.title;
+    row.children[2].innerText = values.codigo_barras;
+    row.children[3].innerText = values.description;
+    row.children[4].innerText = values.precio_venta;
+    row.children[5].innerText = values.cantidad;
+    row.children[6].innerText = values.iva;
+    row.children[8].innerText = (values.precio_venta * values.cantidad).toFixed(2);
+    row.children[10].innerText = values.referventa;
+    row.children[11].innerText = values.refercompra;
     
   }
 
@@ -221,6 +242,12 @@ export default class View {
   }
 
   createRowGo(todo, contador) {
+    //al llamar esta funcion
+    //me crea el producto que recien
+    //agrego pero no todos los que
+    //estan en el vector
+    console.log("soy createRowGo page");
+    console.log(todo);
     const row = this.table.insertRow();
     row.setAttribute('id', todo.id);
     row.innerHTML = `

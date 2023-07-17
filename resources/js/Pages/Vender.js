@@ -12,24 +12,47 @@ const Vender = ({ url, taza }) => {
   const [name_cliente, setName_cliente] = useState('')
   const [id_cliente, setId_cliente] = useState('')
 
-  document.addEventListener('inertia:success', (event) => {
+  let variablea = 1;
+
+  document.addEventListener('inertia:finish', (event) => {
     
     const model = new Model();
     const view = new View();
     model.setView(view);
     view.setModel(model);
 
-    view.render();
+    /* view.render(); */
+
+    view.renderEnlace(variablea);
+
+    
+    setTimeout(() => {
+        
+      model.resetContador();
+      
+    }, 5000);
   })
+
+  function demorar() {
+    const model = new Model();
+    const view = new View();
+    model.setView(view);
+    view.setModel(model);
+    setTimeout(() => {
+        
+      model.resetContador();
+      
+    }, 10000);
+    
+  }
 
   function buscar(e) { 
     
-                          console.log(e) 
+                           
 
                           if (e.key === "Enter") {
 
-                                    let a = "hola"
-                                    console.log(a);
+                                    
 
                                     $.ajaxSetup({
                                       headers: {

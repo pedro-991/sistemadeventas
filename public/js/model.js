@@ -36,8 +36,27 @@ export default class Model {
     localStorage.setItem('todos', JSON.stringify(this.todos));
   }
 
+  save2(conteo) {
+    if (!this.contador || this.contador.length < 1) {
+      localStorage.setItem('conteo', JSON.stringify(conteo));
+
+      } else {
+        conteo++
+        localStorage.setItem('conteo', JSON.stringify(conteo));
+      }
+    
+  }
+
+  resetContador() {
+    localStorage.setItem('conteo', null);
+  }
+
   getTodos() {
     return this.todos.map((todo) => ({...todo}));
+  }
+
+  getContador() {
+    return this.contador;
   }
 
   findTodo(id) {
@@ -57,6 +76,7 @@ export default class Model {
     //console.log(values);
     
     //this.save();
+    this.save();
     //this.view.showTotal();
   }
 
@@ -84,6 +104,7 @@ export default class Model {
     this.todos.push(todo);
     //console.log(todo);
     //this.save();
+    this.save();
 
     return {...todo};
   }
@@ -103,6 +124,21 @@ export default class Model {
     this.todos.splice(0, this.todos.length);
       
     this.save();
+    
+    return this.arrayId;
+  }
+
+  /* esta funcion es para remover solo la tabla
+  sin eliminar los datos del vector */
+  removeTodoTableGo() {
+    //console.log('soy remove todo table');
+    this.arrayId = [];
+    this.todos.forEach((todo) => {
+      this.arrayId.push(todo.id);
+    });
+    //this.todos.splice(0, this.todos.length);
+      
+    //this.save();
     
     return this.arrayId;
   }

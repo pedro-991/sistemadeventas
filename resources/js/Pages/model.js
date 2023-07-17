@@ -4,6 +4,7 @@ export default class Model {
     this.totalesTable = [];
     this.view = null;
     this.todos = JSON.parse(localStorage.getItem('todos'));
+    this.contador = JSON.parse(localStorage.getItem('conteo'));
     if (!this.todos || this.todos.length < 1) {
      /*  this.todos = [
         {
@@ -36,8 +37,27 @@ export default class Model {
     localStorage.setItem('todos', JSON.stringify(this.todos));
   }
 
+  save2(conteo) {
+    if (!this.contador || this.contador.length < 1) {
+      localStorage.setItem('conteo', JSON.stringify(conteo));
+
+      } else {
+        conteo++
+        localStorage.setItem('conteo', JSON.stringify(conteo));
+      }
+    
+  }
+
+  resetContador() {
+    localStorage.setItem('conteo', null);
+  }
+
   getTodos() {
     return this.todos.map((todo) => ({...todo}));
+  }
+
+  getContador() {
+    return this.contador;
   }
 
   findTodo(id) {
