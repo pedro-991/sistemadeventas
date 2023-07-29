@@ -10,11 +10,18 @@ use Illuminate\Support\Facades\DB;
 use Mike42\Escpos\PrintConnectors\FilePrintConnector;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 use Mike42\Escpos\Printer;
+require env("LIBRERIA") . '\TfhkaPHP.php';
+use Tfhka;
 //require 'TfhkaPHP.php';
 //use IntTFHKA;
 //include_once (__DIR__ . '/../../../vendor/IntTFHKA/TfhkaPHP.php');
 
 //use Vendor\IntTFHKA\TfhkaPHP;
+
+//aqui va una clase tfhka abajo
+
+/* ********************************
+**********************************
 
 class Tfhka
 {
@@ -141,7 +148,8 @@ $sentencia = "IntTFHKA.exe UploadStatusCmd(".$cmd." ".$file;
 shell_exec($sentencia);
 
 $repStErr = ""; 
-$repuesta = file('StatusData.txt');
+//$repuesta = file('StatusData.txt');
+$repuesta = file('Status.txt');
 $lineas = count($repuesta);
 for($i=0; $i < $lineas; $i++)
 {
@@ -158,6 +166,19 @@ for($i=0; $i < $lineas; $i++)
  } 
  
 return $rep;
+
+}
+
+function UploadStatusCmdCustom($cmd = "")
+{
+
+$sentencia = "IntTFHKA.exe UploadStatusCmd(".$cmd;
+
+shell_exec($sentencia);
+
+$repStErr = ""; 
+//$repuesta = file('StatusData.txt');
+
 
 }
 //Funci�n que sube al PC reportes X � Z de la impresora 
@@ -190,6 +211,13 @@ for($i=0; $i < $lineas; $i++)
  return $rep;
 }
 }
+
+**********************************
+**********************************/
+
+
+
+//aqui va una clase tfhka arriba
 
 class VentasController extends Controller
 {
@@ -684,6 +712,8 @@ $write = fputs($fp, $cmd);
 
              $descripcionFinal = substr($producto->descripcion, 0, 50);
 
+             //$descripcionFinal = substr($producto->descripcion, 0, 14); //se limito a 14 para pruebas con la impresora virtual
+
 
             
                  $factura[$conteo] = $taza . $precioFinal . $cantidadFinal . $descripcionFinal . "\n";
@@ -772,20 +802,13 @@ $write = fputs($fp, $cmd);
                 //si el efectivo es mayor al total
                 //pero no creo que sea necesario
                 if ($venta->efectivo == $venta->total) {
-                    $factura[$conteo] = "101\n";
-                    $conteo++;
-                    $factura[$conteo] = "199";
+                    $factura[$conteo] = "101\n";      //se le quito \n para pruebas $factura[$conteo] = "101\n";
+                    $conteo++;                    //se comento para pruebas con la impresora virtual
+                    $factura[$conteo] = "199";    //se comento para pruebas con la impresora virtual
                 };
 
                 
 
-       /*  $factura = array(0 => "! 0000001000 00001000 HarinaLaravel\n",
-        1 => " 000000150000001500Jamon\n",
-        2 => "\"000000205000003000Patilla\n",
-        3 => "#000005000000001000Caja de Whisky\n",
-        4 => "101"); */
-        //agregar aqui el comando 199 con pruebas con la impresora 
-        //fisica
 $file = "Factura.txt";	
 $fp = fopen($file, "w+");
 $write = fputs($fp, "");
@@ -799,23 +822,302 @@ $write = fputs($fp, $cmd);
     
     $out =  $itObj->SendFileCmd($file);
 
+    $respuestaS1 =  $itObj->UploadStatusCmdCustom("S1");
+
+    $numInvoice =  substr($respuestaS1, 21, 8);
+
+    //guardar la venta con el numero
+    //de factura actualizado
+    Venta::where('id', $id)->update(['factura'=>$numInvoice]);
+
+    $fechatest = date('d-m-Y', $venta->created_at->getTimestamp());
+
+    //$timeunix = $venta->created_at->getTimestamp();
+    
 
     //return redirect()->back()->with("mensaje", "Ticket impreso");
     //enviar aqui a una pagina que diga ticket impreso
-    return redirect()->route("impreso");
+    return redirect()->route("impreso", ["respuestaS1" => $numInvoice]);
 
 
 
     }
 
-    public function impreso()
+    /* funcion para imprimir nota de credito
+    *****************************************/
+
+    public function notaCreditoPrint($id) {
+
+        //$venta = Venta::findOrFail($request->get("id"));
+        $venta = Venta::findOrFail($id);
+
+        $numInvoice = $venta->factura;
+
+        /* 
+        conseguir el numero de factura
+        */
+
+        $array = str_split($numInvoice); //divide la factura en array donde cada digito es una posicion
+	
+            
+            
+            
+            if (count($array) < 8) { //si la cantidad de posiciones del array es menor a 11
+                while (count($array) < 8){ //mientras la cantidad de posiciones del array sea menor a 11
+                    array_unshift($array, "0"); //voy añadiendo un cero a la izquierda del array
+                }
+                
+            }
+            
+            
+            $numInvoiceFinal = implode($array); //reuno otra vez cada posicion del array en el numero de factura
+
+
+
+        /* 
+        arriba conseguir el numero de factura
+        */
+
+        $itObj = new Tfhka();
+
+        $out = "";
+
+        $total = 0;
+
+        $factura = array();
+
+        $conteo = 0;
+
+        //identificacion
+        $factura[$conteo] = "iR*" . $venta->cliente->documento . "\n";
+        $conteo++;
+        //razon social
+        $factura[$conteo] = "iS*" . $venta->cliente->nombre . "\n";
+        $conteo++;
+        //linea adicional 01 se puede usar para la direccion
+        $factura[$conteo] = "i01" . $venta->cliente->direccion . "\n";
+        $conteo++;
+        //numero de factura afectada para hacer la nota de credito
+        $factura[$conteo] = "iF*" . $numInvoiceFinal . "\n";
+        $conteo++;
+        //fecha de factura afectada
+        $factura[$conteo] = "iD*" . date('d-m-Y', $venta->created_at->getTimestamp()) . "\n";
+        $conteo++;
+        //numero de registro de la maquina fiscal
+        $factura[$conteo] = "iI*" . env("MAQUINAFISCAL") . "\n";
+        $conteo++;
+
+        foreach ($venta->productos as $producto) {
+                $subtotal = $producto->cantidad * $producto->precio;
+                $total += $subtotal;
+                //como yo se donde esta el valor iva
+                //$producto->iva
+
+                // convertir iva
+
+                if ($producto->iva == 0) {
+                    $taza = "d0";
+                }
+
+                if ($producto->iva == 16) {
+                    $taza = "d1";
+                }
+
+                //convertir precio
+                //precio = ?.00 ejemplo: 15.14, 245.45, 1247.44
+
+                $array = str_split($producto->precio);
+        
+                
+                $resta = count($array) - 3;
+                
+                unset($array[$resta]);
+                
+                
+                if (count($array) < 10) {
+                    while (count($array) < 10){
+                        array_unshift($array, "0");
+                    }
+                    
+                }
+                
+                
+                $precioFinal = implode($array);
+
+                /* 
+                ---------------------------
+                */
+                /* aqui abajo
+                convertir cantidad */
+                
+
+                $array = str_split($producto->cantidad);
+        
+                
+                $resta = count($array) - 3;
+                
+                unset($array[$resta]);
+                
+                array_push($array, "0");
+                
+            
+                
+                if (count($array) < 8) {
+                    while (count($array) < 8){
+                        array_unshift($array, "0");
+                    }
+                    
+                }
+                
+                
+                $cantidadFinal = implode($array);
+
+                /* 
+                ############################
+                */
+
+                /* -----------------
+                largo de descripcion
+                limitar el largo de descripcion
+                */
+
+                $descripcionFinal = substr($producto->descripcion, 0, 50);
+
+                //$descripcionFinal = substr($producto->descripcion, 0, 14); //se limito a 14 para pruebas con la impresora virtual
+
+
+            
+                 $factura[$conteo] = $taza . $precioFinal . $cantidadFinal . $descripcionFinal . "\n";
+            
+        
+                 $conteo++;
+            }
+
+                /* **********************************
+                aqui colocar un if
+                si efectivo 1 es mayor a cero quiere decir que tiene
+                que pagar en efectivo 1 entonces
+                se hace un pago parciel en bs del efectivo 1
+                y luego se hace el pago directo en dolares
+                *************************************
+                */
+
+                /* ¿como hago cuando el efectivo es mayor al total
+                en este caso todo se paga en efectivo creo no equivocarme
+                y entra en el mismo caso
+                "si efectivo 1 es mayor a cero y ademas
+                es igual al total + iva"
+                */
+
+                if ($venta->efectivo > 0 && $venta->efectivo < $venta->total) {
+                    //pasar de 5.00 a 000000000500
+                    //2 01 0000000005 00
+                    //comando pago parcial -> 2 codigo pago -> 01 monto -> 0000000005 decimales -> 00
+                    
+                    //divido efectivo en un array de un caracter en cada posicion
+                    $array = str_split($venta->efectivo); 
+            
+                    //resta es igual a la tercera posicion del vector de atras hacia delante
+                    $resta = count($array) - 3; 
+            
+                    //elimina el caracter en la posicion resta que es un punto decimal
+                    unset($array[$resta]); 
+            
+            
+                    if (count($array) < 12) {
+                        while (count($array) < 12){
+                            array_unshift($array, "0");
+                        }
+                        
+                    }
+            
+            
+                    $precioParcial = implode($array);
+                    
+                    //$factura[$conteo] = "201000000000500\n";
+                    $factura[$conteo] = "201" . $precioParcial . "\n";
+                    $conteo++;
+                    $factura[$conteo] = "120\n";
+                    $conteo++;
+                    $factura[$conteo] = "199";
+                };
+
+                /* **********************************
+                si efectivo 1 es cero o menor
+                se cancela todo en divisa
+                por lo que se hace un pago directo
+                en divisa
+                *************************************
+                */
+
+                if ($venta->efectivo <= 0) {
+                    $factura[$conteo] = "120\n";
+                    $conteo++;
+                    $factura[$conteo] = "199";
+                };
+
+                /* **********************************
+                si efectivo 1 es mayor a cero y ademas
+                es igual al total + iva
+                entonces todo se paga en efectivo 1
+                y no se paga nada en divisa
+                entonces se hace un pago directo
+                en bs y no se cobra igtf
+                de la misma manera como siempre
+                se ha venido haciendo normalmente
+                *************************************
+                */
+
+                //aqui podria colocar sin problema
+                //if ($venta->efectivo >= $venta->total) {
+                //si el efectivo es mayor al total
+                //pero no creo que sea necesario
+                if ($venta->efectivo == $venta->total) {
+                    $factura[$conteo] = "101\n";      //se le quito \n para pruebas $factura[$conteo] = "101\n";
+                    $conteo++;                    //se comento para pruebas con la impresora virtual
+                    $factura[$conteo] = "199";    //se comento para pruebas con la impresora virtual
+                };
+
+                
+
+$file = "Nota.txt";	
+$fp = fopen($file, "w+");
+$write = fputs($fp, "");
+    
+foreach($factura as $campo => $cmd)
+{
+$write = fputs($fp, $cmd);
+}
+   
+    fclose($fp); 
+    
+    $out =  $itObj->SendFileCmd($file);
+
+    $respuestaS1 =  $itObj->UploadStatusCmdCustom("S1");
+
+    $numInvoice =  substr($respuestaS1, 21, 8);
+
+    //guardar la venta con el numero
+    //de factura actualizado
+    //Venta::where('id', $id)->update(['factura'=>$numInvoice]);
+    
+
+    //return redirect()->back()->with("mensaje", "Ticket impreso");
+    //enviar aqui a una pagina que diga ticket impreso
+    return redirect()->route("impreso", ["respuestaS1" => $numInvoice]);
+
+
+
+    }
+
+    public function impreso($respuestaS1)
     {
 
         $url = env("APP_URL");
        
     
        
-        return Inertia::render('Impreso', ["url" => $url]);
+        return Inertia::render('Impreso', ["url" => $url, "respuesta" => $respuestaS1]);
     
 
     }

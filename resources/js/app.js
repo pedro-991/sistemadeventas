@@ -78,6 +78,9 @@ createInertiaApp({
                     <li className="nav-item">
                         <Link className="nav-link" style={{ color: "white" }} href={uri + "/respaldarIndex"}>Respaldar &nbsp;<i class="fa fa-cart-plus"></i></Link>
                     </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" style={{ color: "white" }} href={uri + "/notaCredito"}>Nota de Crédito &nbsp;<i class="fa fa-cart-plus"></i></Link>
+                    </li>
               </ul>
             </div>
         </nav>

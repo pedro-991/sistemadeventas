@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from '@inertiajs/inertia-react'
 
 
-const Impreso = ({ url }) => {
+const Impreso = ({ url, respuesta }) => {
     
    
 
@@ -10,6 +10,7 @@ const Impreso = ({ url }) => {
         <div>
             <Link href={url + "/ventaIndexReact"} className="btn btn-primary">Volver al listado</Link>
             <h1>Ticket impreso</h1>
+            <h5>{respuesta}</h5>
         </div>
     )
 

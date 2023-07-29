@@ -76,7 +76,8 @@ export default class View {
     //console.log('soy variablea ' + variablea);
     const todos = this.model.getTodos();
     if (contador == null) {
-    todos.forEach((todo, index) => this.createRowGo(todo, index));
+      this.showTotal();
+      todos.forEach((todo, index) => this.createRowGo(todo, index));
     }
   }
 

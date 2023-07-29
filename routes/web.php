@@ -52,6 +52,8 @@ Route::get("/indexReactVender", "VenderController@indexReact")->name("indexReact
 Route::get("/productosTabla", "VenderController@productosTabla")->name("productosTabla");
 //ruta para actualizar productos en la tabla
 Route::post("/productosTablaUpdate", "VenderController@productosTablaUpdate")->name("productosTablaUpdate");
+//ruta para anular factura
+Route::get("/notaCredito", "VenderController@notaCredito")->name("notaCredito");
 
 
 
@@ -143,7 +145,8 @@ Route::post("/showCargarVenta", "DocEsperaController@showCargarVenta")->name("sh
 * ******/
 
 //ruta para mostrar mensaje ticket impreso
-Route::get("/impreso", "VentasController@impreso")->name("impreso");
+//se agrego {respuestaS1} para test
+Route::get("/impreso/{respuestaS1}", "VentasController@impreso")->name("impreso");
 //ruta para mostrar venta en react
 Route::get("/ventaIndexReact", "VentasController@indexReact")->name("ventaIndexReact");
 //ruta para imprimir en la termica con react
@@ -170,6 +173,8 @@ Route::get("/reporteZ", "VentasController@reporteZ")->name("reporteZ");
 Route::get("/reportes", "VentasController@reportes")->name("reportes");
 //ruta para probar IGTF
 Route::get("/testIf/{id}", "VentasController@testIf")->name("testIf");
+//ruta para imprimir nota de credito en la termica con react
+Route::get("/notaCreditoPrint/{id}", "VentasController@notaCreditoPrint")->name("notaCreditoPrint");
 
 
 /* *****

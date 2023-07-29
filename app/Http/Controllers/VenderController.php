@@ -12,6 +12,7 @@ use App\License;
 use App\Taza;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\DB;
 
 class VenderController extends Controller
 {
@@ -565,6 +566,29 @@ class VenderController extends Controller
   
             return response()->json(['success' => true]);
         }
+    }
+
+    public function notaCredito()
+    {
+
+        $ventasConTotales = Venta::join("productos_vendidos", "productos_vendidos.id_venta", "=", "ventas.id" )
+            ->join("clientes", "clientes.id", "=", "ventas.id_cliente" )
+            ->select("clientes.*", "ventas.*", DB::raw("sum(productos_vendidos.cantidad * (productos_vendidos.precio*((productos_vendidos.iva/100)+1))) as total"))
+            ->groupBy("ventas.id", "ventas.created_at", "ventas.updated_at", "ventas.id_cliente")
+            ->get();
+
+            
+       
+        //return Inertia::render('Ventas', ["ventas" => $ventasConTotales, "url" => $url]);
+
+        $url = env("APP_URL");
+        $message = "hola desde laravel nota de credito";
+
+        return Inertia::render('nota/NotaCredito', [
+            "url" => $url,
+            "message" => $message,
+            "ventas" => $ventasConTotales
+        ]);
     }
 
 }
