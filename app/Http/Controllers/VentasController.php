@@ -828,7 +828,8 @@ $write = fputs($fp, $cmd);
 
     //guardar la venta con el numero
     //de factura actualizado
-    Venta::where('id', $id)->update(['factura'=>$numInvoice]);
+    Venta::where('id', $id)->update(['factura'=>$numInvoice, 'printed'=>true]);
+    //Venta::where('id', $id)->update(['printed'=>true]);
 
     $fechatest = date('d-m-Y', $venta->created_at->getTimestamp());
 

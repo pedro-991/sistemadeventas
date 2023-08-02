@@ -26,6 +26,7 @@
       <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script> 
       <script src="{{ asset('js/index.js') }}" type="module"></script>
       <script src="{{ asset('js/myscript.js') }}" defer></script> 
+      <script src="https://www.w3schools.com/lib/w3.js"></script>
 
       
 

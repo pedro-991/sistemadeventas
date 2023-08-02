@@ -9,6 +9,26 @@ const Ventas = ({ ventas, url }) => {
         console.log(venta) 
         
       } 
+
+      const imprimida = false;
+
+      const LinkDisabled = `
+
+        <Link className="btn btn-info"
+            href={url + "/ventaIndexReact"}>
+            <i class="fa fa-print"></i>
+        </Link>
+
+      `;
+
+      const LinkEnabled = `
+
+        <Link className="btn btn-info"
+            href={url + "/ticketTestReact/" + venta.id}>
+            <i class="fa fa-print"></i>
+        </Link>
+
+      `;
     
    
 
@@ -41,16 +61,29 @@ const Ventas = ({ ventas, url }) => {
                             <td>{ venta.nombre }</td>
                             <td>{ parseFloat(venta.total).toFixed(2) }</td>
                             <td>
-                                <Link className="btn btn-info"
+                                {/* <Link className="btn btn-info"
                                     href={url + "/ticketTestReact/" + venta.id}>
                                     <i class="fa fa-print"></i>
-                                </Link>    
+                                </Link>  */}   
+                                {/* <Link className="btn btn-info"
+                                    href={url + "/ventaIndexReact"}>
+                                    <i class="fa fa-print"></i>
+                                </Link> */}
+                                {venta.printed ? <Link className="btn btn-info"
+                                    href={url + "/ventaIndexReact"}>
+                                    <i class="fa fa-print"></i>
+                                </Link> : <Link className="btn btn-info"
+                                    href={url + "/ticketTestReact/" + venta.id}>
+                                    <i class="fa fa-print"></i>
+                                </Link>}
                             </td>
                             <td>
                                 <Link className="btn btn-success"
                                     href={url + "/ventasShowReact/" + venta.id}>
                                     <i className="fa fa-info"></i>
                                 </Link>
+                                
+                                
                             </td>
                             <td>
                                 <Link className="btn btn-danger"

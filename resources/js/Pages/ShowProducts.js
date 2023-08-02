@@ -32,6 +32,12 @@ const ShowProducts = ({ products, url, taza }) => {
 
   }
 
+  const wsort = () => {
+
+    w3.sortHTML('#tblProducto', '.item', 'td:nth-child(2)')
+
+  }
+
 
     
    
@@ -65,8 +71,9 @@ const ShowProducts = ({ products, url, taza }) => {
           <thead>
            <tr>
             <th>Codigo</th>
-            <th>Description</th>
+            <th onClick={wsort} style={{ cursor: "pointer" }}>Description</th>
             <th>Precio</th>
+            <th>Existencia</th>
             <th>Editar</th>
             <th>Eliminar</th>
            </tr>
@@ -77,6 +84,7 @@ const ShowProducts = ({ products, url, taza }) => {
               <td>{ product.codigo_barras }</td>
               <td>{ product.descripcion }</td>
               <td>{ product.precio_venta }</td>
+              <td>{ product.existencia }</td>
               <td>
               <Link className="btn btn-warning"
                href={url + "/edit/" + product.id}>
