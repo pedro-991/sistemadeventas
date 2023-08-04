@@ -1102,6 +1102,7 @@ $write = fputs($fp, $cmd);
     //de factura actualizado
     //Venta::where('id', $id)->update(['factura'=>$numInvoice]);
     
+    Venta::where('id', $id)->update(['nota'=>true]);
 
     //return redirect()->back()->with("mensaje", "Ticket impreso");
     //enviar aqui a una pagina que diga ticket impreso

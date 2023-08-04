@@ -325,17 +325,18 @@ if (inputNameCliente.value === "")
                                                                         <label htmlFor="">RIF/CI</label>
                                                                         <input className="form-control" name="documento_cliente_script" id="documento_cliente_script" autocomplete="off"/>
                                                                     </div>
-                                                                    <div className="form-group col-md-2">
-                                                                    <label htmlFor=""></label>
-                                                                    <input name="" id="btnAgregarCliente" value="Agregar" type="button" className="btn btn-success"
-                                                                    onClick={agregarCliente}/>
-                                                                    </div>
+                                                                    
                                                                 </div>
 
                                                                 <div className="row">
                                                                     <div className="form-group col-md-10">
                                                                         <label htmlFor="">Dirección</label>
                                                                         <input className="form-control" name="direccion_cliente_script" id="direccion_cliente_script" autocomplete="off"/>
+                                                                    </div>
+                                                                    <div className="form-group col-md-2">
+                                                                    <label htmlFor=""></label>
+                                                                    <input name="" id="btnAgregarCliente" value="Agregar" type="button" className="btn btn-success"
+                                                                    onClick={agregarCliente}/>
                                                                     </div>
                                                                 </div>
                                                       

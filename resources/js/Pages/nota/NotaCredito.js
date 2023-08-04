@@ -6,11 +6,14 @@ const NotaCredito = ({ url, message, ventas }) => {
     
    /* console.log('hola desde nota de credito'); */
 
+   const printed = true;
+   const nota = true;
+
     return(
         <div className="row">
         <div className="col-12">
             <h1>Nota de Credito <i className="fa fa-list"></i></h1>
-            <h5>{message}</h5>
+            {/* <h5>{message}</h5> */}
             <Link className="btn btn-info" href={url + "/notaCredito"}>
                 &nbsp;Actualizar
             </Link>
@@ -36,10 +39,17 @@ const NotaCredito = ({ url, message, ventas }) => {
                             <td>{ venta.nombre }</td>
                             <td>{ parseFloat(venta.total).toFixed(2) }</td>
                             <td>
-                                <Link className="btn btn-info"
+                                {/* <Link className="btn btn-info"
                                     href={url + "/notaCreditoPrint/" + venta.id}>
                                     <i class="fa fa-print"></i>
-                                </Link>    
+                                </Link> */}  
+                                {venta.printed && !venta.nota ? <Link className="btn btn-info"
+                                    href={url + "/notaCreditoPrint/" + venta.id}>
+                                    <i class="fa fa-print"></i>
+                                </Link> : <Link className="btn btn-info"
+                                    href={url + "/notaCredito"}>
+                                    <i class="fa fa-print"></i>
+                                </Link>}  
                             </td>
                             <td>
                                 <Link className="btn btn-success"
