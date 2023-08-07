@@ -448,6 +448,37 @@ function selectCode(content) {
     
             };
 
+            function selectClienteDirecto(content) {
+
+                var btnCloseModal = document.getElementById('btnCloseModal');
+    
+
+                var myJson = JSON.parse (content.value);
+                var myInputCliente = document.getElementById('id_cliente');
+                var myInputClienteNombre = document.getElementById('nombre_cliente');
+                
+
+                myInputCliente.value = myJson.id;
+                myInputClienteNombre.value = myJson.nombre;
+                myInputCliente.click();
+                myInputClienteNombre.click();
+
+
+                /* myInputCliente.value = myJson.id;
+                myInputClienteNombre.value = myJson.nombre;
+                myInputCliente.click();
+                myInputClienteNombre.click(); */
+                
+                //console.log(myJson);
+
+                
+                //btnCloseModal.click();
+                
+    
+            };
+
+
+
             function selectCodeVenta(content, url) {
 
                 var btnCloseModal = document.getElementById('btnCloseModal');

@@ -84,6 +84,9 @@ const Vender = ({ url, taza }) => {
     let inputDocumentoCliente = document.getElementById('documento_cliente_script');
     let inputDireccionCliente = document.getElementById('direccion_cliente_script');
     let alertCliente = document.getElementById('alert');
+
+    let myInputCliente = document.getElementById('id_cliente');
+    let myInputClienteNombre = document.getElementById('nombre_cliente');
     
 
     if (inputNombreCliente != "" && inputDocumentoCliente.value != "") {
@@ -108,6 +111,39 @@ const Vender = ({ url, taza }) => {
                     inputDireccionCliente.value = "";
                     alertCliente.innerText = "Cliente agregado con exito";
                     alertCliente.classList.remove('d-none');
+                    console.log(datos);
+                    setId_cliente(datos.id)
+                    setName_cliente(datos.nombre)
+                    myInputCliente.value = datos.id;
+                    myInputClienteNombre.value = datos.nombre;
+                    /*  $.ajax({
+                      url: url + '/clienteFiltro',
+                      type: 'POST',
+                      data:  {
+                        txtcodigo : datos,
+                        acceso : 1
+                      },
+                      success: function (datos1) {
+                          //$("#contentTable").html(datos1);
+                          //openmodal();
+                          //$('#exampleModal').modal('toggle');
+                          //var myJson = JSON.parse (datos1);
+                          console.log(datos1)
+                          console.log(datos1.id)
+                          setId_cliente(datos1.id)
+                          setName_cliente(datos1.nombre)
+                          console.log(name_cliente)
+                          
+
+                          myInputCliente.value = datos1.id;
+                          myInputClienteNombre.value = datos1.nombre;
+                          //myInputCliente.click();
+                          //myInputClienteNombre.click(); 
+                      }
+                  }); */
+                  //let btnRadio = document.getElementById('selectPro');
+                  //btnRadio.click();
+                  //btnRadio.click();
                 }
             });
             return false;
@@ -135,7 +171,10 @@ const Vender = ({ url, taza }) => {
                 $.ajax({
                     url: url + '/clienteFiltro',
                     type: 'POST',
-                    data:  {txtcodigo : buscar_cliente},
+                    data:  {
+                      txtcodigo : buscar_cliente,
+                      acceso : 0
+                    },
                     success: function (datos) {
                         $("#contentTable").html(datos);
                         //openmodal();

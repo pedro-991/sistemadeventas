@@ -440,11 +440,12 @@ class VenderController extends Controller
 
     public function clienteFiltro(Request $request)
     {
-        $codigo = $request->post("txtcodigo") . "%";
+        $codigo = $request->post("txtcodigo");
+        $acceso = $request->post("acceso");
         //$respuesta = $codigo . " desde laravel";
         //$codigo = "<h1>Hola desde laravel</h1>";
         //return $respuesta;
-        $producto = Cliente::where("nombre", "LIKE", $codigo)->get();
+        $producto = Cliente::where("nombre", "LIKE", $codigo . "%")->orWhere('id', $codigo)->get();
         $htmlproducto = "";
             if ($producto) {
 
@@ -508,11 +509,11 @@ class VenderController extends Controller
                  
             };
 
-            if ($htmlproducto != "") {
+            if ($acceso == 0) {
                 return $htmlproducto;
             } else {
 
-            return "Producto no encontrado";
+            return $pro;
             }
     }
 

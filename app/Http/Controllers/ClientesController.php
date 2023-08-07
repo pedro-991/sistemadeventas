@@ -47,8 +47,9 @@ class ClientesController extends Controller
     
         $cliente = new Cliente($request->input());
         $cliente->saveOrFail();
+        $idCliente = $cliente->id;
 
-        return true;
+        return $cliente;
     }
 
     /**

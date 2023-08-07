@@ -27,7 +27,7 @@ class ProductosController extends Controller
 
 
         $productos = DB::table('productos')
-                ->orderBy('descripcion', 'asc')
+                ->orderBy('existencia', 'asc')
                 ->get();
 
         $taza = Taza::find(1);
