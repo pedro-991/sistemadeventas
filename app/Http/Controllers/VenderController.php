@@ -193,11 +193,10 @@ class VenderController extends Controller
 
     public function productoFiltro(Request $request)
     {
-        $codigo = $request->post("txtcodigo") . "%";
-        //$respuesta = $codigo . " desde laravel";
-        //$codigo = "<h1>Hola desde laravel</h1>";
-        //return $respuesta;
-        $producto = Producto::where("descripcion", "LIKE", $codigo)->get();
+        $codigo = $request->post("txtcodigo");
+        //$producto = Producto::where("descripcion", "LIKE", $codigo)->get();
+        $producto = Producto::where("descripcion", "LIKE", $codigo . "%")->orWhere('codigo_barras', $codigo)->get();
+        
         $htmlproducto = "";
             if ($producto) {
 
@@ -234,9 +233,36 @@ class VenderController extends Controller
 </td>
 
 
-<td>
-" . $pro->existencia . "
-</td>
+
+";
+
+//busco el producto compuesto que tiene la fraccion
+//$productoCompuestoFraccion = Producto::find($producto[0]);
+//el producto compuesto con la fraccion seria $pro
+
+//busco el producto por caja al que se va a descontar
+$productoCaja = Producto::where('codigo_barras', '=', $pro->compuesto)->first();
+
+//operacion matematica
+//multiplico la fraccion del producto compuesto * 3
+//comparo la cantidad del producto por caja con la multiplicacion anterior
+//que resultado daria? 0.65 < 0.024*3 se ve bien
+//si es menor marcar en rojo
+
+$cantidadMinima = $pro->fraccion * 4;
+
+//if ($pro->existencia < 4) {
+
+if ($productoCaja->existencia < $cantidadMinima) {
+
+    $htmlproducto = $htmlproducto . "<td class='table-danger'>" . $pro->existencia . "</td>";
+
+} else {
+    $htmlproducto = $htmlproducto . "<td>" . $pro->existencia . "</td>"; 
+};
+
+$htmlproducto = $htmlproducto . "
+
                     
                 
                     <td>
@@ -263,11 +289,21 @@ class VenderController extends Controller
                  
             };
 
-            if ($htmlproducto != "") {
-                return $htmlproducto;
+            if (count($producto) > 1) {
+                return $datos = ["html" => $htmlproducto, "estado" => true];
             } else {
+                if (count($producto) == 1) {
+                    //if ($producto[0]->existencia < 4) {
+                    if ($productoCaja->existencia < $cantidadMinima) {
+                        return $datos = ["html" => $htmlproducto, "estado" => true];
+                    } else {
+                        return $datos = ["html" => $producto, "estado" => false];
+                    }
+                } else {
+                    return $datos = ["html" => null, "estado" => false];
+                }
 
-            return "Producto no encontrado";
+            
             }
     }
 

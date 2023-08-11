@@ -185,7 +185,7 @@ $(function ()
 /* ****************************** */
             
 
-  $(function ()
+ /*  $(function ()
 {
     $("#codigotest").on('keyup', function (e) {
 
@@ -217,7 +217,7 @@ $(function ()
     }
     });
 
-});
+}); */
 
 /* funcion para buscar cliente */
 
@@ -620,7 +620,7 @@ function selectCode(content) {
                         };
 
                         
-  $(function ()
+  /* $(function ()
   {
       $("#btnTerminarVenta...").on('click', function () {
 
@@ -685,7 +685,7 @@ function selectCode(content) {
   
       });
   
-  });
+  }); */
 
   $(function ()
   {

@@ -67,8 +67,47 @@ const Vender = ({ url, taza }) => {
                                         type: 'POST',
                                         data:  {txtcodigo : buscar_producto},
                                         success: function (datos) {
-                                            $("#contentTable").html(datos);
+                                          if (datos.estado) {
+                                            $("#contentTable").html(datos.html);
                                             openmodal();
+                                            console.log(datos.estado);
+                                          } else {
+                                            if (datos.html != null) {
+                                              console.log(datos.html[0]);
+                                              console.log(datos.estado);
+
+                                              let btnAdd = document.getElementById('add');
+                                              let myInputTitle = document.getElementById('title');
+                                              let myInputCod = document.getElementById('codigoTdl');
+                                              let myInputDescrip = document.getElementById('description');
+                                              let myInputPrec = document.getElementById('precioTdl');
+                                              let myInputCant = document.getElementById('cantidadTdl');
+                                              let myInputIva = document.getElementById('ivaTdl');
+                                              let myInputUnd = document.getElementById('typeUnd');
+                                              let myInputReferVenta = document.getElementById('referVenta');
+                                              let myInputReferCompra = document.getElementById('referCompra');
+                                              let myInputPrecioIva = document.getElementById('precioConIva');
+                                              let myInputCodigoTest = document.getElementById('codigotest');
+
+                                              myInputTitle.value = datos.html[0].id;
+                                              myInputCod.value = datos.html[0].codigo_barras;
+                                              myInputDescrip.value = datos.html[0].descripcion;
+                                              myInputPrec.value = datos.html[0].precio_venta;
+                                              myInputCant.value = "1";
+                                              myInputIva.value = datos.html[0].iva;
+                                              myInputUnd.value = datos.html[0].und;
+                                              myInputReferVenta.value = datos.html[0].referventa;
+                                              myInputReferCompra.value = datos.html[0].refercompra;
+                                              myInputPrecioIva.value = (datos.html[0].precio_venta * ( 1 + (datos.html[0].iva/100))).toFixed(2);
+
+                                              myInputCodigoTest.value = "";
+
+                                              btnAdd.click();
+                                            } else {
+                                              console.log("producto no encontrado");
+                                            }
+                                          }
+                                        
                                         }
                                     });
                                 
@@ -116,34 +155,7 @@ const Vender = ({ url, taza }) => {
                     setName_cliente(datos.nombre)
                     myInputCliente.value = datos.id;
                     myInputClienteNombre.value = datos.nombre;
-                    /*  $.ajax({
-                      url: url + '/clienteFiltro',
-                      type: 'POST',
-                      data:  {
-                        txtcodigo : datos,
-                        acceso : 1
-                      },
-                      success: function (datos1) {
-                          //$("#contentTable").html(datos1);
-                          //openmodal();
-                          //$('#exampleModal').modal('toggle');
-                          //var myJson = JSON.parse (datos1);
-                          console.log(datos1)
-                          console.log(datos1.id)
-                          setId_cliente(datos1.id)
-                          setName_cliente(datos1.nombre)
-                          console.log(name_cliente)
-                          
-
-                          myInputCliente.value = datos1.id;
-                          myInputClienteNombre.value = datos1.nombre;
-                          //myInputCliente.click();
-                          //myInputClienteNombre.click(); 
-                      }
-                  }); */
-                  //let btnRadio = document.getElementById('selectPro');
-                  //btnRadio.click();
-                  //btnRadio.click();
+                    
                 }
             });
             return false;
