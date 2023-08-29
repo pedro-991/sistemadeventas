@@ -255,7 +255,17 @@ $cantidadMinima = $pro->fraccion * 4;
 
 if ($productoCaja->existencia < $cantidadMinima) {
 
-    $htmlproducto = $htmlproducto . "<td class='table-danger'>" . $pro->existencia . "</td>";
+    if ($productoCaja->existencia <= 0) {
+
+        $htmlproducto = $htmlproducto . "<td class='table-danger'>" . $pro->existencia . "</td>";
+
+    } else {
+
+        $htmlproducto = $htmlproducto . "<td class='table-warning'>" . $pro->existencia . "</td>";
+
+    };
+
+    
 
 } else {
     $htmlproducto = $htmlproducto . "<td>" . $pro->existencia . "</td>"; 

@@ -239,17 +239,17 @@ class DocEsperaController extends Controller
                         </tr>
                     </table>
 
-                    <table width='100%' border='1'>
+                    <table width='100%' border='1' style='border-left: hidden;border-right: hidden;'>
                                     
                                 <thead >
                                 
                                     <tr>
-                                        <th style='width: 12%;'><font face='Courier'>Código</font></th>
-                                        <th style='width: 38%;'><font face='Courier'>Descripción</font></th>
-                                        <th style='width: 17%;'><font face='Courier'>Cantidad</font></th>
-                                        <th style='width: 12%;'><font face='Courier'>Precio</font></th>
-                                        <th style='width: 10%;'><font face='Courier'>I.V.A.</font></th>
-                                        <th style='width: 10%;'><font face='Courier'>Total</font></th>
+                                        <th style='width: 12%; border: hidden;'><font face='Courier'>Código</font></th>
+                                        <th style='width: 38%; border: hidden;'><font face='Courier'>Descripción</font></th>
+                                        <th style='width: 17%; border: hidden;'><font face='Courier'>Cantidad</font></th>
+                                        <th style='width: 12%; border: hidden;'><font face='Courier'>Precio</font></th>
+                                        <th style='width: 10%; border: hidden;'><font face='Courier'>I.V.A.</font></th>
+                                        <th style='width: 10%; border: hidden;'><font face='Courier'>Total</font></th>
                                     </tr>
                                 
                                 </thead>
@@ -342,7 +342,7 @@ class DocEsperaController extends Controller
                         </tbody>
                 </table>
 
-                <table width='100%' border='2'>
+                <table width='100%' border='2' style='border-left: hidden;border-right: hidden;'>
                     
                                 <tr>
                                     
@@ -371,8 +371,10 @@ class DocEsperaController extends Controller
                                         <font face='Courier'><strong>Total:</strong></font>
                                         
                                     </td>
-                                    <td align='left' style='padding-right: 0%; border: hidden;'>
+                                    <td align='left' style='padding-right: 0%; width: 15%; border: hidden;'>
                                         <font face='Courier'><strong>" . number_format($total + $totalIva, 2) . "</strong></font>
+                                    </td>
+                                    <td align='left' style='padding-right: 0%; border: hidden;'>
                                         <font face='Courier'><strong>REF: " . number_format(($total + $totalIva)/$venta->taza, 2) . "</strong></font>
                                     </td>
                                 </tr>

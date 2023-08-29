@@ -32,6 +32,23 @@ Route::get('/respaldar', 'HomeController@respaldar')->name('respaldar');
 //ruta para mostrar mensaje Respaldo realizado
 Route::get("/pantalla", "HomeController@pantalla")->name("pantalla");
 
+
+/* *****
+********************************
+*controlador EmpresaController.php
+********************************
+* ******/
+// mostrar la vista empresa
+Route::get('/empresa', 'EmpresaController@index')->name('empresa.index');
+// mostrar la vista agregar empresa
+Route::get('/empresaCreate', 'EmpresaController@create')->name('empresa.create');
+// guardar empresa en la base de datos
+Route::post('/empresaStore', 'EmpresaController@store')->name('empresa.store');
+// mostrar la vista editar empresa
+Route::get('/empresaEdit/{id}', 'EmpresaController@edit')->name('empresa.edit');
+// ruta para actualizar la empresa en la base de datos
+Route::post('/empresaUpdate/{id}', 'EmpresaController@update')->name('empresa.update');
+
 /* ***
 *****************************
 *controlador VenderController

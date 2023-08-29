@@ -658,7 +658,7 @@ if (inputNameCliente.value === "")
                                         
                                         
                                                   <div className="">
-                                                    <input type="hidden" 
+                                                    <input type="button" 
                                                     className="btn btn-success" 
                                                     id="add" value="Agregar"
                                                     />
