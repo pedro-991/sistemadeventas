@@ -55,7 +55,7 @@ createInertiaApp({
             <div className="collapse navbar-collapse" id="">
               <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
-                        <Link className="nav-link" style={{ color: "white" }} href={uri + "/indexReactVender"}>Vender &nbsp;<i class="fa fa-cart-plus"></i></Link>
+                        <Link className="nav-link" style={{ color: "white" }} href={uri + "/indexReactVender"}>Facturación &nbsp;<i class="fa fa-cart-plus"></i></Link>
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link" style={{ color: "white" }} href={uri + "/ventaIndexReact"}>Ventas &nbsp;<i class="fa fa-cart-plus"></i></Link>

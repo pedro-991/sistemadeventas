@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Doc_espera;
+use App\Empresa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
@@ -186,6 +187,7 @@ class DocEsperaController extends Controller
     public function showReact(Request $request)
     {
         $venta = Doc_espera::with(["productos", "cliente"])->findOrFail($request->id);
+        $empresa = Empresa::find(1)->nombre;
         $total = 0;
         $totalIva = 0;
         $url = env("APP_URL");
@@ -224,6 +226,11 @@ class DocEsperaController extends Controller
             $htmlPresupuesto = $htmlPresupuesto . "
             
                     <table width='100%' border='0'>
+
+                        <tr>
+                        <td style=''><font size='4' face='Courier'><strong>" . $empresa . "</strong></font></td>
+                        </tr>
+
                         <tr>
                         <td><font face='Courier'><strong>CLIENTE: " . $venta->cliente->nombre . "</strong></font></td>
                         <td><font face='Courier'><strong>FECHA: <small>" . date_format($venta->created_at, 'd/m/Y') . "</strong></small></font></td>
@@ -245,7 +252,7 @@ class DocEsperaController extends Controller
                                 
                                     <tr>
                                         <th style='width: 12%; border: hidden;'><font face='Courier'>Código</font></th>
-                                        <th style='width: 38%; border: hidden;'><font face='Courier'>Descripción</font></th>
+                                        <th ALIGN='left' style='padding-left: 20px; width: 38%; border: hidden;'><font face='Courier'>Descripción</font></th>
                                         <th style='width: 17%; border: hidden;'><font face='Courier'>Cantidad</font></th>
                                         <th style='width: 12%; border: hidden;'><font face='Courier'>Precio</font></th>
                                         <th style='width: 10%; border: hidden;'><font face='Courier'>I.V.A.</font></th>

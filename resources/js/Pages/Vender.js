@@ -5,7 +5,7 @@ import Model from './model.js';
 import View from './view.js';
 
 
-const Vender = ({ url, taza }) => {
+const Vender = ({ url, taza, empresa }) => {
 
   const [buscar_producto, setBuscar_producto] = useState('')
   const [buscar_cliente, setBuscar_cliente] = useState('')
@@ -361,7 +361,7 @@ if (inputNameCliente.value === "")
 
                         <div className="row">
                                 <div className="col-12">
-                                              <h1>Nueva venta <i className="fa fa-cart-plus"></i></h1>
+                                              <h3>{empresa} <i className="fa fa-cart-plus"></i></h3>
                                               
                                               <div className="row">
                                                   <div className="col-12 col-md-6">
@@ -658,7 +658,7 @@ if (inputNameCliente.value === "")
                                         
                                         
                                                   <div className="">
-                                                    <input type="button" 
+                                                    <input type="hidden" 
                                                     className="btn btn-success" 
                                                     id="add" value="Agregar"
                                                     />

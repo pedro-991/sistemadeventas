@@ -10,6 +10,7 @@ use App\Doc_espera;
 use App\Product_espera;
 use App\License;
 use App\Taza;
+use App\Empresa;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\DB;
@@ -470,7 +471,7 @@ $htmlproducto = $htmlproducto . "
 
         License::where('license', $license)->update(['days' => $days]);
 
-        return redirect()->route("vender.index");
+        return redirect()->route("indexReactVender");
 
     }
 
@@ -585,7 +586,8 @@ $htmlproducto = $htmlproducto . "
         {
             return Inertia::render('Vender', [
                 "url" => $url,
-                "taza" => $taza->taza
+                "taza" => $taza->taza,
+                "empresa" => Empresa::find(1)->nombre
             ]);
         } else {
 

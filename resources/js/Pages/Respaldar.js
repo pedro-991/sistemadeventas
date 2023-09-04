@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from '@inertiajs/inertia-react'
 
 
-const Respaldar = ({ url, campos }) => {
+const Respaldar = ({ url }) => {
     
     document.addEventListener('inertia:success', (event) => {
     

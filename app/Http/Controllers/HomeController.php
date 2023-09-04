@@ -179,7 +179,7 @@ class HomeController extends Controller
         return Inertia::render('Respaldar', ["url" => $url, "campos" => $extraidoArray['Create Table']]);
           */   
 
-          $nombreDeLaTabla = "clientes";
+         /*  $nombreDeLaTabla = "clientes";
 
           $datosQueContieneLaTabla = DB::select("SELECT * FROM " . $nombreDeLaTabla . "");
 
@@ -199,13 +199,13 @@ class HomeController extends Controller
                     $verFilaArray = json_decode($verFilaString, true);
                     $fila = array_values($verFilaArray);
 
-                };
+                }; */
 
         
 
 
         $url = env("APP_URL");
-        return Inertia::render('Respaldar', ["url" => $url, "campos" => $fila]);
+        return Inertia::render('Respaldar', ["url" => $url]);
         
 
     }
