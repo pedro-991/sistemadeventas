@@ -44,7 +44,7 @@ let my_env_var = process.env.APP_URL;
 
 console.log(myUrl);
 
-const uri = "http://localhost/sistemadeventas-git/public";
+const uri = "http://sistemadeventas.com";
 
 createInertiaApp({
   resolve: name => require(`./Pages/${name}`),

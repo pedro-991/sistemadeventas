@@ -228,12 +228,12 @@ class DocEsperaController extends Controller
                     <table width='100%' border='0'>
 
                         <tr>
-                        <td style=''><font size='4' face='Courier'><strong>" . $empresa . "</strong></font></td>
+                        <td style=''><font size='5' face='Courier'><strong>" . $empresa . "</strong></font></td>
                         </tr>
 
                         <tr>
                         <td><font face='Courier'><strong>CLIENTE: " . $venta->cliente->nombre . "</strong></font></td>
-                        <td><font face='Courier'><strong>FECHA: <small>" . date_format($venta->created_at, 'd/m/Y') . "</strong></small></font></td>
+                        <td><font face='Courier'><strong>FECHA: " . date_format($venta->created_at, 'd/m/Y') . "</strong></font></td>
                         </tr>
 
                         <tr>
@@ -242,7 +242,7 @@ class DocEsperaController extends Controller
                         </tr>
 
                         <tr>
-                        <td><font face='Courier'><strong>DIRECCIÓN: <small></small></strong></font></td>
+                        <td><font face='Courier'><strong>DIRECCIÓN: <small>" . $venta->cliente->direccion . "</small></strong></font></td>
                         </tr>
                     </table>
 

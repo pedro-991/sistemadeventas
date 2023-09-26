@@ -196,7 +196,7 @@ class VenderController extends Controller
     {
         $codigo = $request->post("txtcodigo");
         //$producto = Producto::where("descripcion", "LIKE", $codigo)->get();
-        $producto = Producto::where("descripcion", "LIKE", $codigo . "%")->orWhere('codigo_barras', $codigo)->get();
+        $producto = Producto::where("descripcion", "LIKE", $codigo . "%")->orWhere('codigo_barras', $codigo)->get()->sortBy('descripcion');
         
         $htmlproducto = "";
             if ($producto) {
@@ -218,7 +218,7 @@ class VenderController extends Controller
                     
                     <tr align='center'>
 
-                    <td>
+                    <td align='left' style='padding-left: 20px;'>
                     
                     " . $pro->descripcion . "
                       
@@ -278,7 +278,7 @@ $htmlproducto = $htmlproducto . "
                 
                     <td>
 
-<input type='radio' name='selectPro' id='selectPro' onclick='selectCode(this)' value='" . $pro . "'>
+<input type='checkbox' name='selectPro' id='selectPro' onclick='selectCode(this)' value='" . $pro . "'>
   
  
 </td>
@@ -382,43 +382,7 @@ $htmlproducto = $htmlproducto . "
             }
     }
 
-    private function agregarProductoACarrito($producto)
-    {
-        if ($producto->existencia <= 0) {
-            return redirect()->route("vender.index")
-                ->with([
-                    "mensaje" => "No hay existencias del producto",
-                    "tipo" => "danger"
-                ]);
-        }
-        $productos = $this->obtenerProductos();
-        $posibleIndice = $this->buscarIndiceDeProducto($producto->codigo_barras, $productos);
-        // Es decir, producto no fue encontrado
-        if ($posibleIndice === -1) {
-            $producto->cantidad = 1;
-            array_push($productos, $producto);
-        } else {
-            if ($productos[$posibleIndice]->cantidad + 1 > $producto->existencia) {
-                return redirect()->route("vender.index")
-                    ->with([
-                        "mensaje" => "No se pueden agregar más productos de este tipo, se quedarían sin existencia",
-                        "tipo" => "danger"
-                    ]);
-            }
-            $productos[$posibleIndice]->cantidad++;
-        }
-        $this->guardarProductos($productos);
-    }
-
-    private function buscarIndiceDeProducto(string $codigo, array &$productos)
-    {
-        foreach ($productos as $indice => $producto) {
-            if ($producto->codigo_barras === $codigo) {
-                return $indice;
-            }
-        }
-        return -1;
-    }
+    
 
     /**
      * Display a listing of the resource.
