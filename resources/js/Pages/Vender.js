@@ -345,6 +345,39 @@ if (inputNameCliente.value === "")
 
     }
 
+    function calcularIgtf() {
+
+      let divisa1 = document.getElementById('divisa1').value;
+        let efectivo1 = document.getElementById('efectivo1');
+        let igtf = document.getElementById('igtf');
+        let tazaNow = document.getElementById('tazaNow').value;
+        let totalBs = document.getElementById('totalBs').value; //total + iva
+        let montoBs = (divisa1 * tazaNow).toFixed(2); //divisa 1 en bs
+        let totalPagar = document.getElementById('totalPagar'); // input para mostrar total + iva + igtf
+
+        //let montoIgtf = (montoBs * 0.03).toFixed(2);
+
+        if (parseFloat(montoBs) < parseFloat(totalBs)) {
+                console.log("soy caso 1")
+                efectivo1.value = (totalBs - montoBs).toFixed(2);
+                igtf.value = (montoBs * 0.03).toFixed(2);
+                totalPagar.value = (parseFloat(totalBs) + parseFloat(montoBs * 0.03)).toFixed(2);
+        } else if (parseFloat(montoBs) > parseFloat(totalBs)) {
+                console.log("soy caso 2")
+                efectivo1.value = (totalBs - montoBs).toFixed(2);
+                igtf.value = (totalBs * 0.03).toFixed(2);
+                totalPagar.value = (parseFloat(totalBs) + parseFloat(totalBs * 0.03)).toFixed(2);
+        } else {
+                console.log("soy caso 3")
+                efectivo1.value = (totalBs - montoBs).toFixed(2);
+                igtf.value = (montoBs * 0.03).toFixed(2);
+                totalPagar.value = (parseFloat(totalBs) + parseFloat(montoBs * 0.03)).toFixed(2);
+          }
+
+        
+
+    }
+
  
 
     return(
@@ -452,7 +485,8 @@ if (inputNameCliente.value === "")
                                                                   <input id="divisa1" autocomplete="off" name="" type="number"
                                                                     
                                                                         className="form-control"
-                                                                        placeholder=""/>
+                                                                        placeholder=""
+                                                                        onKeyUp={calcularIgtf}/>
                                                               </div>
                                                             </div>
                                                             <div className="row">
